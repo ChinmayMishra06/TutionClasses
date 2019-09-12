@@ -24,7 +24,13 @@ class DataModel extends CI_Model
 
     public function setValue($key, $value)
     {
-
+        $result = $this->db->replace(TABLE_DATA, ['key'=>$key, 'value'=>$value]);
+        if(!$result):
+            return $result;
+        elseif($result):
+            return $result;
+        endif;
+        return "";
     }
 
 }

@@ -7,6 +7,7 @@ define("URL_PRODUCT", "seller/product");
 
 //tables
 define("TABLE_DATA", "tc_data");
+define("TABLE_USER", "tc_users");
 
 //data paths
 define("DIR_PRIVATE_DATA", "./private/data/");
@@ -29,3 +30,4 @@ function toLocalDate($date, $format)
 
     return $dt->format($format);
 }
+?>

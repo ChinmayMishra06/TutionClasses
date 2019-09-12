@@ -12,19 +12,70 @@ class AuthApi extends BaseApi
 
         //validate input values
         if(!isset($this->inputJson->email)){
-            $this->error("Email field required", ErrorCode::PARAM_MISSING);
+            $this->error("Email field required.", ErrorCode::PARAM_MISSING);
         }
 
-        //check for user
+        if(!isset($this->inputJson->password)){
+            $this->error("Password field required.", ErrorCode::PARAM_MISSING);
+        }
 
-
+        //check for user        
+        $this->load->model("AuthModel", "authModel");
+        $response = $this->authModel->getUser(trim($this->inputJson->email), trim($this->inputJson->password));
+        
         //response
+        if($response):
+            $this->success("Data found.", $response);
+        else:
+            $this->error("NO_DATA_FOUND");
+        endif;    
+        die(json_encode($response));
+    }
 
+    // signUp Fuction.
+    public function signUp(){
+        // Validating user input
+        if(!isset($this->inputJson->name)):
+            $this->error("Name field required.", ErrorCode::PARAM_MISSING);
+        elseif(!isset($this->inputJson->email)):
+            $this->error("Email field required.", ErrorCode::PARAM_MISSING);
+        elseif(!isset($this->inputJson->password)):
+            $this->error("Password field required", ErrorCode::PARAM_MISSING);
+        endif;
 
-        $this->load->model("DataModel", "dataModel");
+        // Inserting signup data
+        $this->load->model('AuthModel', 'authModel');
+        $response = $this->authModel->signUp(
+            trim($this->inputJson->name),
+            trim($this->inputJson->email),
+            trim($this->inputJson->password)
+        );
+        
+        die($this->success("User successfully registerd."));
+    }
 
-        $this->success('', array(
-            "min_ver" => $this->dataModel->getValue("min_ver"),
-            "cur_ver" => $this->dataModel->getValue("cur_ver")));
+    public function forget(){
+        // Validating user input
+        if(!isset($this->inputJson->email)):
+            $this->error("Email field required", ErrorCode::PARAM_MISSING);
+        endif;
+
+        // Check user exist
+        $this->load->model("AuthModel", 'authModel');
+        $result = $this->authModel->forget(trim($this->inputJson->email));
+    }
+
+    public function reset(){
+        // Validating user input
+        if(!isset($this->inputJson->email)):
+            $this->error("Email filed required", ErrorCode::PARAM_MISSING);
+        elseif(!isset($this->inputJson->newPassword)):
+            $this->error("New password field required", ErrorCode::PARAM_MISSING);
+        endif;
+
+        // Reset user password
+        $this->load->model("AuthModel", "authModel");
+        $response = $this->authModel->reset(trim($this->inputJson->email), trim($this->inputJson->newPassword));
+        die($this->success("Password successfully updated."));
     }
 }

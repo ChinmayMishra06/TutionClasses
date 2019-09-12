@@ -40,6 +40,7 @@ class BaseApi extends MY_Controller
         die(json_encode($json));
     }
 
+    // Initialization data in key.
     public function init()
     {
         $this->load->model("DataModel", "dataModel");
@@ -47,6 +48,22 @@ class BaseApi extends MY_Controller
         $this->success('', array(
             "min_ver" => $this->dataModel->getValue("min_ver"),
             "cur_ver" => $this->dataModel->getValue("cur_ver")));
+    }
+
+    public function setValue(){
+        //validate input values
+        if(!isset($this->inputJson->key)){
+            $this->error("Key field required.", ErrorCode::PARAM_MISSING);
+        }
+
+        if(!isset($this->inputJson->value)){
+            $this->error("Value field required.", ErrorCode::PARAM_MISSING);
+        }
+
+        // call the model.
+        $this->load->model("DataModel", "dataModel");
+        $result = $this->dataModel->setValue(trim($this->inputJson->key), trim($this->inputJson->value));
+        echo $result;
     }
 }
 
