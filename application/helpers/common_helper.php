@@ -6,14 +6,7 @@ define("URL_PRODUCT_ALL", "seller/product/all");
 define("URL_PRODUCT", "seller/product");
 
 //tables
-define("TABLE_CATS", "tb_categories");
-define("TABLE_SHAPES", "tb_diamond_shapes");
-define("TABLE_PRODUCT_DIAMONDS", "tb_product_diamonds");
-define("TABLE_USER", "tb_user");
-define("TABLE_PRODUCT", "tb_product");
-define("TABLE_PRODUCT_PRICE", "tb_product_prices");
-define("TABLE_FILES", "tb_files");
-define("TABLE_PRODUCT_FILES", "tb_product_files");
+define("TABLE_DATA", "tc_data");
 
 //data paths
 define("DIR_PRIVATE_DATA", "./private/data/");
