@@ -6,6 +6,7 @@
     RewriteEngine On
 
     #todo add env variable for production
+    SetEnv ENCKEY k4osdifjoasd8f923
     #todo change public path
     RewriteCond %{REQUEST_URI} !^/tutionclasses/public/?(.*)$ [NC]
     RewriteRule ^.*$ index.php [L,NS,QSA]

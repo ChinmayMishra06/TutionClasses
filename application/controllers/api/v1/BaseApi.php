@@ -74,6 +74,7 @@ class ErrorCode
     const INVALID_API = "INVALID_API";
     const INVALID_TOKEN = "INVALID_TOKEN";
     const INVALID_VALUE = "INVALID_VALUE";
+    const INVALID_AUTH = "INVALID_AUTH";
     const DATABASE_ERROR = "DATABASE_ERROR";
 
 }//class
