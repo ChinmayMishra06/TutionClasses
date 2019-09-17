@@ -7,7 +7,7 @@ class AuthApi extends BaseApi
 {
 
     //send login response using email and password
-    public function login()
+    public function apiLogin()
     {
 
         //validate input values
@@ -27,7 +27,8 @@ class AuthApi extends BaseApi
         if ($user) {
 
             //create session
-            $authToken = $this->authModel->getSession($user);
+            $this->load->model("AuthModel", "authModel");
+            $authToken = $this->authModel->createSession($user);
 
             $this->success("Data found.",
                 array("auth_token" => $authToken, "user_data" => $user));
@@ -38,7 +39,7 @@ class AuthApi extends BaseApi
     }
 
     // signUp Fuction.
-    public function signUp()
+    public function apiSignUp()
     {
         // Validating user input
         if (!isset($this->inputJson->name)):
@@ -60,7 +61,7 @@ class AuthApi extends BaseApi
         die($this->success("User successfully registerd."));
     }
 
-    public function forget()
+    public function apiForget()
     {
         // Validating user input
         if (!isset($this->inputJson->email)):
@@ -72,7 +73,7 @@ class AuthApi extends BaseApi
         $result = $this->authModel->forget(trim($this->inputJson->email));
     }
 
-    public function reset()
+    public function apiReset()
     {
         // Validating user input
         if (!isset($this->inputJson->email)):
@@ -85,5 +86,18 @@ class AuthApi extends BaseApi
         $this->load->model("AuthModel", "authModel");
         $response = $this->authModel->reset(trim($this->inputJson->email), trim($this->inputJson->newPassword));
         die($this->success("Password successfully updated."));
+    }
+
+    public function apiLogout(){
+        if($this->userId > 0){
+            $this->load->model("AuthModel", "authModel");
+            $response = $this->authModel->logout($this->userId);
+
+            if($response == true){
+                $this->success("Logout successfully.");
+            }else{
+                $this->error(ERR_UNAUTHORIZED_ACCESS);
+            }
+        }
     }
 }

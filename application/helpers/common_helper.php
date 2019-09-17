@@ -8,6 +8,8 @@ define("URL_PRODUCT", "seller/product");
 //tables
 define("TABLE_DATA", "tc_data");
 define("TABLE_USER", "tc_users");
+define("TABLE_SESS", "tc_sessions");
+define("TABLE_CAT", "tc_categories");
 
 //data paths
 define("DIR_PRIVATE_DATA", "./private/data/");

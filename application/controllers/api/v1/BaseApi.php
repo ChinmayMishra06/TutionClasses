@@ -5,6 +5,7 @@ class BaseApi extends MY_Controller
 {
 
     protected $inputJson = array();
+    protected $userId = 0;
 
     public function __construct()
     {
@@ -18,6 +19,25 @@ class BaseApi extends MY_Controller
 
         if (json_last_error() != JSON_ERROR_NONE) {
             $this->error(json_last_error_msg(), ErrorCode::JSON_ERROR);
+        }
+
+        if(isset($this->inputJson->authToken)){
+            if(!empty($this->inputJson->authToken)){
+                $this->checkUser($this->inputJson->authToken);
+            }
+        }
+    }
+
+    public function checkUser($authToken){
+        $userProfileData = $this->encryption->decrypt($authToken);
+        if($userProfileData){
+            $this->load->model('AuthModel', 'authModel');
+            $this->userId = $this->authModel->validateUser(json_decode($userProfileData, true));
+            if($this->userId == 0){
+                return $this->error(ERR_UNAUTHORIZED_ACCESS);
+            }
+        }else{
+            return $this->error(ERR_UNAUTHORIZED_ACCESS);
         }
     }
 
@@ -41,7 +61,7 @@ class BaseApi extends MY_Controller
     }
 
     // Initialization data in key.
-    public function init()
+    public function apiInit()
     {
         $this->load->model("DataModel", "dataModel");
 
@@ -50,7 +70,7 @@ class BaseApi extends MY_Controller
             "cur_ver" => $this->dataModel->getValue("cur_ver")));
     }
 
-    public function setValue(){
+    public function apiSetValue(){
         //validate input values
         if(!isset($this->inputJson->key)){
             $this->error("Key field required.", ErrorCode::PARAM_MISSING);
@@ -65,6 +85,24 @@ class BaseApi extends MY_Controller
         $result = $this->dataModel->setValue(trim($this->inputJson->key), trim($this->inputJson->value));
         echo $result;
     }
+
+    public function apiGetCategory(){
+        if(isset($this->inputJson->parentCategory)){
+            if($this->inputJson->parentCategory >= 0){
+                $parentCategory = $this->inputJson->parentCategory;
+            }else{
+                $this->error(ERR_INVALID_DATA);
+            }            
+        }
+
+        $this->load->model("AuthModel", "authModel");
+        $categories = $this->authModel->getCategory(isset($this->inputJson->parentCategory));
+        if($categories){
+            $this->success("Categories as follows", $categories);
+        }else{
+            $this->error("No data found.");
+        }
+    }    
 }
 
 class ErrorCode
