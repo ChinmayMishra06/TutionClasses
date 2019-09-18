@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class BaseApi extends MY_Controller
 {
 
+    private static $apiKey = "molajdfsklajfjowermolajdfsklajfjower";
     protected $inputJson = array();
     protected $userId = 0;
 
@@ -12,6 +13,11 @@ class BaseApi extends MY_Controller
         parent::__construct();
 
         header("content-type: application/json");
+        
+        if(($this->input->get_request_header("x-api-key", true) !== null) && ($this->input->get_request_header("x-api-key", true) !== self::$apiKey)){
+            $this->error(ERR_UNAUTHORIZED_ACCESS);
+        }
+
 
         $inputData = file_get_contents("php://input");
 
@@ -87,6 +93,7 @@ class BaseApi extends MY_Controller
     }
 
     public function apiGetCategory(){
+        $parentCategory = 0;
         if(isset($this->inputJson->parentCategory)){
             if($this->inputJson->parentCategory >= 0){
                 $parentCategory = $this->inputJson->parentCategory;
@@ -96,7 +103,7 @@ class BaseApi extends MY_Controller
         }
 
         $this->load->model("AuthModel", "authModel");
-        $categories = $this->authModel->getCategory(isset($this->inputJson->parentCategory));
+        $categories = $this->authModel->getCategory($parentCategory);
         if($categories){
             $this->success("Categories as follows", $categories);
         }else{

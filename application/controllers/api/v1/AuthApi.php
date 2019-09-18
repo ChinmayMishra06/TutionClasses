@@ -19,13 +19,16 @@ class AuthApi extends BaseApi
             $this->error("Password field required.", ErrorCode::PARAM_MISSING);
         }
 
+        if (!isset($this->inputJson->userType)) {
+            $this->error("User type field required.", ErrorCode::PARAM_MISSING);
+        }
+
         //check for user        
         $this->load->model("AuthModel", "authModel");
-        $user = $this->authModel->getUser(trim($this->inputJson->email), trim($this->inputJson->password));
+        $user = $this->authModel->getUser(trim($this->inputJson->email), trim($this->inputJson->password), trim($this->inputJson->userType));
 
         //response
         if ($user) {
-
             //create session
             $this->load->model("AuthModel", "authModel");
             $authToken = $this->authModel->createSession($user);
@@ -47,7 +50,9 @@ class AuthApi extends BaseApi
         elseif (!isset($this->inputJson->email)):
             $this->error("Email field required.", ErrorCode::PARAM_MISSING);
         elseif (!isset($this->inputJson->password)):
-            $this->error("Password field required", ErrorCode::PARAM_MISSING);
+            $this->error("Password field required", ErrorCode::PARAM_MISSING);            
+        elseif (!isset($this->inputJson->userType)):
+            $this->error("User type field required", ErrorCode::PARAM_MISSING);
         endif;
 
         // Inserting signup data
@@ -55,10 +60,19 @@ class AuthApi extends BaseApi
         $response = $this->authModel->signUp(
             trim($this->inputJson->name),
             trim($this->inputJson->email),
-            trim($this->inputJson->password)
+            trim($this->inputJson->password),
+            trim($this->inputJson->userType)
         );
 
-        die($this->success("User successfully registerd."));
+        if($response === true){
+            $this->success("User successfully registerd.");
+        }
+        elseif($response === ""){
+            $this->error('Your account is already exist.');
+        }
+        else{
+            $this->error("Acount could not be created.");
+        }
     }
 
     public function apiForget()
@@ -89,9 +103,14 @@ class AuthApi extends BaseApi
     }
 
     public function apiLogout(){
+        
+        if(!isset($this->inputJson->authToken) || empty($this->inputJson->authToken)){
+            $this->error('Please provide your token.', ErrorCode::PARAM_MISSING);
+        }
+
         if($this->userId > 0){
             $this->load->model("AuthModel", "authModel");
-            $response = $this->authModel->logout($this->userId);
+            $response = $this->authModel->logout($this->inputJson->authToken);
 
             if($response == true){
                 $this->success("Logout successfully.");

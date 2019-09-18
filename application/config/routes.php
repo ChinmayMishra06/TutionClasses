@@ -17,3 +17,5 @@ $route['api/v1/getProfile'] = 'api/v1/UserApi/apiGetProfile';
 $route['api/v1/editProfile'] = 'api/v1/UserApi/apiEditProfile';
 $route['api/v1/getCategory'] = 'api/v1/BaseApi/apiGetCategory';
 $route['api/v1/logout'] = 'api/v1/AuthApi/apiLogout';
+$route['api/v1/addFeedback'] = 'api/v1/UserApi/apiAddFeedback';
+$route['api/v1/addReport'] = 'api/v1/UserApi/apiAddReport';

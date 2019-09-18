@@ -28,5 +28,25 @@
             }
             return false;
         }
+
+        public function addFeedback($userId, $categoryId, $description){
+            $result = $this->db->insert(TABLE_FEED, [
+                "user_id"=>$userId,
+                "category_id"=>$categoryId,
+                "description"=>$description
+            ]);
+            return $result ? true : false;
+        }
+
+        public function addReport($categoryId, $victimId, $criminalId, $title, $description){
+            $result = $this->db->insert(TABLE_REPORT, [
+                "category_id"=>$categoryId,
+                "victim_id"=>$victimId,
+                "criminal_id"=>$criminalId,
+                "title"=>$title,
+                "description"=>$description
+            ]);
+            return $result ? true : false;
+        }
     }
 ?>

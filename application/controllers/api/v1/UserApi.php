@@ -65,4 +65,62 @@ class UserApi extends BaseApi
             $this->error('User details could not be updated');
         }
     }
+
+    public function apiAddFeedback(){
+        if(!isset($this->inputJson->user_id)){
+            $this->error("User id field is required", ErrorCode::PARAM_MISSING);
+        }
+        if(!isset($this->inputJson->category_id)){
+            $this->error("Category id field is required", ErrorCode::PARAM_MISSING);
+        }
+        if(!isset($this->inputJson->description)){
+            $this->error("Description field is required", ErrorCode::PARAM_MISSING);
+        }
+
+        $this->load->model("UserModel","userModel");
+        $response = $this->userModel->addFeedback(
+            trim($this->inputJson->user_id),
+            trim($this->inputJson->category_id),
+            trim($this->inputJson->description)
+        );
+
+        if($response == true){
+            $this->success("Feedback send successfully.");
+        }else{
+            $this->error(ERR_FAILED);
+        }
+    }
+
+    public function apiAddReport(){
+        if(!isset($this->inputJson->category_id)){
+            $this->error("Category id field is required", ErrorCode::PARAM_MISSING);
+        }
+        if(!isset($this->inputJson->victim_id)){
+            $this->error("Victim id field is required", ErrorCode::PARAM_MISSING);
+        }        
+        if(!isset($this->inputJson->criminal_id)){
+            $this->error("Criminal id field is required", ErrorCode::PARAM_MISSING);
+        }
+        if(!isset($this->inputJson->title)){
+            $this->error("Title field is required", ErrorCode::PARAM_MISSING);
+        }
+        if(!isset($this->inputJson->description)){
+            $this->error("Description field is required", ErrorCode::PARAM_MISSING);
+        }
+
+        $this->load->model("UserModel","userModel");
+        $response = $this->userModel->addReport(
+            trim($this->inputJson->category_id),
+            trim($this->inputJson->victim_id),
+            trim($this->inputJson->criminal_id),
+            trim($this->inputJson->title),
+            trim($this->inputJson->description)
+        );
+
+        if($response == true){
+            $this->success("Report send successfully.");
+        }else{
+            $this->error(ERR_FAILED);
+        }
+    }
 }
