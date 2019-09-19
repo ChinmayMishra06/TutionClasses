@@ -89,13 +89,22 @@
                             $include_or_not[TABLE_COURSE.'.medium'] = $medium;
                         }
                         
+                        // $result = $this->db->select([TABLE_USER.'.user_id', TABLE_COURSE.'.course_name', TABLE_CAT.'.category_name'])
+                        //     ->from(TABLE_USER)
+                        //     ->from(TABLE_COURSE)
+                        //     ->from(TABLE_CAT)
+                        //     ->where(TABLE_USER.'.user_id='.TABLE_COURSE.'.user_id')
+                        //     ->where(TABLE_CAT.'.category_id='.TABLE_COURSE.'.category_id')
+                        //     ->get();
+
                         $result = $this->db
                                 ->select(TABLE_USER.'.user_id,'. TABLE_COURSE. '.course_name,  name, email, contact, address, category_name')
-                                ->join(TABLE_COURSE, TABLE_USER.'.user_id='.TABLE_COURSE.'.user_id', 'left')
+                                ->join(TABLE_COURSE, TABLE_USER.'.user_id='.TABLE_COURSE.'.user_id')
                                 ->join(TABLE_COURSE . ' TC', TABLE_CAT.'.category_id=' .'TC.category_id')
                                 ->where($include_or_not)
                                 ->where(TABLE_CAT.'.status', 1)
-                                ->where_in(TABLE_USER.'.user_id', $id)->get(TABLE_USER);
+                                ->where_in(TABLE_USER.'.user_id', $id)->get([TABLE_USER, TABLE_CAT]);
+                                
                         if($result->num_rows() > 0) {
                             return $result->result_array();
                         }else{
