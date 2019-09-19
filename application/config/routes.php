@@ -19,3 +19,6 @@ $route['api/v1/getCategory'] = 'api/v1/BaseApi/apiGetCategory';
 $route['api/v1/logout'] = 'api/v1/AuthApi/apiLogout';
 $route['api/v1/addFeedback'] = 'api/v1/UserApi/apiAddFeedback';
 $route['api/v1/addReport'] = 'api/v1/UserApi/apiAddReport';
+$route['api/v1/addCourse'] = 'api/v1/UserApi/apiAddCourse';
+$route['api/v1/editCourse'] = 'api/v1/UserApi/apiEditCourse';
+$route['api/v1/getCourse'] = 'api/v1/UserApi/apiGetCourse';

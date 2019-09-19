@@ -9,6 +9,7 @@ define("URL_PRODUCT", "seller/product");
 define("TABLE_DATA", "tc_data");
 define("TABLE_USER", "tc_users");
 define("TABLE_SESS", "tc_sessions");
+define("TABLE_COURSE", "tc_courses");
 define("TABLE_CAT", "tc_categories");
 define("TABLE_FEED", "tc_feedbacks");
 define("TABLE_REPORT", "tc_reports");

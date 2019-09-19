@@ -78,18 +78,6 @@ class AuthModel extends CI_Model
         return $this->db->where("email", $email)->update(TABLE_USER, array("password" => "$newPassword"));
     }
 
-    public function getCategory($parentCategory){
-        $result = $this->db->select("parent_category, category_name")->where("parent_category", $parentCategory)->get(TABLE_CAT);
-
-        if(!$result){
-            return false;
-        }
-        if($result->num_rows() > 0){
-            return $result->result_array();
-        }
-        return false;
-    }
-
     public function logout($authToken){
         $authToken = $this->encryption->decrypt($authToken);
         $authToken = json_decode($authToken);

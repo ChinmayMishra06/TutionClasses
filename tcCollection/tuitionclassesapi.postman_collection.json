@@ -171,6 +171,66 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "addCourse",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"authToken\" : \"e9046e6d9d5ffada46a583a2f1be188668caa4a79b3a9051d23ad42a4eb2a1e00c987deed5fee9b149d2a91c421e1c8e671b70eb2c5f9c2139bc2d9c86f1bd23wXrv7w+kyHRC6QVtZFaTuAEzOwlzh9Ze0JXmCLMAGxSHdelXnym+YKPMqTcEdhtIUPbtPXjqa6Wg7RHacL8yH6r6lrCPvqtaXekQiHX+zx4Gxt6TEGvz3IToJ0dwNA446jFb9mZeKxvhemp+tHELZfOwTGt7P6bcEEV+pTQUDJx9fRlja34+ACuWIBegpyS7\",\n\t\"category_id\": 1\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}addCourse",
+					"host": [
+						"{{tutionclasses}}addCourse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editCourse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}editCourse",
+					"host": [
+						"{{tutionclasses}}editCourse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCourse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"authToken\": \"9768540ecf1e9de49c006ae1d25af0b6dcea39b40b9972b419d584b4ad8cb6dfdd036bf3b0379eef9cccfef552c19b90fdbb027093ba17921a19d9d46e09ddeaK+ZQJPVdRZ7WC/86NQtzleokmqb51Di/5o3Z9D6MqLYDL4y8aowNqMIpg83mqy+Pt/TlctfVds/oOanp8gi/dmJEd9CR7FYqG4bTKJgM2IuIINgyjBpUGpxOQ/nL1YPPUgYeuHl4PtfqSJUddgg/xbM8abBk+Nv/aMhtCKJM5Kx2Oy6R2GvOzFzS6uWEoNWu\",\n\t\"latitude\" : 25.23590100,\n\t\"longitude\" : 73.23519900,\n\t\"category_id\":2\n\t\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}getCourse",
+					"host": [
+						"{{tutionclasses}}getCourse"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

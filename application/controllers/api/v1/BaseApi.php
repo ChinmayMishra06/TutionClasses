@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class BaseApi extends MY_Controller
 {
 
-    private static $apiKey = "molajdfsklajfjowermolajdfsklajfjower";
+    private static $APIKEY = "molajdfsklajfjowermolajdfsklajfjower";
     protected $inputJson = array();
     protected $userId = 0;
 
@@ -14,7 +14,7 @@ class BaseApi extends MY_Controller
 
         header("content-type: application/json");
         
-        if(($this->input->get_request_header("x-api-key", true) !== null) && ($this->input->get_request_header("x-api-key", true) !== self::$apiKey)){
+        if(($this->input->get_request_header("x-api-key", true) !== null) && ($this->input->get_request_header("x-api-key", true) !== self::$APIKEY)){
             $this->error(ERR_UNAUTHORIZED_ACCESS);
         }
 
@@ -102,10 +102,10 @@ class BaseApi extends MY_Controller
             }            
         }
 
-        $this->load->model("AuthModel", "authModel");
-        $categories = $this->authModel->getCategory($parentCategory);
+        $this->load->model("DataModel", "dataModel");
+        $categories = $this->dataModel->getCategory($parentCategory);
         if($categories){
-            $this->success("Categories as follows", $categories);
+            $this->success("Categories as follows", ["list" => $categories]);
         }else{
             $this->error("No data found.");
         }
