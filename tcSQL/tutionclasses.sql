@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2019 at 03:39 PM
+-- Generation Time: Sep 20, 2019 at 08:45 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -112,7 +112,7 @@ CREATE TABLE `tc_courses` (
 
 INSERT INTO `tc_courses` (`course_id`, `category_id`, `user_id`, `course_name`, `start_date`, `description`, `duration`, `medium`, `logo_image`, `fees`, `delete_flag`, `status`, `created_at`) VALUES
 (1, 1, 17, 'English', '2019-09-18', 'This is english course.', 'Quarterly', 7, 'logoImage', '2500.00', '0', '0', '2019-09-18 17:27:43'),
-(2, 2, 18, 'Hindi', '2019-09-18', 'This is hindi course.', 'Monthly', 0, 'logoImage', '1000.00', '0', '0', '2019-09-18 17:28:41'),
+(2, 2, 18, 'Hindi', '2019-09-18', 'This is hindi course.', 'Monthly', 8, 'logoImage', '1000.00', '0', '0', '2019-09-18 17:28:41'),
 (3, 5, 19, 'Maths', '2019-09-18', 'This is maths course.', 'Half Yearly', 8, 'logoImage', '4000.00', '0', '0', '2019-09-18 17:29:17'),
 (4, 1, 20, 'Science', '2019-09-18', 'This is science course.', 'Yearly', 9, 'logoImage', '5000.00', '0', '0', '2019-09-18 17:30:50'),
 (5, 3, 21, 'Social Science', '2019-09-19', 'This is science course.', 'Yearly', 10, 'logoImage', '5000.00', '0', '0', '2019-09-19 13:44:56'),
@@ -243,7 +243,7 @@ CREATE TABLE `tc_users` (
 
 INSERT INTO `tc_users` (`user_id`, `name`, `contact`, `email`, `address`, `password`, `dob`, `logo_image`, `banner_image`, `user_type`, `delete_flag`, `status`, `created_at`, `latitude`, `longitude`) VALUES
 (17, 'Kuldeep Chand', '', 'bccfalna@gmail.com', 'falna', 'password', '0000-00-00', '', NULL, '1', '0', '1', '2019-09-18 14:58:03', '25.23590100', '73.23519900'),
-(18, 'Abhishek Agarawal', '', 'agarawal.falna@gmail.com', 'rani', 'password', '0000-00-00', '', NULL, '1', '1', '0', '2019-09-18 14:59:05', '25.34820000', '73.31050100'),
+(18, 'Abhishek Agarawal', '', 'agarawal.falna@gmail.com', 'rani', 'password', '0000-00-00', '', NULL, '1', '0', '1', '2019-09-18 14:59:05', '25.34820000', '73.31050100'),
 (19, 'Gajendra Nagar', '', 'nagar.jalore@gmail.com', 'bali', 'password', '0000-00-00', '', NULL, '1', '0', '1', '2019-09-18 14:59:32', '25.19208000', '73.27949000'),
 (20, 'Rishi Mathur', '', 'mathur.jhodhpur@gmail.com', 'sumerpur', 'password', '0000-00-00', '', NULL, '1', '0', '1', '2019-09-18 14:59:55', '25.16820000', '73.08740000'),
 (21, 'Yameen Sharma', '', 'sharma.sumerpur@gmail.com', 'falna', 'password', '0000-00-00', '', NULL, '1', '0', '1', '2019-09-18 15:00:38', '25.23590100', '73.23519900'),

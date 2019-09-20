@@ -125,7 +125,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"authToken\":\"\"\n}"
+					"raw": "{\n\t\"authToken\":\"7b625e343e61be78b7bae7ba2501d46f5d9ab99e1630171a6b2b75360c0192d9c77f5becde921a9f347b9490a7d4ecbf1f20d54d24bef0e2e54a52a2eb818f44BEf6YuO1SmcwhFmNV7g108wyXGXTvy/snhqCRwebNVKqk7aaX8S0fDNennCUvEmtDndJVVobu/I9uH59Wb6LNksaeAvy9pHx49tW3CTiQkn7f+DldFp7Sk6RP6EGj5uBnvpl0WrO5bTLIfbGx5vOSbNPvJqKlZlO27UXo45hjQM3+o5K+tfCDswZWnt7rpyj\"\n}"
 				},
 				"url": {
 					"raw": "{{tutionclasses}}logout",
@@ -218,10 +218,22 @@
 			"name": "getCourse",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"authToken\": \"9768540ecf1e9de49c006ae1d25af0b6dcea39b40b9972b419d584b4ad8cb6dfdd036bf3b0379eef9cccfef552c19b90fdbb027093ba17921a19d9d46e09ddeaK+ZQJPVdRZ7WC/86NQtzleokmqb51Di/5o3Z9D6MqLYDL4y8aowNqMIpg83mqy+Pt/TlctfVds/oOanp8gi/dmJEd9CR7FYqG4bTKJgM2IuIINgyjBpUGpxOQ/nL1YPPUgYeuHl4PtfqSJUddgg/xbM8abBk+Nv/aMhtCKJM5Kx2Oy6R2GvOzFzS6uWEoNWu\",\n\t\"latitude\" : 25.23590100,\n\t\"longitude\" : 73.23519900,\n\t\"category_id\":2\n\t\n}"
+					"raw": "{\n\t\"authToken\": \"9768540ecf1e9de49c006ae1d25af0b6dcea39b40b9972b419d584b4ad8cb6dfdd036bf3b0379eef9cccfef552c19b90fdbb027093ba17921a19d9d46e09ddeaK+ZQJPVdRZ7WC/86NQtzleokmqb51Di/5o3Z9D6MqLYDL4y8aowNqMIpg83mqy+Pt/TlctfVds/oOanp8gi/dmJEd9CR7FYqG4bTKJgM2IuIINgyjBpUGpxOQ/nL1YPPUgYeuHl4PtfqSJUddgg/xbM8abBk+Nv/aMhtCKJM5Kx2Oy6R2GvOzFzS6uWEoNWu\",\n\t\"latitude\" : 25.23590100,\n\t\"longitude\" : 73.23519900,\n\t\"medium\": 8,\n\t\"category_id\":2\n\t\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "{{tutionclasses}}getCourse",
