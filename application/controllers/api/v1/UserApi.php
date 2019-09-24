@@ -218,7 +218,11 @@ class UserApi extends BaseApi
         }
     }
 
+<<<<<<< HEAD
     public function apiGetCourses()
+=======
+    public function apiGetCourse()
+>>>>>>> 6513519f75754b26529f62b7d78a8e3f9f58dcdd
     {
 
         if ($this->userId == 0) {
@@ -233,6 +237,7 @@ class UserApi extends BaseApi
 
         $this->load->model("UserModel", "userModel");
 
+<<<<<<< HEAD
         $userType = $this->userModel->getUserType($this->userId);
         if($userType != 0)
             $this->error(ERR_UNAUTHORIZED_ACCESS);
@@ -243,5 +248,15 @@ class UserApi extends BaseApi
             $this->error("No data found.");
         
         $this->success("Data found", array("have_more" => (count($response) == self::$LIMIT), "list" => $response));
+=======
+
+        $response = $this->userModel->getCourse($this->userId, $latitude, $longitude, $categoryId, $medium);
+
+        ($response == false)
+            ? $this->error(ERR_FAILED)
+            : (($response === true)
+            ? $this->success(ERR_UNAUTHORIZED_ACCESS)
+            : $this->success("Data found", array("have_more" => (count($response) == self::$LIMIT), "list" => $response)));
+>>>>>>> 6513519f75754b26529f62b7d78a8e3f9f58dcdd
     }
 }
