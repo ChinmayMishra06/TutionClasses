@@ -61,12 +61,16 @@ UserModel extends CI_Model
         return $result ? true : false;
     }
 
-    public function getUserType(){
+    public function getUserType($userId){
         //checking for user type is tutor
-        $result = $this->db->select('user_type')->where(array('user_id' => $userId, 'user_type' => 1))->get(TABLE_USER);
+        $result = $this->db->select('user_type')
+                            ->where('user_id', $userId)
+                            ->where('status',1)
+                            ->get(TABLE_USER);
+
         if (!$result)
             return false;
-
+        
         if ($result->num_rows() > 0)
             return $result->row()->user_type;
     }
@@ -82,10 +86,9 @@ UserModel extends CI_Model
                     AS distance')
             ->where(array('user_type' => 1, 'status' => 1, 'delete_flag' => 0))
             ->having('distance < ' . $distance)->order_by('distance')->limit(20)->get(TABLE_USER);
-
+            
         if ($result->num_rows() == 0)
             return false;
-
         $result = $result->result_array();
         // To store all the id's selected by the above query.
         $id = array();
@@ -127,9 +130,8 @@ UserModel extends CI_Model
 
         if ($result->num_rows() == 0)
             return false;
-
+        
         return $result->result_array();
-
     }
 }
 

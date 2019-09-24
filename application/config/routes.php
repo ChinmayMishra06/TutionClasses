@@ -21,4 +21,4 @@ $route['api/v1/addFeedback'] = 'api/v1/UserApi/apiAddFeedback';
 $route['api/v1/addReport'] = 'api/v1/UserApi/apiAddReport';
 $route['api/v1/addCourse'] = 'api/v1/UserApi/apiAddCourse';
 $route['api/v1/editCourses'] = 'api/v1/UserApi/apiEditCourses';
-$route['api/v1/getCourse'] = 'api/v1/UserApi/apiGetCourse';
+$route['api/v1/getCourses'] = 'api/v1/UserApi/apiGetCourses';

@@ -234,7 +234,7 @@ class UserApi extends BaseApi
         $this->load->model("UserModel", "userModel");
 
         $userType = $this->userModel->getUserType($this->userId);
-        if($userType != 0 || $userType == false)
+        if($userType != 0)
             $this->error(ERR_UNAUTHORIZED_ACCESS);
 
         $response = $this->userModel->getCourses($latitude, $longitude, $categoryId, $medium);
