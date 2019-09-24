@@ -61,7 +61,6 @@ UserModel extends CI_Model
         return $result ? true : false;
     }
 
-<<<<<<< HEAD
     public function getUserType($userId){
         //checking for user type is tutor
         $result = $this->db->select('user_type')
@@ -78,22 +77,6 @@ UserModel extends CI_Model
     
     public function getCourses($latitude, $longitude, $categoryId, $medium, $distance = 100)
     {
-=======
-
-    public function getCourse($userId, $latitude, $longitude, $categoryId, $medium, $distance = 100)
-    {
-
-        //checking for user type is tutor
-        $result = $this->db->select('user_type')->where(array('user_id' => $userId, 'user_type' => 1))->get(TABLE_USER);
-
-        if (!$result)
-            return false;
-
-        if ($result->num_rows() > 0)
-            return true;
-
-
->>>>>>> 6513519f75754b26529f62b7d78a8e3f9f58dcdd
         $result = $this->db->select('user_id, ( 6371  * 
                     acos ( cos ( radians(' . $latitude . ') ) * 
                     cos( radians( latitude ) ) * 
@@ -103,16 +86,9 @@ UserModel extends CI_Model
                     AS distance')
             ->where(array('user_type' => 1, 'status' => 1, 'delete_flag' => 0))
             ->having('distance < ' . $distance)->order_by('distance')->limit(20)->get(TABLE_USER);
-<<<<<<< HEAD
             
         if ($result->num_rows() == 0)
             return false;
-=======
-
-        if ($result->num_rows() == 0)
-            return false;
-
->>>>>>> 6513519f75754b26529f62b7d78a8e3f9f58dcdd
         $result = $result->result_array();
         // To store all the id's selected by the above query.
         $id = array();
@@ -154,17 +130,9 @@ UserModel extends CI_Model
 
         if ($result->num_rows() == 0)
             return false;
-<<<<<<< HEAD
         
         return $result->result_array();
     }
-=======
-
-        return $result->result_array();
-
-    }
-
->>>>>>> 6513519f75754b26529f62b7d78a8e3f9f58dcdd
 }
 
 ?>
