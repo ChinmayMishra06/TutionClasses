@@ -81,13 +81,13 @@ class UserApi extends BaseApi
     public function apiAddFeedback()
     {
         if (!isset($this->inputJson->user_id)) {
-            $this->error("User id field is required", ErrorCode::PARAM_MISSING);
+            $this->error("User id field is required", PARAM_MISSING);
         }
         if (!isset($this->inputJson->category_id)) {
-            $this->error("Category id field is required", ErrorCode::PARAM_MISSING);
+            $this->error("Category id field is required", PARAM_MISSING);
         }
         if (!isset($this->inputJson->description)) {
-            $this->error("Description field is required", ErrorCode::PARAM_MISSING);
+            $this->error("Description field is required", PARAM_MISSING);
         }
 
         $this->load->model("UserModel", "userModel");
@@ -107,19 +107,19 @@ class UserApi extends BaseApi
     public function apiAddReport()
     {
         if (!isset($this->inputJson->category_id)) {
-            $this->error("Category id field is required", ErrorCode::PARAM_MISSING);
+            $this->error("Category id field is required", PARAM_MISSING);
         }
         if (!isset($this->inputJson->victim_id)) {
-            $this->error("Victim id field is required", ErrorCode::PARAM_MISSING);
+            $this->error("Victim id field is required", PARAM_MISSING);
         }
         if (!isset($this->inputJson->criminal_id)) {
-            $this->error("Criminal id field is required", ErrorCode::PARAM_MISSING);
+            $this->error("Criminal id field is required", PARAM_MISSING);
         }
         if (!isset($this->inputJson->title)) {
-            $this->error("Title field is required", ErrorCode::PARAM_MISSING);
+            $this->error("Title field is required", PARAM_MISSING);
         }
         if (!isset($this->inputJson->description)) {
-            $this->error("Description field is required", ErrorCode::PARAM_MISSING);
+            $this->error("Description field is required", PARAM_MISSING);
         }
 
         $this->load->model("UserModel", "userModel");
@@ -147,16 +147,16 @@ class UserApi extends BaseApi
         }
         $courseData = [];
         // Validating user input
-        $courseData['category_id'] = isset($this->inputJson->category_id) ? trim($this->inputJson->category_id) : $this->error('Category id field is required.', ErrorCode::PARAM_MISSING);
-        $courseData['user_id'] = isset($this->inputJson->user_id) ? trim($this->inputJson->user_id) : $this->error('User id field is required.', ErrorCode::PARAM_MISSING);
-        $courseData['course_name'] = isset($this->inputJson->course_name) ? trim($this->inputJson->course_name) : $this->error('Course name field is required.', ErrorCode::PARAM_MISSING);
-        $courseData['start_date'] = isset($this->inputJson->start_date) ? trim($this->inputJson->start_date) : $this->error('Start date field is required.', ErrorCode::PARAM_MISSING);
-        $courseData['description'] = isset($this->inputJson->description) ? trim($this->inputJson->description) : $this->error('Description field is required.', ErrorCode::PARAM_MISSING);
-        $courseData['duration'] = isset($this->inputJson->duration) ? trim($this->inputJson->duration) : $this->error('Duration field is required.', ErrorCode::PARAM_MISSING);
-        $courseData['medium'] = isset($this->inputJson->medium) ? trim($this->inputJson->medium) : $this->error('Medium field is required.', ErrorCode::PARAM_MISSING);
-        $courseData['logo_image'] = isset($this->inputJson->logo_image) ? trim($this->inputJson->logo_image) : $this->error('Logo image field is required.', ErrorCode::PARAM_MISSING);
-        $courseData['banner_image'] = isset($this->inputJson->banner_image) ? trim($this->inputJson->banner_image) : $this->error('Banner image field is required.', ErrorCode::PARAM_MISSING);
-        $courseData['fees'] = isset($this->inputJson->fees) ? trim($this->inputJson->fees) : $this->error('Fees field is required.', ErrorCode::PARAM_MISSING);
+        $courseData['category_id'] = isset($this->inputJson->category_id) ? trim($this->inputJson->category_id) : $this->error('Category id field is required.', PARAM_MISSING);
+        $courseData['user_id'] = isset($this->inputJson->user_id) ? trim($this->inputJson->user_id) : $this->error('User id field is required.', PARAM_MISSING);
+        $courseData['course_name'] = isset($this->inputJson->course_name) ? trim($this->inputJson->course_name) : $this->error('Course name field is required.', PARAM_MISSING);
+        $courseData['start_date'] = isset($this->inputJson->start_date) ? trim($this->inputJson->start_date) : $this->error('Start date field is required.', PARAM_MISSING);
+        $courseData['description'] = isset($this->inputJson->description) ? trim($this->inputJson->description) : $this->error('Description field is required.', PARAM_MISSING);
+        $courseData['duration'] = isset($this->inputJson->duration) ? trim($this->inputJson->duration) : $this->error('Duration field is required.', PARAM_MISSING);
+        $courseData['medium'] = isset($this->inputJson->medium) ? trim($this->inputJson->medium) : $this->error('Medium field is required.', PARAM_MISSING);
+        $courseData['logo_image'] = isset($this->inputJson->logo_image) ? trim($this->inputJson->logo_image) : $this->error('Logo image field is required.', PARAM_MISSING);
+        $courseData['banner_image'] = isset($this->inputJson->banner_image) ? trim($this->inputJson->banner_image) : $this->error('Banner image field is required.', PARAM_MISSING);
+        $courseData['fees'] = isset($this->inputJson->fees) ? trim($this->inputJson->fees) : $this->error('Fees field is required.', PARAM_MISSING);
 
         // Editing user profile details
         $this->load->model('UserModel', 'userModel');
@@ -225,8 +225,8 @@ class UserApi extends BaseApi
             $this->error(ERR_UNAUTHORIZED_ACCESS);
         }
 
-        $latitude = isset($this->inputJson->latitude) ? trim($this->inputJson->latitude) : $this->error("Latitude field is required", ErrorCode::PARAM_MISSING);
-        $longitude = isset($this->inputJson->longitude) ? trim($this->inputJson->longitude) : $this->error("Longitude field is required", ErrorCode::PARAM_MISSING);
+        $latitude = isset($this->inputJson->latitude) ? trim($this->inputJson->latitude) : $this->error("Latitude field is required", PARAM_MISSING);
+        $longitude = isset($this->inputJson->longitude) ? trim($this->inputJson->longitude) : $this->error("Longitude field is required", PARAM_MISSING);
 
         $categoryId = isset($this->inputJson->category_id) ? trim($this->inputJson->category_id) : false;
         $medium = isset($this->inputJson->medium) ? trim($this->inputJson->medium) : false;

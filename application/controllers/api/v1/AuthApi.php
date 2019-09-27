@@ -12,15 +12,15 @@ class AuthApi extends BaseApi
 
         //validate input values
         if (!isset($this->inputJson->email)) {
-            $this->error("Email field required.", ErrorCode::PARAM_MISSING);
+            $this->error("Email field required.", PARAM_MISSING);
         }
 
         if (!isset($this->inputJson->password)) {
-            $this->error("Password field required.", ErrorCode::PARAM_MISSING);
+            $this->error("Password field required.", PARAM_MISSING);
         }
 
         if (!isset($this->inputJson->userType)) {
-            $this->error("User type field required.", ErrorCode::PARAM_MISSING);
+            $this->error("User type field required.", PARAM_MISSING);
         }
 
         //check for user        
@@ -30,7 +30,6 @@ class AuthApi extends BaseApi
         //response
         if ($user) {
             //create session
-            $this->load->model("AuthModel", "authModel");
             $authToken = $this->authModel->createSession($user);
 
             $this->success("Data found.",
@@ -46,13 +45,13 @@ class AuthApi extends BaseApi
     {
         // Validating user input
         if (!isset($this->inputJson->name)):
-            $this->error("Name field required.", ErrorCode::PARAM_MISSING);
+            $this->error("Name field required.", PARAM_MISSING);
         elseif (!isset($this->inputJson->email)):
-            $this->error("Email field required.", ErrorCode::PARAM_MISSING);
+            $this->error("Email field required.", PARAM_MISSING);
         elseif (!isset($this->inputJson->password)):
-            $this->error("Password field required", ErrorCode::PARAM_MISSING);            
+            $this->error("Password field required", PARAM_MISSING);            
         elseif (!isset($this->inputJson->userType)):
-            $this->error("User type field required", ErrorCode::PARAM_MISSING);
+            $this->error("User type field required", PARAM_MISSING);
         endif;
 
         // Inserting signup data
@@ -79,7 +78,7 @@ class AuthApi extends BaseApi
     {
         // Validating user input
         if (!isset($this->inputJson->email)):
-            $this->error("Email field required", ErrorCode::PARAM_MISSING);
+            $this->error("Email field required", PARAM_MISSING);
         endif;
 
         // Check user exist
@@ -91,9 +90,9 @@ class AuthApi extends BaseApi
     {
         // Validating user input
         if (!isset($this->inputJson->email)):
-            $this->error("Email filed required", ErrorCode::PARAM_MISSING);
+            $this->error("Email filed required", PARAM_MISSING);
         elseif (!isset($this->inputJson->newPassword)):
-            $this->error("New password field required", ErrorCode::PARAM_MISSING);
+            $this->error("New password field required", PARAM_MISSING);
         endif;
 
         // Reset user password
@@ -105,7 +104,7 @@ class AuthApi extends BaseApi
     public function apiLogout(){
         
         if(!isset($this->inputJson->authToken) || empty($this->inputJson->authToken)){
-            $this->error('Please provide your token.', ErrorCode::PARAM_MISSING);
+            $this->error('Please provide your token.', PARAM_MISSING);
         }
 
         if($this->userId > 0){

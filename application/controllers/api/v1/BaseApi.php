@@ -24,7 +24,7 @@ class BaseApi extends MY_Controller
         $this->inputJson = json_decode($inputData);
 
         if (json_last_error() != JSON_ERROR_NONE) {
-            $this->error(json_last_error_msg(), ErrorCode::JSON_ERROR);
+            $this->error(json_last_error_msg(), JSON_ERROR);
         }
 
         if(isset($this->inputJson->authToken)){
@@ -79,11 +79,11 @@ class BaseApi extends MY_Controller
     public function apiSetValue(){
         //validate input values
         if(!isset($this->inputJson->key)){
-            $this->error("Key field required.", ErrorCode::PARAM_MISSING);
+            $this->error("Key field required.", PARAM_MISSING);
         }
 
         if(!isset($this->inputJson->value)){
-            $this->error("Value field required.", ErrorCode::PARAM_MISSING);
+            $this->error("Value field required.", PARAM_MISSING);
         }
 
         // call the model.
@@ -105,21 +105,9 @@ class BaseApi extends MY_Controller
         $this->load->model("DataModel", "dataModel");
         $categories = $this->dataModel->getCategory($parentCategory);
         if($categories){
-            $this->success("Categories as follows", ["list" => $categories]);
+            $this->success("Categories as follows", array("list" => $categories));
         }else{
             $this->error("No data found.");
         }
     }    
 }
-
-class ErrorCode
-{
-    const JSON_ERROR = "JSON_ERROR";
-    const PARAM_MISSING = "PARAM_MISSING";
-    const INVALID_API = "INVALID_API";
-    const INVALID_TOKEN = "INVALID_TOKEN";
-    const INVALID_VALUE = "INVALID_VALUE";
-    const INVALID_AUTH = "INVALID_AUTH";
-    const DATABASE_ERROR = "DATABASE_ERROR";
-
-}//class
