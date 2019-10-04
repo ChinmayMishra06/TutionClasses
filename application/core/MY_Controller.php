@@ -7,7 +7,6 @@ class MY_Controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('session');
     }
 
     public function isLoggedIn()
@@ -27,12 +26,6 @@ class MY_Controller extends CI_Controller
         return $data;
     }
 
-    public function getProductCats()
-    {
-        $this->load->model("DataModel", "data");
-        return $this->data->getProductCats();
-    }
-
     public function canUserContinue()
     {
 
@@ -42,21 +35,6 @@ class MY_Controller extends CI_Controller
         redirect(base_url('user/login'));
         return false;
 
-    }
-
-    public function canSellerContinue()
-    {
-        if (!$this->isLoggedIn()) {
-            redirect(base_url('user/login?from=seller'));
-            return false;
-        }
-
-        if ($this->getUserData()->is_seller == 0) {
-            redirect(base_url('user/seller/signup'));
-            return false;
-        }
-
-        return true;
     }
 
     public function isValidSellerUser()
@@ -71,17 +49,4 @@ class MY_Controller extends CI_Controller
 
         return true;
     }
-
-
-    public function publishApi($status, $err_code = "", $msg = "", $data = NULL)
-    {
-        header("Content-Type: application/json");
-        die(json_encode(
-            array("status" => $status,
-                "err_code" => $err_code,
-                "msg" => $msg,
-                "data" => $data))
-        );
-    }
-
 }//class

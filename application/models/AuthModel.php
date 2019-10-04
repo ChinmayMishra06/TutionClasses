@@ -13,13 +13,7 @@ class AuthModel extends CI_Model
     {
         $result = $this->db->select("user_id, name, email")->from(TABLE_USER)->where(array('email' => $email, 'password' => $password, 'user_type' => $userType))->limit(1)->get();
 
-        if (!$result)
-            return false;
-
-        if ($result->num_rows() > 0)
-            return $result->row();
-
-        return false;
+        return ($result->num_rows() > 0) ? $result->row() : false;
     }
 
     public function createSession($user) {

@@ -37,7 +37,6 @@ class DataModel extends CI_Model
         $result = $this->db
         ->select("category_id, category_name")
         ->where("parent_category", $parentCategory)
-        ->where("category_type",0)
         ->where("status", 1)
         ->get(TABLE_CAT);
 

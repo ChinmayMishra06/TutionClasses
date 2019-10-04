@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class BaseApi extends MY_Controller
+class BaseApi extends CI_Controller
 {
 
     private static $APIKEY = "molajdfsklajfjowermolajdfsklajfjower";
