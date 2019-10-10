@@ -34,8 +34,8 @@ $route['institute/courses/details/(:num)'] = 'institute/course/details/$1';     
 //Institute profile
 $route['institute/profile'] = 'institute/profiles/';                            //Completed
 $route['institute/profile/edit'] = 'institute/profile/edit';                    //Completed
-$route['institute/reports'] = 'institute/common/report';                        //Pending
-$route['institute/feedbacks'] = 'institute/common/feedback';                    //Pending
+$route['institute/reports'] = 'institute/common/report';                        //Completed
+$route['institute/feedbacks'] = 'institute/common/feedback';                    //Completed
 // $route['institute/notifications'] = 'institute/notification';                   //Pending
 // $route['institute/subscriptions'] = 'institute/subscription';                   //Pending
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2019 at 11:29 AM
+-- Generation Time: Oct 10, 2019 at 11:26 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -25,59 +25,41 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `markers`
---
-
-CREATE TABLE `markers` (
-  `id` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `address` varchar(80) NOT NULL,
-  `lat` float(10,6) NOT NULL,
-  `lng` float(10,6) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `markers`
---
-
-INSERT INTO `markers` (`id`, `name`, `address`, `lat`, `lng`) VALUES
-(1, 'Heir Apparel', 'Crowea Pl, Frenchs Forest NSW 2086', -33.737885, 151.235260),
-(2, 'BeeYourself Clothing', 'Thalia St, Hassall Grove NSW 2761', -33.729752, 150.836090),
-(3, 'Dress Code', 'Glenview Avenue, Revesby, NSW 2212', -33.949448, 151.008591),
-(4, 'The Legacy', 'Charlotte Ln, Chatswood NSW 2067', -33.796669, 151.183609),
-(5, 'Fashiontasia', 'Braidwood Dr, Prestons NSW 2170', -33.944489, 150.854706),
-(6, 'Trish & Tash', 'Lincoln St, Lane Cove West NSW 2066', -33.812222, 151.143707),
-(7, 'Perfect Fit', 'Darley Rd, Randwick NSW 2031', -33.903557, 151.237732),
-(8, 'Buena Ropa!', 'Brodie St, Rydalmere NSW 2116', -33.815521, 151.026642),
-(9, 'Coxcomb and Lily Boutique', 'Ferrers Rd, Horsley Park NSW 2175', -33.829525, 150.873764),
-(10, 'Moda Couture', 'Northcote Rd, Glebe NSW 2037', -33.873882, 151.177460);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tc_categories`
 --
 
 CREATE TABLE `tc_categories` (
   `category_id` int(11) UNSIGNED NOT NULL,
-  `parent_category` int(11) UNSIGNED DEFAULT NULL,
+  `category_type` int(11) UNSIGNED DEFAULT '0',
+  `parent_category` int(11) UNSIGNED DEFAULT '0',
   `category_name` varchar(100) DEFAULT '',
   `delete_flag` char(1) DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `status` char(1) DEFAULT '0'
+  `status` char(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tc_categories`
 --
 
-INSERT INTO `tc_categories` (`category_id`, `parent_category`, `category_name`, `delete_flag`, `created_at`, `status`) VALUES
-(1, 0, 'Java', '0', '2019-09-16 19:00:32', '1'),
-(2, 1, 'Core Java\r\n', '0', '2019-09-16 19:00:53', '1'),
-(3, 1, 'Advance Java', '0', '2019-09-16 19:01:11', '1'),
-(4, 0, 'PHP', '0', '2019-09-16 19:02:13', '1'),
-(5, 4, 'Core PHP\r\n', '0', '2019-09-16 19:02:45', '1'),
-(6, 4, 'Advance PHP', '0', '2019-09-16 19:02:45', '1');
+INSERT INTO `tc_categories` (`category_id`, `category_type`, `parent_category`, `category_name`, `delete_flag`, `created_at`, `status`) VALUES
+(1, 0, 0, 'Java', '0', '2019-09-16 19:00:32', '1'),
+(2, 0, 1, 'Core Java\r\n', '0', '2019-09-16 19:00:53', '1'),
+(3, 0, 1, 'Advance Java', '0', '2019-09-16 19:01:11', '1'),
+(4, 0, 0, 'PHP', '0', '2019-09-16 19:02:13', '1'),
+(5, 0, 4, 'Core PHP\r\n', '0', '2019-09-16 19:02:45', '1'),
+(6, 0, 4, 'Advance PHP', '0', '2019-09-16 19:02:45', '1'),
+(7, 1, 0, 'Hindi', '0', '2019-09-19 16:51:36', '1'),
+(8, 1, 0, 'English', '0', '2019-09-19 16:51:36', '1'),
+(9, 1, 0, 'Tamil', '0', '2019-09-19 17:00:53', '1'),
+(10, 1, 0, 'Malyalam', '0', '2019-09-19 17:00:53', '1'),
+(11, 0, 0, '.NET', '0', '2019-10-05 09:46:48', '1'),
+(12, 2, 0, 'Day', '0', '2019-10-07 13:25:19', '1'),
+(13, 2, 0, 'Weak', '0', '2019-10-07 13:25:19', '1'),
+(14, 2, 0, 'Month', '0', '2019-10-07 13:26:25', '1'),
+(15, 2, 0, 'Quarter', '0', '2019-10-07 13:26:25', '1'),
+(16, 2, 0, 'Half Year', '0', '2019-10-07 13:27:21', '1'),
+(17, 2, 0, 'Year', '0', '2019-10-07 13:27:21', '1');
 
 -- --------------------------------------------------------
 
@@ -87,18 +69,22 @@ INSERT INTO `tc_categories` (`category_id`, `parent_category`, `category_name`, 
 
 CREATE TABLE `tc_courses` (
   `course_id` int(10) UNSIGNED NOT NULL,
-  `category_id` int(10) UNSIGNED DEFAULT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
-  `course_name` varchar(50) DEFAULT NULL,
-  `start_date` date DEFAULT NULL,
-  `description` varchar(1000) DEFAULT '',
-  `duration` varchar(100) DEFAULT '',
+  `category_id` int(10) UNSIGNED DEFAULT NULL,
+  `sub_category_id` int(10) UNSIGNED DEFAULT NULL,
   `medium` varchar(15) DEFAULT '',
+  `course_name` varchar(50) DEFAULT NULL,
+  `description` varchar(1000) DEFAULT '',
+  `duration` varchar(100) DEFAULT NULL,
+  `time` int(10) UNSIGNED DEFAULT '0',
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
   `logo_image` varchar(100) DEFAULT '',
   `banner_image` varchar(100) DEFAULT '',
-  `fees` decimal(10,2) DEFAULT '0.00',
+  `fees` varchar(255) DEFAULT '',
+  `amount` decimal(10,2) DEFAULT NULL,
   `delete_flag` char(1) DEFAULT '0',
-  `status` char(1) DEFAULT '0',
+  `status` char(1) DEFAULT '1',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -106,11 +92,8 @@ CREATE TABLE `tc_courses` (
 -- Dumping data for table `tc_courses`
 --
 
-INSERT INTO `tc_courses` (`course_id`, `category_id`, `user_id`, `course_name`, `start_date`, `description`, `duration`, `medium`, `logo_image`, `banner_image`, `fees`, `delete_flag`, `status`, `created_at`) VALUES
-(1, 1, 17, 'English', '2019-09-18', 'This is english course.', 'Quarterly', 'English', 'logoImage', 'logoImage', '2500.00', '0', '0', '2019-09-18 17:27:43'),
-(2, 1, 18, 'Hindi', '2019-09-18', 'This is hindi course.', 'Monthly', 'Hindi', 'logoImage', 'logoImage', '1000.00', '0', '0', '2019-09-18 17:28:41'),
-(3, 1, 19, 'Maths', '2019-09-18', 'This is maths course.', 'Half Yearly', 'maths', 'logoImage', 'logoImage', '4000.00', '0', '0', '2019-09-18 17:29:17'),
-(4, 1, 20, 'Science', '2019-09-18', 'This is science course.', 'Yearly', 'science', 'logoImage', 'logoImage', '5000.00', '0', '0', '2019-09-18 17:30:50');
+INSERT INTO `tc_courses` (`course_id`, `user_id`, `category_id`, `sub_category_id`, `medium`, `course_name`, `description`, `duration`, `time`, `start_date`, `end_date`, `logo_image`, `banner_image`, `fees`, `amount`, `delete_flag`, `status`, `created_at`) VALUES
+(16, 17, 1, 2, '8', 'Java Programming Langauge', 'Java is a simple and plateform independent programming language.', '15', 2, '2019-10-01', '2019-10-31', 'javabook.jpeg', 'javascriptbook.jpeg', '14', '1000.00', '0', '1', '2019-10-10 13:10:36');
 
 -- --------------------------------------------------------
 
@@ -153,7 +136,7 @@ CREATE TABLE `tc_feedbacks` (
 --
 
 INSERT INTO `tc_feedbacks` (`feedback_id`, `user_id`, `category_id`, `description`, `status`, `created_at`) VALUES
-(1, 1, 2, 'Nice Tution.', '1', '2019-09-18 09:28:57');
+(1, 17, 2, 'Nice Tution.', '1', '2019-09-18 09:28:57');
 
 -- --------------------------------------------------------
 
@@ -177,7 +160,7 @@ CREATE TABLE `tc_reports` (
 --
 
 INSERT INTO `tc_reports` (`report_id`, `category_id`, `victim_id`, `criminal_id`, `title`, `description`, `status`, `created_at`) VALUES
-(1, 1, 1, 16, 'Learning', 'Not good learning', '1', '2019-09-18 09:44:32');
+(1, 2, 24, 17, 'Learning', 'Not good learning', '1', '2019-09-18 09:44:32');
 
 -- --------------------------------------------------------
 
@@ -249,7 +232,7 @@ INSERT INTO `tc_users` (`user_id`, `name`, `contact`, `email`, `address`, `passw
 (21, 'Yameen Sharma', '', 'sharma.sumerpur@gmail.com', 'falna', 'password', '0000-00-00', '', '1', '0', '1', '2019-09-18 15:00:38', '73.23519900', '25.23590100'),
 (22, 'Mohit Mishra', '', 'mohitmishra.falna850@gmail.com', 'sheoganj', 'password', '0000-00-00', '', '0', '0', '1', '2019-09-18 15:02:49', '73.07026300', '25.13271700'),
 (23, 'Urvashi Mishra', '', 'urvashimishra.falna850@gmail.com', 'bali', 'password', '0000-00-00', '', '0', '0', '1', '2019-09-18 15:03:34', '73.27949000', '25.19208000'),
-(24, 'Chinmay Mishra', '', 'chinmaymishra.falna@gmail.com', 'rani', 'password', '0000-00-00', '', '0', '0', '1', '2019-09-18 15:04:08', '73.31050100', '25.34820000'),
+(24, 'Chinmay Mishra', '8690736210', 'chinmaymishra.falna@gmail.com', 'rani', 'password', '0000-00-00', '', '0', '0', '1', '2019-09-18 15:04:08', '73.31050100', '25.34820000'),
 (25, 'Raaj Mishra', '', 'a@gmail.com', '', 'pass', '0000-00-00', '', '1', '0', '0', '2019-09-30 17:22:41', '0.00000000', '0.00000000'),
 (26, 'bharat', '', 'bharat@gmail.com', '', 'password', '0000-00-00', '', '1', '0', '0', '2019-09-30 17:25:43', '0.00000000', '0.00000000'),
 (27, 'Dharmesh', '', 'dharmesh@gmail.com', '', 'password', '0000-00-00', '', '1', '0', '0', '2019-10-01 09:22:05', '0.00000000', '0.00000000'),
@@ -262,12 +245,6 @@ INSERT INTO `tc_users` (`user_id`, `name`, `contact`, `email`, `address`, `passw
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `markers`
---
-ALTER TABLE `markers`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tc_categories`
@@ -317,22 +294,16 @@ ALTER TABLE `tc_users`
 --
 
 --
--- AUTO_INCREMENT for table `markers`
---
-ALTER TABLE `markers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT for table `tc_categories`
 --
 ALTER TABLE `tc_categories`
-  MODIFY `category_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `category_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tc_courses`
 --
 ALTER TABLE `tc_courses`
-  MODIFY `course_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `course_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tc_data`
