@@ -12,13 +12,7 @@ UserModel extends CI_Model
     public function getUser($userId)
     {
         $result = $this->db->select(array('name', 'contact', 'email', 'dob', 'image'))->where(array('user_id' => $userId))->get(TABLE_USER);
-        if (!$result) {
-            return false;
-        }
-        if ($result->num_rows() > 0) {
-            return $result->row();
-        }
-        return false;
+        return ($result->num_rows() > 0) ? $result->row() : false;
     }
 
     public function editUser($userId, $userData)
@@ -57,8 +51,28 @@ UserModel extends CI_Model
 
     public function editCourse($userId, $courseData)
     {
+        // echo "<pre>"; print_r($courseData); die();
         $result = $this->db->set($courseData)->where('user_id', $userId)->update(TABLE_COURSE);
         return $result ? true : false;
+    }
+
+    public function getAllCourses($userId, $courseId=0){
+        $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as term, tcf.category_name as period')
+                 ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
+                 ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
+                 ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
+                 ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
+                 ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration')
+                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees')
+                 ->where(TABLE_COURSE.".user_id=", $userId)
+                 ->where(TABLE_COURSE.".status=",1);
+
+                if($courseId > 0)
+                    $this->db->where(TABLE_COURSE.".course_id=", $courseId);
+        
+        $result = $this->db->get(TABLE_COURSE);
+        // echo "<pre>" ; print_r($result->result_array()); die();
+        return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
 
     public function getUserType($userId){
@@ -95,21 +109,6 @@ UserModel extends CI_Model
         foreach ($result as $key) {
             $id[] = $key['user_id'];
         }
-
-//        $include_or_not = array();
-//        $join_cat_med = '';
-//        if ($categoryId !== false) {
-//            if ($medium !== false) {
-//                $include_or_not['tc.medium'] = $medium;
-//                $include_or_not['tc.category_id'] = $categoryId;
-//            } else {
-//                $include_or_not['tc.category_id'] = $categoryId;
-//            }
-//        }
-//
-//        if ($medium !== false) {
-//            $include_or_not['tc.medium'] = $medium;
-//        }
 
         $this->db
             ->select('tc.user_id, tc.course_name, tc.category_id,  tu.name, tu.email, tu.contact, tu.address, tct.category_name, tcm.category_name as medium')

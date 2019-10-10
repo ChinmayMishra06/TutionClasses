@@ -7,34 +7,23 @@
         <div class="tab-pane active" id="timeline">
             <!-- The timeline -->
             <ul class="timeline timeline-inverse">
-                <!-- timeline time label -->
-                <li class="time-label">
-                    <span class="bg-red">
-                        10 Feb. 2014
-                    </span>
-                </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li>
+                <?php foreach($feedbacks as $feedback){?>
+                    <!-- timeline time label -->
+                    <li class="time-label">
+                        <span class="bg-red"><?php echo $feedback['category_name']; ?></span>
+                    </li>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+                    <li>
 
-                <div class="timeline-item">
-                    <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-                    <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                    <div class="timeline-body">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                    quora plaxo ideeli hulu weebly balihoo...
+                    <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i><?php echo date('d/m/y', strtotime($feedback['created_at'])); ?></span>
+                        <h3 class="timeline-header"><a href="#"><?php echo $feedback['name']; ?></a> <span class="small">  sent by <?php echo $feedback['email']; ?></span></h3>
+                        <div class="timeline-body"><?php echo $feedback['description']; ?></div>
                     </div>
-                    <div class="timeline-footer">
-                    <a class="btn btn-primary btn-xs" href="<?php echo base_url('institute/courses/edit'); ?>">Edit</a>
-                    <a class="btn btn-danger btn-xs" href="<?php echo base_url('institute/courses/delete'); ?>">Delete</a>
-                    </div>
-                </div>
-                </li>
-                <!-- END timeline item -->
+                    </li>   
+                    <!-- END timeline item -->
+                <?php } ?>
             </ul>
         </div>
     </div>

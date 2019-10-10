@@ -114,6 +114,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
+	// die($_SERVER['REQUEST_URI']);
 	$application_folder = 'application';
 
 /*

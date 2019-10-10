@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2019 at 11:29 AM
+-- Generation Time: Oct 05, 2019 at 06:10 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -25,42 +25,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `markers`
---
-
-CREATE TABLE `markers` (
-  `id` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `address` varchar(80) NOT NULL,
-  `lat` float(10,6) NOT NULL,
-  `lng` float(10,6) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `markers`
---
-
-INSERT INTO `markers` (`id`, `name`, `address`, `lat`, `lng`) VALUES
-(1, 'Heir Apparel', 'Crowea Pl, Frenchs Forest NSW 2086', -33.737885, 151.235260),
-(2, 'BeeYourself Clothing', 'Thalia St, Hassall Grove NSW 2761', -33.729752, 150.836090),
-(3, 'Dress Code', 'Glenview Avenue, Revesby, NSW 2212', -33.949448, 151.008591),
-(4, 'The Legacy', 'Charlotte Ln, Chatswood NSW 2067', -33.796669, 151.183609),
-(5, 'Fashiontasia', 'Braidwood Dr, Prestons NSW 2170', -33.944489, 150.854706),
-(6, 'Trish & Tash', 'Lincoln St, Lane Cove West NSW 2066', -33.812222, 151.143707),
-(7, 'Perfect Fit', 'Darley Rd, Randwick NSW 2031', -33.903557, 151.237732),
-(8, 'Buena Ropa!', 'Brodie St, Rydalmere NSW 2116', -33.815521, 151.026642),
-(9, 'Coxcomb and Lily Boutique', 'Ferrers Rd, Horsley Park NSW 2175', -33.829525, 150.873764),
-(10, 'Moda Couture', 'Northcote Rd, Glebe NSW 2037', -33.873882, 151.177460);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tc_categories`
 --
 
 CREATE TABLE `tc_categories` (
   `category_id` int(11) UNSIGNED NOT NULL,
-  `parent_category` int(11) UNSIGNED DEFAULT NULL,
+  `category_type` int(11) UNSIGNED DEFAULT '0',
+  `parent_category` int(11) UNSIGNED DEFAULT '0',
   `category_name` varchar(100) DEFAULT '',
   `delete_flag` char(1) DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -71,13 +42,17 @@ CREATE TABLE `tc_categories` (
 -- Dumping data for table `tc_categories`
 --
 
-INSERT INTO `tc_categories` (`category_id`, `parent_category`, `category_name`, `delete_flag`, `created_at`, `status`) VALUES
-(1, 0, 'Java', '0', '2019-09-16 19:00:32', '1'),
-(2, 1, 'Core Java\r\n', '0', '2019-09-16 19:00:53', '1'),
-(3, 1, 'Advance Java', '0', '2019-09-16 19:01:11', '1'),
-(4, 0, 'PHP', '0', '2019-09-16 19:02:13', '1'),
-(5, 4, 'Core PHP\r\n', '0', '2019-09-16 19:02:45', '1'),
-(6, 4, 'Advance PHP', '0', '2019-09-16 19:02:45', '1');
+INSERT INTO `tc_categories` (`category_id`, `category_type`, `parent_category`, `category_name`, `delete_flag`, `created_at`, `status`) VALUES
+(1, 0, 0, 'Java', '0', '2019-09-16 19:00:32', '1'),
+(2, 0, 1, 'Core Java\r\n', '0', '2019-09-16 19:00:53', '1'),
+(3, 0, 1, 'Advance Java', '0', '2019-09-16 19:01:11', '1'),
+(4, 0, 0, 'PHP', '0', '2019-09-16 19:02:13', '1'),
+(5, 0, 4, 'Core PHP\r\n', '0', '2019-09-16 19:02:45', '1'),
+(6, 0, 4, 'Advance PHP', '0', '2019-09-16 19:02:45', '1'),
+(7, 1, 0, 'Hindi', '0', '2019-09-19 16:51:36', '1'),
+(8, 1, 0, 'English', '0', '2019-09-19 16:51:36', '1'),
+(9, 1, 0, 'Tamil', '0', '2019-09-19 17:00:53', '1'),
+(10, 1, 0, 'Malyalam', '0', '2019-09-19 17:00:53', '1');
 
 -- --------------------------------------------------------
 
@@ -264,12 +239,6 @@ INSERT INTO `tc_users` (`user_id`, `name`, `contact`, `email`, `address`, `passw
 --
 
 --
--- Indexes for table `markers`
---
-ALTER TABLE `markers`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tc_categories`
 --
 ALTER TABLE `tc_categories`
@@ -317,16 +286,10 @@ ALTER TABLE `tc_users`
 --
 
 --
--- AUTO_INCREMENT for table `markers`
---
-ALTER TABLE `markers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT for table `tc_categories`
 --
 ALTER TABLE `tc_categories`
-  MODIFY `category_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `category_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tc_courses`

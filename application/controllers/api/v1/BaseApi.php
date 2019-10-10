@@ -94,16 +94,34 @@ class BaseApi extends CI_Controller
 
     public function apiGetCategory(){
         $parentCategory = 0;
+        $categoryType = 0;
         if(isset($this->inputJson->parentCategory)){
             if($this->inputJson->parentCategory >= 0){
                 $parentCategory = $this->inputJson->parentCategory;
             }else{
                 $this->error(ERR_INVALID_DATA);
+            }
+
+            if($this->inputJson->categoryType >= 0){
+                $categoryType = $this->inputJson->categoryType;
+            }else{
+                $this->error(ERR_INVALID_DATA);
+            }
+
+            if($this->inputJson->parentCategory >= 0){
+                $parentCategory = $this->inputJson->parentCategory;
+            }else{
+                $this->error(ERR_INVALID_DATA);
+            }
+                        
+            if($this->inputJson->categoryType >= 0){
+                $categoryType = $this->inputJson->categoryType;
+            }else{
+                $this->error(ERR_INVALID_DATA);
             }            
         }
-
         $this->load->model("DataModel", "dataModel");
-        $categories = $this->dataModel->getCategory($parentCategory);
+        $categories = $this->dataModel->getCategory($parentCategory, $categoryType);
         if($categories){
             $this->success("Categories as follows", array("list" => $categories));
         }else{

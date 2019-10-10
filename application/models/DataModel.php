@@ -33,10 +33,11 @@ class DataModel extends CI_Model
         return "";
     }
 
-    public function getCategory($parentCategory){
+    public function getCategory($parentCategory, $categoryType){
         $result = $this->db
         ->select("category_id, category_name")
         ->where("parent_category", $parentCategory)
+        ->where("category_type", $categoryType)
         ->where("status", 1)
         ->get(TABLE_CAT);
 
@@ -48,4 +49,6 @@ class DataModel extends CI_Model
         }
         return false;
     }
+
+    
 }

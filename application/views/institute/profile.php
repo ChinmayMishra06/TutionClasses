@@ -5,7 +5,7 @@
           </ul>          
           <div class="tab-content">
             <?php if($this->session->flashdata('message')){ ?>
-                <div class=" col-sm-offset-2 text-center alert alert-<?php echo $this->session->flashdata('status')?>" data-dismiss="alert">
+                <div class="col-sm-offset-2 alert alert-<?php echo $this->session->flashdata('status')?>" data-dismiss="alert">
                     <?php echo $this->session->flashdata('message'); ?>
                     <button class="close">&times;</button>
                 </div>
