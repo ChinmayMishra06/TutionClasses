@@ -12,7 +12,12 @@
 
             $this->load->model('CommonModel', 'commonModel');            
             $rspProfileData = $this->commonModel->getProfileData($this->session->userdata('user_id'));
-            $this->load->view('institute/header', array('title'=>'Dashboard', 'profileData'=>$rspProfileData));            
+            $data['profileData'] = $rspProfileData;
+
+            $data['siteTitle'] = "Dashboard";
+            $data['sectionTitle'] = "Activity";
+            
+            $this->load->view('institute/header', $data);            
             $this->load->view('institute/dashboard');
             $this->load->view('institute/footer');
         }
@@ -83,6 +88,22 @@
             $this->session->set_flashdata('message', 'Logout successfully.');
             $this->session->set_flashdata('status', 'success');
             redirect('institute/login');
+        }
+
+        public function breadcrumbs()
+        {
+            // load Breadcrumbs
+            $this->load->library('breadcrumbs');
+            echo "HELLO BREADCRUMBS";
+            // add breadcrumbs
+            $this->breadcrumbs->push('Section', '/section');
+            $this->breadcrumbs->push('Page', '/section/page');
+
+            // unshift crumb
+            $this->breadcrumbs->unshift('Home', '/');
+
+            // output
+            $this->breadcrumbs->show();
         }
     }
 ?>

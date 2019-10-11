@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?php echo isset($title) ? $title : "Tution Classes"; ?></title>
+  <title><?php echo isset($siteTitle) ? $siteTitle : "Tution Classes"; ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -47,12 +47,12 @@
 
 <header class="main-header">
   <!-- Logo -->
-  <a href="../../index2.html" class="logo">
+  <div class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>T</b>P</span>
     <!-- logo for regular state and mobile devices -->
     <span class="logo-lg"><b>Teacher</b>Panel</span>
-  </a>
+  </div>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
     <!-- Sidebar toggle button-->
@@ -79,7 +79,7 @@
                 <li><!-- start message -->
                   <a href="#">
                     <div class="pull-left">
-                      <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                      <img src="#" class="img-circle" alt="User Image">
                     </div>
                     <h4>
                       Support Team
@@ -115,85 +115,29 @@
             <li class="footer"><a href="#">View all</a></li>
           </ul>
         </li>
-        <!-- Tasks: style can be found in dropdown.less -->
-        <li class="dropdown tasks-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-flag-o"></i>
-            <span class="label label-danger">9</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li class="header">You have 9 tasks</li>
-            <li>
-              <!-- inner menu: contains the actual data -->
-              <ul class="menu">
-                <li><!-- Task item -->
-                  <a href="#">
-                    <h3>
-                      Design some buttons
-                      <small class="pull-right">20%</small>
-                    </h3>
-                    <div class="progress xs">
-                      <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                           aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                        <span class="sr-only">20% Complete</span>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <!-- end task item -->
-              </ul>
-            </li>
-            <li class="footer">
-              <a href="#">View all tasks</a>
-            </li>
-          </ul>
-        </li>
-        <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs">Alexander Pierce</span>
-          </a>
-          <ul class="dropdown-menu">
-            <!-- User image -->
-            <li class="user-header">
-              <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-              <p>
-                Alexander Pierce - Web Developer
-                <small>Member since Nov. 2012</small>
-              </p>
-            </li>
-            <!-- Menu Body -->
-            <li class="user-body">
-              <div class="row">
-                <div class="col-xs-4 text-center">
-                  <a href="#">Followers</a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <img src="<?php echo base_url('public/uploads/institute/images/'. $profileData->image); ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $profileData->name; ?></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li >
+                <img src="<?php echo base_url('public/uploads/institute/images/'. $profileData->banner_image); ?>" alt="User Image" height="auto" width="277px" class="user-header">
+              </li>
+          
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="<?php echo base_url();?>institute" class="btn btn-default btn-flat">Profile</a>
                 </div>
-                <div class="col-xs-4 text-center">
-                  <a href="#">Sales</a>
+                <div class="pull-right">
+                  <a href="<?php echo base_url();?>institute/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
-                <div class="col-xs-4 text-center">
-                  <a href="#">Friends</a>
-                </div>
-              </div>
-              <!-- /.row -->
-            </li>
-            <!-- Menu Footer-->
-            <li class="user-footer">
-              <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
-              </div>
-              <div class="pull-right">
-                <a href="<?php echo base_url();?>institute/logout" class="btn btn-default btn-flat">Sign out</a>
-              </div>
-            </li>
-          </ul>
-        </li>
+              </li>
+            </ul>
+          </li>
         <!-- Control Sidebar Toggle Button -->
-        <li>
-          <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-        </li>
       </ul>
     </div>
   </nav>
@@ -208,28 +152,26 @@
    <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
-      <li>
-        <a href="<?php echo base_url('institute/courses'); ?>">
+      <li class="treeview menu-open">
+        <a href="#">
           <i class="fa fa-book"></i> <span>Courses</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
+        <ul class="treeview-menu">
+          <li><a href="<?php echo base_url('institute/courses/add'); ?> "><i class="fa fa-circle-o"></i> Add New Course</a></li>
+          <li><a href="<?php echo base_url('institute/courses'); ?>"><i class="fa fa-circle-o"></i> All Courses</a></li>
+        </ul>
       </li>
       <li>
         <a href="<?php echo base_url('institute/feedbacks'); ?>">
           <i class="fa fa-comments"></i> <span>Feedbacks</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
         </a>
       </li>
       <li>
         <a href="<?php echo base_url('institute/reports'); ?>">
           <i class="fa fa-warning"></i> <span>Reports</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
         </a>
       </li>
     </ul>
@@ -239,10 +181,12 @@
 <div class="content-wrapper" style="min-height: 1136px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>Edit Profile</h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('institute'); ?>"><i class="fa fa-arrow-left"></i> Back</a></li>
-      </ol>
+      <h1><?php echo $sectionTitle; ?></h1>
+      <!-- <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Charts</a></li>
+        <li class="active">ChartJS</li>
+      </ol> -->
     </section>
 
     <!-- Main content -->

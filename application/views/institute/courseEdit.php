@@ -28,10 +28,11 @@
                   <?php if(validation_errors()) echo form_error('inputCategory'); ?>
                </div>
               </div>
-              <div class="form-group" id="subCategory" style="display:none;">
+              <div class="form-group" id="subCategory">
                 <label for="inputSubCategory" class="col-sm-2 control-label">Sub Category</label>                
                 <div class="col-sm-10">
-                  <select name="inputSubCategory" id="inputSubCategory" class="form-control"></select>
+                  <select name="inputSubCategory" id="inputSubCategory" class="form-control" disabled="disabled">
+                    <option value="">Choose Sub Category</option></select>                  
                   <?php if(validation_errors()) echo form_error('inputSubCategory'); ?>
                </div>
               </div>
@@ -65,7 +66,7 @@
                   <textarea class="form-control" name="inputDescription" id="inputDescription"><?php echo $course[0]['description']; ?></textarea>
                   <?php
                     if(validation_errors()) echo form_error('inputDescription');
-                    else echo '<i class="text-danger">* Only 200 characters are allowed.</i>';
+                    else echo '<i class="text-danger">* Only 500 characters are allowed.</i>';
                   ?>
                 </div>
               </div>
@@ -89,7 +90,7 @@
                     <div class="col-sm-6">
                       <div class="row">
                         <div class="col-sm-12">
-                          <label for="inputEndDate" class="control-label">End Joining Date</label>
+                          <label for="inputEndDate" class="control-label">Last Joining Date</label>
                         </div>     
                       </div>
                       <div class="row">
@@ -106,7 +107,7 @@
                     <div class="col-sm-7">
                       <div class="row">
                         <div class="col-sm-12">
-                          <label for="inputTimingTerm" class="control-label">Term</label>
+                          <label for="inputTimingTerm" class="control-label">Term (per)</label>
                         </div>     
                       </div>
                       <div class="row">
@@ -148,7 +149,7 @@
                     <div class="col-sm-6">
                       <div class="row">
                         <div class="col-sm-12">
-                          <label for="inputFeesTerm" class="control-label">Term</label>
+                          <label for="inputFeesTerm" class="control-label">Term (per)</label>
                         </div>     
                       </div>
                       <div class="row">
@@ -193,24 +194,30 @@
               <div class="form-group">
                 <label for="inputLogoImage" class="col-sm-2 control-label">Logo Image</label>
                 <div class="col-sm-8">
+                  <div id="view_logo_img" style="display:none;" class="pull-right">
+                     <img src="<?php echo base_url('public/uploads/institute/images/'.$course[0]['logo_image']);?>" height="80px" width="80px">
+                  </div>
                   <input type="file" class="form-control" name="inputLogoImage" id="inputLogoImage">
                 </div>
                 <div class="col-sm-2">
-                  <a href="<?php echo base_url('public/uploads/institute/images/'.$course[0]['logo_image']);?>" target="_blank" class="btn btn-primary pull-right">View Image</a>
+                  <button type="button" class="btn btn-primary pull-right" id="logo_img">View Image</button>
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputBannerImage" class="col-sm-2 control-label">Banner Image</label>
                 <div class="col-sm-8">
+                  <div id="view_banner_img" style="display:none;" class="pull-right">
+                     <img src="<?php echo base_url('public/uploads/institute/images/'.$course[0]['banner_image']);?>" height="80px" width="180px">
+                  </div> 
                   <input type="file" class="form-control" name="inputBannerImage" id="inputBannerImage">
                 </div>
                 <div class="col-sm-2">
-                  <a href="<?php echo base_url('public/uploads/institute/images/'.$course[0]['banner_image']);?>" target="_blank" class="btn btn-primary pull-right">View Image</a>
+                  <button type="button" class="btn btn-primary pull-right" id="banner_img">View Image</button>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-danger" name="btnCourseUpdate">Update</button>
+                  <button type="submit" class="btn btn-primary" name="btnCourseUpdate">Update</button>
                 </div>
               </div>
             </form>
@@ -220,9 +227,12 @@
 
         <script type="text/javascript">
           'use script';
+          
           document.getElementById('inputFeesTerm').addEventListener('change', function(){
             if(document.getElementById('inputFeesTerm').value == "0"){
               document.getElementById('inputAmount').value = 0;
+            }else{
+              document.getElementById('inputAmount').value = "";              
             }
           });
 
@@ -239,13 +249,13 @@
               xhr.onreadystatechange = function(){
                 if((xhr.readyState == 4) && (xhr.status == 200)){
                   let response = JSON.parse(xhr.responseText);
-
+                  
                   if(response.status == true){
-                    document.getElementById('subCategory').style.display = "block";
                     let elmOption = document.createElement('option');
+                    document.getElementById('inputSubCategory').appendChild(elmOption);
+                    document.getElementById('inputSubCategory').removeAttribute("disabled");
                     elmOption.value = "";
                     elmOption.textContent = "Choose Sub Category";
-                    document.getElementById('inputSubCategory').appendChild(elmOption);
                   
                     for(let i=0; i<response.data.list.length; i++){                    
                       let elmOption = document.createElement('option');
@@ -254,12 +264,20 @@
                       document.getElementById('inputSubCategory').appendChild(elmOption);
                     }
                   }else{
-                    document.getElementById('subCategory').style.display = "none";
+                    let elmOption = document.createElement('option');
+                    elmOption.value = "";
+                    elmOption.textContent = "Choose Sub Category";
+                    document.getElementById('inputSubCategory').appendChild(elmOption);
+                    document.getElementById('inputSubCategory').setAttribute("disabled", "disabled");
                   }
                 }
               }
             }else{
-              document.getElementById('subCategory').style.display = "none";
+              let elmOption = document.createElement('option');
+              elmOption.value = "";
+              elmOption.textContent = "Choose Sub Category";
+              document.getElementById('inputSubCategory').appendChild(elmOption);
+              document.getElementById('inputSubCategory').setAttribute("disabled", "disabled");
             }
           }
 
@@ -269,5 +287,21 @@
 
           window.addEventListener('load', function(){
             subCategory();
+          });
+
+          document.getElementById('banner_img').addEventListener('mouseover', function(){
+            document.getElementById('view_banner_img').style.display="block";
+          });
+
+          document.getElementById('banner_img').addEventListener('mouseout', function(){
+            document.getElementById('view_banner_img').style.display="none";
+          });
+
+          document.getElementById('logo_img').addEventListener('mouseover', function(){
+            document.getElementById('view_logo_img').style.display="block";
+          });
+
+          document.getElementById('logo_img').addEventListener('mouseout', function(){
+            document.getElementById('view_logo_img').style.display="none";
           });
         </script>

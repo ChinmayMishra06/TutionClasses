@@ -14,6 +14,9 @@
             $rspAllCourses = $this->userModel->getAllCourses($this->session->userdata('user_id'));            
             $data['courses'] = $rspAllCourses;
 
+            $data['siteTitle'] = "All courses";
+            $data['sectionTitle'] = "All courses";
+            
             $this->load->view('institute/header', $data);            
             $this->load->view('institute/courses');
             $this->load->view('institute/footer');
@@ -89,6 +92,9 @@
             $data['categories'] = $rspCategory;
             $data['mediums'] = $rspMedium;
             $data['terms'] = $rspTerm;
+            
+            $data['siteTitle'] = "Add new course";
+            $data['sectionTitle'] = "Add new course";
             
             $this->load->view('institute/header', $data);
             $this->load->view('institute/courseAdd');
@@ -176,7 +182,9 @@
             $data['categories'] = $rspCategory;
             $data['mediums'] = $rspMedium;
             $data['terms'] = $rspTerm;
-
+            $data['siteTitle'] = "Edit course";
+            $data['sectionTitle'] = "Edit course";
+            
             $this->load->view('institute/header', $data);            
             $this->load->view('institute/courseEdit');
             $this->load->view('institute/footer');
@@ -193,8 +201,9 @@
             $this->load->model('UserModel', 'userModel');
             $courseDetails = $this->userModel->getAllCourses($this->session->userdata('user_id'), $id);
             $data['course'] = $courseDetails;
-            // echo "<pre>"; print_r($courseDetails); die();
-
+            $data['siteTitle'] = "Course details";
+            $data['sectionTitle'] = "Course details";
+            
             $this->load->view('institute/header', $data);            
             $this->load->view('institute/courseDetails');
             $this->load->view('institute/footer');

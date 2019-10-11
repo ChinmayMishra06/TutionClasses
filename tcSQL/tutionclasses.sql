@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2019 at 11:26 AM
+-- Generation Time: Oct 11, 2019 at 03:14 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -79,8 +79,8 @@ CREATE TABLE `tc_courses` (
   `time` int(10) UNSIGNED DEFAULT '0',
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
-  `logo_image` varchar(100) DEFAULT '',
-  `banner_image` varchar(100) DEFAULT '',
+  `logo_image` varchar(100) DEFAULT 'logodummy.jpg',
+  `banner_image` varchar(100) DEFAULT 'bannerdummy.jpg',
   `fees` varchar(255) DEFAULT '',
   `amount` decimal(10,2) DEFAULT NULL,
   `delete_flag` char(1) DEFAULT '0',
@@ -93,7 +93,7 @@ CREATE TABLE `tc_courses` (
 --
 
 INSERT INTO `tc_courses` (`course_id`, `user_id`, `category_id`, `sub_category_id`, `medium`, `course_name`, `description`, `duration`, `time`, `start_date`, `end_date`, `logo_image`, `banner_image`, `fees`, `amount`, `delete_flag`, `status`, `created_at`) VALUES
-(16, 17, 1, 2, '8', 'Java Programming Langauge', 'Java is a simple and plateform independent programming language.', '15', 2, '2019-10-01', '2019-10-31', 'javabook.jpeg', 'javascriptbook.jpeg', '14', '1000.00', '0', '1', '2019-10-10 13:10:36');
+(16, 17, 1, 2, '8', 'Java Programming Langauge', 'Java is a simple and plateform independent programming language.', '15', 2, '2019-10-01', '2019-10-31', 'javabook.jpeg', 'bannerdummy.jpg', '14', '1000.00', '0', '1', '2019-10-10 13:10:36');
 
 -- --------------------------------------------------------
 
@@ -151,6 +151,7 @@ CREATE TABLE `tc_reports` (
   `criminal_id` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(100) DEFAULT '',
   `description` varchar(1000) DEFAULT '',
+  `rating` int(10) UNSIGNED DEFAULT '0',
   `status` char(1) DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -159,8 +160,8 @@ CREATE TABLE `tc_reports` (
 -- Dumping data for table `tc_reports`
 --
 
-INSERT INTO `tc_reports` (`report_id`, `category_id`, `victim_id`, `criminal_id`, `title`, `description`, `status`, `created_at`) VALUES
-(1, 2, 24, 17, 'Learning', 'Not good learning', '1', '2019-09-18 09:44:32');
+INSERT INTO `tc_reports` (`report_id`, `category_id`, `victim_id`, `criminal_id`, `title`, `description`, `rating`, `status`, `created_at`) VALUES
+(1, 2, 24, 17, 'Learning', 'Not good learning', 0, '1', '2019-09-18 09:44:32');
 
 -- --------------------------------------------------------
 
@@ -211,7 +212,9 @@ CREATE TABLE `tc_users` (
   `address` varchar(100) NOT NULL DEFAULT '',
   `password` varchar(40) NOT NULL DEFAULT '',
   `dob` date NOT NULL,
-  `image` varchar(80) NOT NULL DEFAULT '',
+  `image` varchar(80) NOT NULL DEFAULT 'dummyprofile.jpg',
+  `banner_image` varchar(50) DEFAULT 'bannerdummy.jpg',
+  `about_me` varchar(1000) DEFAULT '',
   `user_type` char(1) NOT NULL DEFAULT '0',
   `delete_flag` char(1) NOT NULL DEFAULT '0',
   `status` char(1) NOT NULL DEFAULT '0',
@@ -224,23 +227,23 @@ CREATE TABLE `tc_users` (
 -- Dumping data for table `tc_users`
 --
 
-INSERT INTO `tc_users` (`user_id`, `name`, `contact`, `email`, `address`, `password`, `dob`, `image`, `user_type`, `delete_flag`, `status`, `created_at`, `longitude`, `latitude`) VALUES
-(17, 'Kuldeep Chand Mishra', '9799455505', 'bccfalna@gmail.com', 'Falna', 'password', '2019-10-03', 'employee20.jpeg', '1', '0', '1', '2019-09-18 14:58:03', '73.23519900', '25.23590100'),
-(18, 'Abhishek Agarawal', '', 'agarawal.falna@gmail.com', 'rani', 'password', '0000-00-00', '', '1', '1', '0', '2019-09-18 14:59:05', '73.31050100', '25.34820000'),
-(19, 'Gajendra Nagar', '', 'nagar.jalore@gmail.com', 'bali', 'password', '0000-00-00', '', '1', '0', '1', '2019-09-18 14:59:32', '73.27949000', '25.19208000'),
-(20, 'Rishi Mathur', '', 'mathur.jhodhpur@gmail.com', 'sumerpur', 'password', '0000-00-00', '', '1', '0', '1', '2019-09-18 14:59:55', '73.08740000', '25.16820000'),
-(21, 'Yameen Sharma', '', 'sharma.sumerpur@gmail.com', 'falna', 'password', '0000-00-00', '', '1', '0', '1', '2019-09-18 15:00:38', '73.23519900', '25.23590100'),
-(22, 'Mohit Mishra', '', 'mohitmishra.falna850@gmail.com', 'sheoganj', 'password', '0000-00-00', '', '0', '0', '1', '2019-09-18 15:02:49', '73.07026300', '25.13271700'),
-(23, 'Urvashi Mishra', '', 'urvashimishra.falna850@gmail.com', 'bali', 'password', '0000-00-00', '', '0', '0', '1', '2019-09-18 15:03:34', '73.27949000', '25.19208000'),
-(24, 'Chinmay Mishra', '8690736210', 'chinmaymishra.falna@gmail.com', 'rani', 'password', '0000-00-00', '', '0', '0', '1', '2019-09-18 15:04:08', '73.31050100', '25.34820000'),
-(25, 'Raaj Mishra', '', 'a@gmail.com', '', 'pass', '0000-00-00', '', '1', '0', '0', '2019-09-30 17:22:41', '0.00000000', '0.00000000'),
-(26, 'bharat', '', 'bharat@gmail.com', '', 'password', '0000-00-00', '', '1', '0', '0', '2019-09-30 17:25:43', '0.00000000', '0.00000000'),
-(27, 'Dharmesh', '', 'dharmesh@gmail.com', '', 'password', '0000-00-00', '', '1', '0', '0', '2019-10-01 09:22:05', '0.00000000', '0.00000000'),
-(28, 'Rishikesh', '', 'rishikesh@gmail.com', '', 'password', '0000-00-00', '', '1', '0', '0', '2019-10-01 09:22:57', '0.00000000', '0.00000000'),
-(29, 'Dwarkadhis', '', 'dwarkadhish@gmail.com', '', 'password', '0000-00-00', '', '1', '0', '0', '2019-10-01 09:24:05', '0.00000000', '0.00000000'),
-(30, 'kedarnath', '', 'kedarnath@gmail.com', '', 'password', '0000-00-00', '', '1', '0', '0', '2019-10-01 09:28:15', '0.00000000', '0.00000000'),
-(31, 'a', '', 'b@gmail.com', '', 'asssssss', '0000-00-00', '', '1', '0', '0', '2019-10-01 09:38:12', '0.00000000', '0.00000000'),
-(32, 'Rameshwaram', '', 'rameshwaram@gmail.com', '', 'password', '0000-00-00', '', '1', '0', '0', '2019-10-01 10:16:36', '0.00000000', '0.00000000');
+INSERT INTO `tc_users` (`user_id`, `name`, `contact`, `email`, `address`, `password`, `dob`, `image`, `banner_image`, `about_me`, `user_type`, `delete_flag`, `status`, `created_at`, `longitude`, `latitude`) VALUES
+(17, 'Kuldeep Chand Mishra', '9799455505', 'bccfalna@gmail.com', 'Falna', 'password', '2019-10-03', 'employee20.jpeg', 'bannerdummy.jpg', '', '1', '0', '1', '2019-09-18 14:58:03', '73.23519900', '25.23590100'),
+(18, 'Abhishek Agarawal', '', 'agarawal.falna@gmail.com', 'rani', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '1', '0', '2019-09-18 14:59:05', '73.31050100', '25.34820000'),
+(19, 'Gajendra Nagar', '', 'nagar.jalore@gmail.com', 'bali', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '1', '2019-09-18 14:59:32', '73.27949000', '25.19208000'),
+(20, 'Rishi Mathur', '', 'mathur.jhodhpur@gmail.com', 'sumerpur', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '1', '2019-09-18 14:59:55', '73.08740000', '25.16820000'),
+(21, 'Yameen Sharma', '', 'sharma.sumerpur@gmail.com', 'falna', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '1', '2019-09-18 15:00:38', '73.23519900', '25.23590100'),
+(22, 'Mohit Mishra', '', 'mohitmishra.falna850@gmail.com', 'sheoganj', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '0', '0', '1', '2019-09-18 15:02:49', '73.07026300', '25.13271700'),
+(23, 'Urvashi Mishra', '', 'urvashimishra.falna850@gmail.com', 'bali', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '0', '0', '1', '2019-09-18 15:03:34', '73.27949000', '25.19208000'),
+(24, 'Chinmay Mishra', '8690736210', 'chinmaymishra.falna@gmail.com', 'rani', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '0', '0', '1', '2019-09-18 15:04:08', '73.31050100', '25.34820000'),
+(25, 'Raaj Mishra', '', 'a@gmail.com', '', 'pass', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '0', '2019-09-30 17:22:41', '0.00000000', '0.00000000'),
+(26, 'bharat', '', 'bharat@gmail.com', '', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '0', '2019-09-30 17:25:43', '0.00000000', '0.00000000'),
+(27, 'Dharmesh', '', 'dharmesh@gmail.com', '', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '0', '2019-10-01 09:22:05', '0.00000000', '0.00000000'),
+(28, 'Rishikesh', '', 'rishikesh@gmail.com', '', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '0', '2019-10-01 09:22:57', '0.00000000', '0.00000000'),
+(29, 'Dwarkadhis', '', 'dwarkadhish@gmail.com', '', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '0', '2019-10-01 09:24:05', '0.00000000', '0.00000000'),
+(30, 'kedarnath', '', 'kedarnath@gmail.com', '', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '0', '2019-10-01 09:28:15', '0.00000000', '0.00000000'),
+(31, 'a', '', 'b@gmail.com', '', 'asssssss', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '0', '2019-10-01 09:38:12', '0.00000000', '0.00000000'),
+(32, 'Rameshwaram', '', 'rameshwaram@gmail.com', '', 'password', '0000-00-00', 'dummyprofile.jpg', 'bannerdummy.jpg', '', '1', '0', '0', '2019-10-01 10:16:36', '0.00000000', '0.00000000');
 
 --
 -- Indexes for dumped tables

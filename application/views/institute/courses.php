@@ -33,7 +33,6 @@
                         <div class="timeline-body"><?php echo $course['description']; ?></div>
                         <div class="timeline-footer">
                             <a class="btn btn-primary btn-xs" href="<?php echo base_url('institute/courses/edit/'.$course['course_id']); ?>">Edit</a>
-                            <a class="btn btn-danger btn-xs" href="<?php echo base_url('institute/courses/delete'); ?>">Delete</a>
                         </div>
                     </div>
                     </li>

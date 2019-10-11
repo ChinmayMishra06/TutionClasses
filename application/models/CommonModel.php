@@ -19,7 +19,7 @@ class CommonModel extends CI_Model
 
     public function getProfileData($user_id)
     {
-        $result = $this->db->select('name, email, contact, address, dob, image')
+        $result = $this->db->select('name, email, contact, address, dob, image, banner_image')
                            ->where('user_id', $user_id)
                            ->get(TABLE_USER);
                     
@@ -44,6 +44,8 @@ class CommonModel extends CI_Model
                            ->join(TABLE_USER . " as criminal", "criminal.user_id=" . TABLE_REPORT.".criminal_id")
                            ->join(TABLE_CAT, TABLE_CAT.".category_id=" . TABLE_REPORT.".category_id")
                            ->where(TABLE_REPORT.'.criminal_id', $user_id)
+                           ->where('rating', 0)
+                           ->where(TABLE_REPORT.'.status', 1)
                            ->get(TABLE_REPORT);
         // echo "<pre>"; print_r($result->result_array()); die();
         return ($result->num_rows() > 0) ? $result->result_array() : false;

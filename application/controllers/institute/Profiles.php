@@ -50,7 +50,11 @@
                 }
             }
             $rspProfileData = $this->commonModel->getProfileData($this->session->userdata('user_id'));
-            $this->load->view('institute/header', array('profileData'=>$rspProfileData));
+            $data['profileData'] = $rspProfileData;
+            $data['siteTitle'] = "Edit profile";
+            $data['sectionTitle'] = "Edit Profile";
+
+            $this->load->view('institute/header', $data);
             $this->load->view('institute/profile');
             $this->load->view('institute/footer');
         }

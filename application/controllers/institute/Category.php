@@ -13,6 +13,8 @@
             $this->load->model('DataModel', 'dataModel');
             $rspCategory = $this->dataModel->getCategory(0, 0);
             $data['categories'] = $rspCategory;
+
+            $data['siteTitle'] = 
             
             $this->load->view('institute/header', $data);            
             $this->load->view('institute/categoryAdd');

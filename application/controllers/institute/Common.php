@@ -12,6 +12,8 @@
             
             $resAllFeedbacks = $this->commonModel->getAllFeedbacks($this->session->userdata('user_id'));
             $data['feedbacks'] = $resAllFeedbacks;
+            $data['siteTitle'] = "All feedbacks";
+            $data['sectionTitle'] = "All feedbacks";
             
             $this->load->view('institute/header', $data);
             $this->load->view('institute/feedback');
@@ -28,10 +30,18 @@
             
             $resAllReports = $this->commonModel->getAllReports($this->session->userdata('user_id'));
             $data['reports'] = $resAllReports;
+            $data['siteTitle'] = "All reports";
+            $data['sectionTitle'] = "All reports";
             
             $this->load->view('institute/header', $data);
             $this->load->view('institute/report');
             $this->load->view('institute/footer');
+        }
+
+        public function dummy(){
+            if(!$this->session->userdata('login'))
+                redirect('institute/login');
+            $this->load->view('institute/googleMap');
         }
     }
 ?>

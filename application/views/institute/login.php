@@ -68,6 +68,8 @@
         <!-- /.col -->
       </div>
     </form>
+    <i style="font-size:25px;" class="fa fa-user"></i>
+    <a style="margin-left:5px;" href="<?php echo base_url('institute/signUp') ?>">Signup here...</a>
   </div>
   <!-- /.login-box-body -->
 </div>

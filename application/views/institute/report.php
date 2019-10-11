@@ -19,7 +19,6 @@
                             <div class="timeline-body"><?php echo $report['description']; ?></div>
                             <div class="timeline-footer">
                                 <span class="pull-right small">By <?php echo $report['victim_name']; ?></span><br>
-                                <span class="pull-right"><?php echo $report['email']; ?></span><br>
                             </div>
                         </div>
                     </li>   

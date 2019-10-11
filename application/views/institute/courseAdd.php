@@ -23,10 +23,12 @@
                   <?php if(validation_errors()) echo form_error('inputCategory'); ?>
                </div>
               </div>
-              <div class="form-group" id="subCategory" style="display:none;">
+              <div class="form-group" id="subCategory">
                 <label for="inputSubCategory" class="col-sm-2 control-label">Sub Category</label>                
                 <div class="col-sm-10">
-                  <select name="inputSubCategory" id="inputSubCategory" class="form-control"></select>
+                  <select name="inputSubCategory" id="inputSubCategory" class="form-control" disabled="disabled">
+                    <option value="">Choose Sub Category</option>
+                  </select>                  
                   <?php if(validation_errors()) echo form_error('inputSubCategory'); ?>
                </div>
               </div>
@@ -55,7 +57,7 @@
                   <textarea class="form-control" name="inputDescription" id="inputDescription" placeholder="Write hort note about your course..." value="<?= set_value('inputDescription'); ?>"></textarea>
                   <?php
                     if(validation_errors()) echo form_error('inputDescription');
-                    else echo '<i class="text-danger">* Only 200 characters are allowed.</i>';
+                    else echo '<i class="text-danger">* Only 500 characters are allowed.</i>';
                   ?>
                 </div>
               </div>
@@ -79,7 +81,7 @@
                     <div class="col-sm-6">
                       <div class="row">
                         <div class="col-sm-12">
-                          <label for="inputEndDate" class="control-label">End Joining Date</label>
+                          <label for="inputEndDate" class="control-label">Last Joining Date</label>
                         </div>     
                       </div>
                       <div class="row">
@@ -96,7 +98,7 @@
                     <div class="col-sm-7">
                       <div class="row">
                         <div class="col-sm-12">
-                          <label for="inputTimingTerm" class="control-label">Term</label>
+                          <label for="inputTimingTerm" class="control-label">Term (per)</label>
                         </div>     
                       </div>
                       <div class="row">
@@ -133,7 +135,7 @@
                     <div class="col-sm-6">
                       <div class="row">
                         <div class="col-sm-12">
-                          <label for="inputFeesTerm" class="control-label">Term</label>
+                          <label for="inputFeesTerm" class="control-label">Term (per)</label>
                         </div>     
                       </div>
                       <div class="row">
@@ -178,7 +180,7 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-danger" name="btnCourseAdd">Add</button>
+                  <button type="submit" class="btn btn-primary" name="btnCourseAdd">Add</button>
                 </div>
               </div>
             </form>
@@ -190,7 +192,9 @@
           'use script';
           document.getElementById('inputFeesTerm').addEventListener('change', function(){
             if(document.getElementById('inputFeesTerm').value == "0"){
-              document.getElementById('inputAmount').value = 0;
+              document.getElementById('inputAmount').value = 0;              
+            }else{
+              document.getElementById('inputAmount').value = "";              
             }
           });
 
@@ -207,13 +211,13 @@
               xhr.onreadystatechange = function(){
                 if((xhr.readyState == 4) && (xhr.status == 200)){
                   let response = JSON.parse(xhr.responseText);
-
+                  
                   if(response.status == true){
-                    document.getElementById('subCategory').style.display = "block";
                     let elmOption = document.createElement('option');
+                    document.getElementById('inputSubCategory').appendChild(elmOption);
+                    document.getElementById('inputSubCategory').removeAttribute("disabled");
                     elmOption.value = "";
                     elmOption.textContent = "Choose Sub Category";
-                    document.getElementById('inputSubCategory').appendChild(elmOption);
                   
                     for(let i=0; i<response.data.list.length; i++){                    
                       let elmOption = document.createElement('option');
@@ -222,12 +226,20 @@
                       document.getElementById('inputSubCategory').appendChild(elmOption);
                     }
                   }else{
-                    document.getElementById('subCategory').style.display = "none";
+                    let elmOption = document.createElement('option');
+                    elmOption.value = "";
+                    elmOption.textContent = "Choose Sub Category";
+                    document.getElementById('inputSubCategory').appendChild(elmOption);
+                    document.getElementById('inputSubCategory').setAttribute("disabled", "disabled");
                   }
                 }
               }
             }else{
-              document.getElementById('subCategory').style.display = "none";
+              let elmOption = document.createElement('option');
+              elmOption.value = "";
+              elmOption.textContent = "Choose Sub Category";
+              document.getElementById('inputSubCategory').appendChild(elmOption);
+              document.getElementById('inputSubCategory').setAttribute("disabled", "disabled");
             }
           }
 
