@@ -2,6 +2,7 @@
         <div class="nav-tabs-custom">            
           <ul class="nav nav-tabs">
             <li class="active"><a href="#profile" data-toggle="tab">Courses</a></li>
+            <a class="btn btn-primary pull-right" style="margin:10px;" href="<?php echo base_url('institute/category/add'); ?>">Add New Category</a>
           </ul>          
           <div class="tab-content">
             <form class="form-horizontal" action="<?php echo base_url('institute/course/add'); ?>" method="POST" enctype="multipart/form-data">
@@ -30,7 +31,7 @@
                     <option value="">Choose Sub Category</option>
                   </select>                  
                   <?php if(validation_errors()) echo form_error('inputSubCategory'); ?>
-               </div>
+               </div>               
               </div>
               <div class="form-group">
                 <label for="inputMedium" class="col-sm-2 control-label">Medium</label>                

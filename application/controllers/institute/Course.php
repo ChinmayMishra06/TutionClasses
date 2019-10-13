@@ -152,7 +152,7 @@
                     $data['time'] = $this->input->post('inputTime');
 
                     $this->load->model('UserModel', 'userModel');
-                    $rspCourseUpdate = $this->userModel->editCourse($this->session->userdata('user_id'), $data);
+                    $rspCourseUpdate = $this->userModel->editCourse($id, $data);
                     if($rspCourseUpdate){
                         $this->session->set_flashdata('message', 'Course updated successfully.');
                         $this->session->set_flashdata('status', 'success');

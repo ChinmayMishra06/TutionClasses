@@ -30,6 +30,7 @@ $route['institute/courses'] = 'institute/course';                               
 $route['institute/courses/add'] = 'institute/course/add';                       //Completed
 $route['institute/courses/edit/(:num)'] = 'institute/course/edit/$1';
 $route['institute/courses/details/(:num)'] = 'institute/course/details/$1';     //Completed
+$route['institute/category/add'] = 'institute/category';     //Completed
 
 //Institute profile
 $route['institute/profile'] = 'institute/profiles';                            //Completed
@@ -41,13 +42,21 @@ $route['institute/dummy'] = 'institute/common/dummy';                    //Compl
 // $route['institute/subscriptions'] = 'institute/subscription';                   //Pending
 
 //User profile panel.
-$route['user/'] = 'user';                                                       //Pending
-$route['user/login'] = 'user/pageLogin';                                        //Pending
-$route['user/profile/signup'] = 'user/profile/pageSignup';                      //Pending
-$route['user/logout'] = 'user/actionLogout';                                    //Pending
-$route['user/profile/add/$id'] = 'user/profile/add/$1';                         //Pending
-$route['user/profile/edit/$id'] = 'user/profile/edit/$1';                       //Pending
+$route['site/'] = 'user';                                                       //Pending
+$route['site/logout'] = 'site/actionLogout';                                    //Pending
+$route['site/profile/add/$id'] = 'site/profile/add/$1';                         //Pending
+$route['site/profile/edit/$id'] = 'site/profile/edit/$1';                       //Pending
 
+
+// Site panel
+$route['site/home'] = 'site/Home';                                        //Pending
+$route['site/home/(:num)'] = 'site/Home/$1';
+$route['site/contact'] = 'site/Home/contact';
+$route['site/about'] = 'site/About';
+$route['site/courses'] = 'site/Courses';
+$route['site/login'] = 'site/Auth';
+$route['site/signup'] = 'site/auth/pageSignup';                      //Pending
+$route['site/courseDetails/(:num)'] = 'site/courses/courseDetails/$1';
 
 //Apis v1
 $route['api/v1/init'] = 'api/v1/BaseApi/apiInit';

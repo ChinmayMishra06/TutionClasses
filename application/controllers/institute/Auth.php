@@ -53,7 +53,7 @@
             if($this->session->userdata('login'))
                 redirect('institute');
                 
-            if(isset($_REQUEST['sign_button'])){
+            if(isset($_REQUEST['signup_teacher'])){
                 if($this->form_validation->run('signup') === true){
                     $username = $this->input->post('username');
                     $email = $this->input->post('email');

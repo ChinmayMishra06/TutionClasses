@@ -53,11 +53,12 @@ class AuthModel extends CI_Model
     public function signUp($name, $email, $password, $userType)
     {
         $userResult = $this->db->select('name')->where(array('email'=>$email, 'user_type'=>$userType))->get(TABLE_USER);
+
         if($userResult->num_rows() > 0){
             return "";
         }else{
             $result = $this->db->insert(TABLE_USER, array('name' => $name, 'email' => $email, 'password' => $password, 'user_type'=>$userType));
-            return !$result ? false : true;
+            return $result ? true : false;
         }
         
     }

@@ -4,7 +4,7 @@
             array(
                 'field' => 'username',
                 'label' => 'User name',
-                'rules' => 'trim|required',
+                'rules' => 'trim|required|regex_match[/^([-a-z ])+$/i]',
                 'errors' => array('required'=>'User name is required.')
             ),
 
