@@ -8,7 +8,7 @@
 
             $this->load->model('UserModel', 'userModel'); 
             
-            $config['base_url'] = base_url() . "site/home/index";
+            $config['base_url'] = base_url() . "home/index";
             $config['per_page'] = 3;
             $config['total_rows'] = $this->userModel->countAllCourse();
     

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -51,9 +51,9 @@ $route['site/profile/edit/$id'] = 'site/profile/edit/$1';                       
 
 
 // Site panel
-$route['site/home'] = 'site/Home';                                        //Pending
-$route['site/home/(:num)'] = 'site/Home/$1';
-$route['site/contact'] = 'site/Home/contact';
+$route['home'] = 'Home';                                        //Pending
+$route['home/(:num)'] = 'Home/$1';
+$route['site/contact'] = 'Home/contact';
 $route['site/about'] = 'site/About';
 $route['site/courses'] = 'site/Courses';
 $route['site/login'] = 'site/Auth';
