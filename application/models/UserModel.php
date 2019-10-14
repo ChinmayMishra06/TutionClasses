@@ -55,7 +55,7 @@ UserModel extends CI_Model
         return $result ? true : false;
     }
 
-    public function getAllCourses($userId, $courseId=0){
+    public function getAllCourses($userId=0, $courseId=0){
         $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as term, tcf.category_name as period')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
@@ -65,13 +65,12 @@ UserModel extends CI_Model
                  ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees')
                  ->where(TABLE_COURSE.".status=",1);
 
-                 if($userId > 0)                 
+                 if($userId > 0)
                     $this->db->where(TABLE_COURSE.".user_id=", $userId);
                  if($courseId > 0)
                     $this->db->where(TABLE_COURSE.".course_id=", $courseId);
         
         $result = $this->db->get(TABLE_COURSE);
-        // echo "<pre>" ; print_r($result->result_array()); die();
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
 

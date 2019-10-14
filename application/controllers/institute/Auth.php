@@ -90,8 +90,7 @@
             redirect('institute/login');
         }
 
-        public function breadcrumbs()
-        {
+        public function breadcrumbs(){
             // load Breadcrumbs
             $this->load->library('breadcrumbs');
             echo "HELLO BREADCRUMBS";

@@ -32,6 +32,16 @@
                 border-color:#ee390f;
                 box-shadow:0 0 10px #ee390f;
             }
+
+            .circle{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: 7px solid white;
+                box-shadow: 2px 2px 5px gray;
+                margin-top: -10%;
+                margin-left: 3%;
+            }
         </style>
     </head>
     <body>

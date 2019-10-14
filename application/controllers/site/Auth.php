@@ -20,11 +20,12 @@
                     $user = $this->authModel->getUser($email, $password, 0);
                     if($user){
                         $this->session->set_userdata(array('login'=>$user->email, 'user_id'=>$user->user_id));
+                        redirect('site/home');
                     }else{
                         $this->session->set_flashdata('message', 'Invalid credentials');
                         $this->session->set_flashdata('status', 'danger');
+                        redirect('site/login');
                     }
-                    redirect('site/login');
                 }
             }
             $data['title'] = "Login panel";

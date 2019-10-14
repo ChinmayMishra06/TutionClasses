@@ -13,7 +13,7 @@
             $this->load->model('UserModel', 'userModel');            
             $rspAllCourses = $this->userModel->getAllCourses($this->session->userdata('user_id'));            
             $data['courses'] = $rspAllCourses;
-
+            
             $data['siteTitle'] = "All courses";
             $data['sectionTitle'] = "All courses";
             

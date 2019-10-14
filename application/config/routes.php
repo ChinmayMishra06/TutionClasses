@@ -31,6 +31,7 @@ $route['institute/courses/add'] = 'institute/course/add';                       
 $route['institute/courses/edit/(:num)'] = 'institute/course/edit/$1';
 $route['institute/courses/details/(:num)'] = 'institute/course/details/$1';     //Completed
 $route['institute/category/add'] = 'institute/category';     //Completed
+$route['institute/category/edit'] = 'institute/category/edit';     //Completed
 
 //Institute profile
 $route['institute/profile'] = 'institute/profiles';                            //Completed
@@ -38,13 +39,14 @@ $route['institute/profile/edit'] = 'institute/profile/edit';                    
 $route['institute/reports'] = 'institute/common/report';                        //Completed
 $route['institute/feedbacks'] = 'institute/common/feedback';                    //Completed
 $route['institute/dummy'] = 'institute/common/dummy';                    //Completed
+$route['institute/category'] = 'institute/category/getAllCategory';                    //Completed
 // $route['institute/notifications'] = 'institute/notification';                   //Pending
 // $route['institute/subscriptions'] = 'institute/subscription';                   //Pending
 
 //User profile panel.
 $route['site/'] = 'user';                                                       //Pending
 $route['site/logout'] = 'site/actionLogout';                                    //Pending
-$route['site/profile/add/$id'] = 'site/profile/add/$1';                         //Pending
+// $route['site/profile/add/$id'] = 'site/profile/add/$1';                         //Pending
 $route['site/profile/edit/$id'] = 'site/profile/edit/$1';                       //Pending
 
 

@@ -44,6 +44,7 @@
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <button type="submit" class="btn btn-primary" name="btnAddCategory">Add</button>
+                  <!-- <a href="< ?php echo base_url('institute/category/edit'); ?>" type="submit" class="btn btn-primary" name="btnEditCategory">Edit</a> -->
                 </div>
               </div>
             </form>

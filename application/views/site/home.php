@@ -159,6 +159,9 @@
                     <div class="col-sm-6 col-lg-4">
                         <div class="single_special_cource">
                             <img src="<?php echo base_url('public/uploads/institute/images/'. $course['banner_image']); ?>" height="100px;" width="400px;" class="special_img" alt="<?php echo $course['banner_image']; ?>">
+                            <!-- <div> -->
+                                <img src="<?php echo base_url('public/uploads/institute/images/'. $course['logo_image']); ?>" class="circle" alt="<?php echo $course['logo_image']; ?>">
+                            <!-- </div> -->
                             <div class="special_cource_text">
                                 <a href="<?php echo base_url('site/courseDetails/'. $course['course_id']);?>" class="btn_4"><?php echo $course['course_name']; ?></a>
                                 <h4><?php echo $course['amount']; ?></h4>
