@@ -1,27 +1,13 @@
 <?php defined('BASEPATH') OR exit("No direct script access allowed."); ?>
-   <!-- breadcrumb start-->
-   <section class="breadcrumb breadcrumb_bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner text-center">
-                        <div class="breadcrumb_iner_item">
-                            <h2>Course Details</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- breadcrumb start-->
-
     <!--================ Start Course Details Area =================-->
     <section class="course_details_area section_padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 course_details_left">
+                    <h2><?php echo $course[0]['course_name']; ?></h2>
                     <div class="main_image">
-                        <img class="img-thumbnail" src="<?php echo base_url('public/uploads/institute/images/'.$course[0]['banner_image']); ?>" alt="<?php echo $course[0]['banner_image']; ?>" width="400%;">
+                        <img class="img-thumbnail" src="<?php echo base_url('public/uploads/institute/images/'.$course[0]['banner_image']); ?>" alt="<?php echo $course[0]['banner_image']; ?>">
+                        <img src="<?php echo base_url('public/uploads/institute/images/'. $course[0]['logo_image']); ?>" class="detail-circle" alt="<?php echo $course[0]['logo_image']; ?>">
                     </div>
                     <div class="content_wrapper">
                         <h4 class="title_top">Description</h4>
@@ -34,26 +20,37 @@
                     <div class="sidebar_top">
                         <ul>
                             <li>
-                                <a class="justify-content-between d-flex" href="#">
+                                <a class="justify-content-between d-flex">
                                     <p>Trainer’s Name</p>
-                                    <span class="color"><?php echo $course[0]['name']; ?></span>
+                                    <span><?php echo $course[0]['name']; ?></span>
                                 </a>
                             </li>
                             <li>
-                                <a class="justify-content-between d-flex" href="#">
+                                <a class="justify-content-between d-flex">
                                     <p>Course Fee </p>
-                                    <span><?php echo $course[0]['amount'] . ' per ' . $course[0]['period']; ?></span>
+                                    <span><?php echo $course[0]['fees'] . ' per ' . $course[0]['fees_unit']; ?></span>
                                 </a>
                             </li>
                             <li>
-                                <a class="justify-content-between d-flex" href="#">
+                                <a class="justify-content-between d-flex">
                                     <p>Schedule </p>
-                                    <span>2.00 pm to 4.00 pm</span>
+                                    <span><?php echo $course[0]['duration'] . ' ' . $course[0]['duration_unit']; ?></span>
                                 </a>
                             </li>
-
+                            <li>
+                                <a class="justify-content-between d-flex">
+                                    <p>Start joining date</p>
+                                    <span><?php echo  date('d/m/Y', strtotime($course[0]['start_date'])); ?></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="justify-content-between d-flex">
+                                    <p>End joining date</p>
+                                    <span><?php echo date('d/m/Y', strtotime($course[0]['end_date'])); ?></span>
+                                </a>
+                            </li>
                         </ul>
-                        <a href="#" class="btn_1 d-block">Enroll the course</a>
+                        <a href="#" class="btn_1 d-block">I am interested</a>
                     </div>
 
                     <h4 class="title">Reviews</h4>

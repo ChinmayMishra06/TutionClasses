@@ -26,7 +26,7 @@ class CommonModel extends CI_Model
     public function getAllFeedbacks($user_id){
         $result = $this->db->select(TABLE_FEED.".*, name, email, category_name")
                            ->join(TABLE_USER, TABLE_USER.".user_id=" . TABLE_FEED.".user_id")
-                           ->join(TABLE_CAT, TABLE_CAT.".category_id=" . TABLE_FEED.".category_id")
+                           ->join(TABLE_CAT, TABLE_CAT.".category_id=" . TABLE_FEED.".course_id")
                            ->where(TABLE_FEED.'.user_id', $user_id)
                            ->get(TABLE_FEED);
         // echo "<pre>"; print_r($result->result_array()); die();
@@ -36,10 +36,7 @@ class CommonModel extends CI_Model
     public function getAllReports($user_id){
         $result = $this->db->select(TABLE_REPORT.".*, victim.name victim_name, victim.email, category_name")
                            ->join(TABLE_USER . " as victim", "victim.user_id=" . TABLE_REPORT.".victim_id")
-                           ->join(TABLE_USER . " as criminal", "criminal.user_id=" . TABLE_REPORT.".criminal_id")
-                           ->join(TABLE_CAT, TABLE_CAT.".category_id=" . TABLE_REPORT.".category_id")
-                           ->where(TABLE_REPORT.'.criminal_id', $user_id)
-                           ->where('rating', 0)
+                           ->join(TABLE_CAT, TABLE_CAT.".category_id=" . TABLE_REPORT.".course_id")
                            ->where(TABLE_REPORT.'.status', 1)
                            ->get(TABLE_REPORT);
         // echo "<pre>"; print_r($result->result_array()); die();

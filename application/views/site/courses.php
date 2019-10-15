@@ -1,23 +1,6 @@
 <?php defined('BASEPATH') OR exit("No direct script access allowed."); ?>
-<!-- breadcrumb start-->
-    <section class="breadcrumb breadcrumb_bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner text-center">
-                        <div class="breadcrumb_iner_item">
-                            <h2>Our Courses</h2>
-                            <p>Home<span>/</span>Courses</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- breadcrumb start-->
-
     <!--::review_part start::-->
-    <section class="special_cource padding_top">
+    <!-- <section class="special_cource padding_top">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-5">
@@ -129,8 +112,68 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!--::blog_part end::-->
+
+    <section class="special_cource padding_top">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5">
+                    <div class="section_tittle text-center">
+                        <h2>All Courses</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 5%;">
+                <div class="col-sm-12">
+                    <div class="controls text-center">
+                        <a href="" class="filter btn btn_1">All</a>
+                        <a href="" class="filter btn btn_1">Category</a>
+                        <a href="" class="filter btn btn_1">Duration</a>
+                        <a href="" class="filter btn btn_1">Price</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <?php foreach($courses as $course){ ?>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="single_special_cource">
+                            <img src="<?php echo base_url('public/uploads/institute/images/'. $course['banner_image']); ?>" height="100px;" width="400px;" class="special_img" alt="<?php echo $course['banner_image']; ?>">
+                            <!-- <div> -->
+                                <img src="<?php echo base_url('public/uploads/institute/images/'. $course['logo_image']); ?>" class="home-circle" alt="<?php echo $course['logo_image']; ?>">
+                            <!-- </div> -->
+                            <div class="special_cource_text">
+                                <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>" class="btn_4"><?php echo $course['course_name']; ?></a>
+                                <h4><?php echo $course['fees']; ?></h4>
+                                <a href="course-details.html"><h3><?php echo $course['course_name']; ?></h3></a>
+                                <p><?php echo $course['description']; ?></p>
+                                <div class="author_info">
+                                    <div class="author_img">
+                                        <img src="<?php echo base_url('public/uploads/institute/images/'. $course['image']); ?>" alt="<?php echo $course['image']; ?>" height="50px;" width="50px;" style="border-radius:50%;">
+                                        <div class="author_info_text">
+                                            <p>Conduct by:</p>
+                                            <h5><a href="#"><?php echo $course['name']; ?></a></h5>
+                                        </div>
+                                    </div>
+                                    <div class="author_rating">
+                                        <div class="rating">
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                        </div>
+                                        <p>3.8 Ratings</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php }?>
+            </div><br/>
+            <?php echo $this->pagination->create_links();?>
+        </div>
+    </section>
 
     <!--::review_part start::-->
     <section class="testimonial_part section_padding">

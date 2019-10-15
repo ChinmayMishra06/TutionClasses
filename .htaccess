@@ -7,6 +7,8 @@
 
     #todo add env variable for production
     SetEnv ENCKEY k4osdifjoasd8f923
+    SetEnv ENCUSER USERNAME
+    SetEnv ENCPASS PASSWORD
     #todo change public path
     RewriteCond %{REQUEST_URI} !^/tutionclasses/public/?(.*)$ [NC]
     RewriteRule ^.*$ index.php [L,NS,QSA]

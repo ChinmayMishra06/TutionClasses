@@ -1,21 +1,4 @@
 <?php defined('BASEPATH') OR exit("No direct script access allowed."); ?>
-   <!-- breadcrumb start-->
-   <section class="breadcrumb breadcrumb_bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner text-center">
-                        <div class="breadcrumb_iner_item">
-                            <h2>Contact us</h2>
-                            <p>Home<span>/<span>Contact us</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- breadcrumb start-->
-
   <!-- ================ contact section start ================= -->
   <section class="contact-section section_padding">
     <div class="container">
@@ -43,42 +26,49 @@
           }
           
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap"></script>
-        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap"></script>        
       </div>
-
 
       <div class="row">
         <div class="col-12">
           <h2 class="contact-title">Get in Touch</h2>
         </div>
         <div class="col-lg-8">
-          <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+          <?php if($this->session->flashdata('message')){ ?>
+              <div class="alert alert-<?php echo $this->session->flashdata('status'); ?>" data-dismiss="alert">
+                  <?php echo $this->session->flashdata('message'); ?>
+                  <button class="close">&times;</button>
+              </div>
+          <?php } ?>
+          <form class="form-contact contact_form" action="<?php echo base_url('contact') ?>" method="post" id="contactForm">
             <div class="row">
               <div class="col-12">
-                <div class="form-group">
-                  
+                <div class="form-group">                  
                     <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder = 'Enter Message'></textarea>
+                    <?php if(validation_errors()) echo form_error('message'); ?>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
                   <input class="form-control" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder = 'Enter your name'>
+                  <?php if(validation_errors()) echo form_error('name'); ?>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <input class="form-control" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder = 'Enter email address'>
+                  <input class="form-control" name="email" id="email" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder = 'Enter email address'>
+                  <?php if(validation_errors()) echo form_error('email'); ?>
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
                   <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder = 'Enter Subject'>
+                  <?php if(validation_errors()) echo form_error('subject'); ?>
                 </div>
               </div>
             </div>
             <div class="form-group mt-3">
-              <button type="submit" class="button button-contactForm btn_1">Send Message</button>
+              <button type="submit" class="button button-contactForm btn_1" name="btnSendMessage">Send Message</button>
             </div>
           </form>
         </div>

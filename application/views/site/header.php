@@ -33,7 +33,7 @@
                 box-shadow:0 0 10px #ee390f;
             }
 
-            .circle{
+            .home-circle{
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
@@ -42,15 +42,43 @@
                 margin-top: -10%;
                 margin-left: 3%;
             }
+
+            .detail-circle{
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                border: 7px solid white;
+                box-shadow: 2px 2px 5px gray;
+                margin-top: -6%;
+            }
+
+            /* cover the body. */
+            .cover{
+                background-color: rgba(0, 0, 0, 0.4);
+                z-index: 1;
+                height: 100%;
+                width: 100%;
+            }
+
+            .login_panel{ z-index: 3; }
+
+            /*button style*/
+            .hide_btn{
+                float: right;
+                background: #f0ad4e;
+                border: none;
+                font-size: 20px;
+                color: white;
+            }
         </style>
     </head>
     <body>
-        <header class="main_menu <?php echo $className; ?>">
+        <header class="main_menu home_menu">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg navbar-light">
-                            <a class="navbar-brand" href="index.html"> <img src="<?php echo base_url(); ?>public/site/img/TutionClasses.png" alt="logo" style="border-radius:50px;"> </a>
+                            <a class="navbar-brand" href="<?php echo base_url(); ?>"> <img src="<?php echo base_url(); ?>public/site/img/TutionClasses.png" alt="logo" style="border-radius:50px;"> </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -58,19 +86,19 @@
                             <div class="collapse navbar-collapse main-menu-item justify-content-end" id="navbarSupportedContent">
                                 <ul class="navbar-nav align-items-center">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="<?php echo base_url('site/home');?>">Home</a>
+                                        <a class="nav-link" href="<?php echo base_url('home');?>">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('site/courses');?>">Courses</a>
+                                        <a class="nav-link" href="<?php echo base_url('courses');?>">Courses</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('site/contact');?>">Contact</a>
+                                        <a class="nav-link" href="<?php echo base_url('contact');?>">Contact</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('site/about');?>">About</a>
+                                        <a class="nav-link" href="<?php echo base_url('about');?>">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('site/login');?>">Login</a>
+                                        <a class="nav-link" href="<?php echo base_url('login');?>">Login</a>
                                     </li>
                                     <li class="nav-item">
                                         <form action="#">
@@ -89,4 +117,3 @@
                 </div>
             </div>
         </header>
-   

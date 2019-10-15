@@ -60,12 +60,12 @@
                     $data['medium'] = $this->input->post('inputMedium');
                     $data['course_name'] = $this->input->post('inputCourseName');
                     $data['description'] = $this->input->post('inputDescription');
-                    $data['fees'] = $this->input->post('inputFeesTerm');
-                    $data['amount'] = $this->input->post('inputAmount');
+                    $data['fees_unit'] = $this->input->post('inputFeesTerm');
+                    $data['fees'] = $this->input->post('inputAmount');
                     $data['start_date'] = $this->input->post('inputStartDate');
                     $data['end_date'] = $this->input->post('inputEndDate');  
-                    $data['duration'] = $this->input->post('inputTimingTerm');
-                    $data['time'] = $this->input->post('inputTime');
+                    $data['duration_unit'] = $this->input->post('inputTimingTerm');
+                    $data['duration'] = $this->input->post('inputTime');
 
                     $this->load->model('UserModel', 'userModel');
                     $rspCourseAdd = $this->userModel->addCourse($data);
@@ -144,12 +144,12 @@
                     $data['medium'] = $this->input->post('inputMedium');
                     $data['course_name'] = $this->input->post('inputCourseName');
                     $data['description'] = $this->input->post('inputDescription');
-                    $data['fees'] = $this->input->post('inputFeesTerm');
-                    $data['amount'] = $this->input->post('inputAmount');
+                    $data['fees_unit'] = $this->input->post('inputFeesTerm');
+                    $data['fees'] = $this->input->post('inputAmount');
                     $data['start_date'] = $this->input->post('inputStartDate');
                     $data['end_date'] = $this->input->post('inputEndDate');  
-                    $data['duration'] = $this->input->post('inputTimingTerm');
-                    $data['time'] = $this->input->post('inputTime');
+                    $data['duration_unit'] = $this->input->post('inputTimingTerm');
+                    $data['duration'] = $this->input->post('inputTime');
 
                     $this->load->model('UserModel', 'userModel');
                     $rspCourseUpdate = $this->userModel->editCourse($id, $data);

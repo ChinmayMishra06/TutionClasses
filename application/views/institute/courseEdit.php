@@ -114,7 +114,7 @@
                         <div class="col-sm-12">
                           <select name="inputTimingTerm" id="inputTimingTerm" class="form-control">
                             <?php foreach($terms as $term){?>
-                              <?php if($term['category_id'] != $course[0]['duration']){?>
+                              <?php if($term['category_id'] != $course[0]['duration_unit']){?>
                                 <option value="<?php echo $term['category_id']; ?>"><?php echo $term['category_name']; ?></option>
                               <?php
                               }else{?>
@@ -134,7 +134,7 @@
                       </div>
                       <div class="row">
                         <div class="col-sm-12">
-                          <input type="number" name="inputTime" id="inputTime" class="form-control" value="<?php echo $course[0]['time']; ?>">
+                          <input type="number" name="inputTime" id="inputTime" class="form-control" value="<?php echo $course[0]['duration']; ?>">
                           <?php if(validation_errors()) echo form_error('inputTime'); ?>
                         </div>
                       </div>
@@ -156,7 +156,7 @@
                         <div class="col-sm-12">
                           <select name="inputFeesTerm" id="inputFeesTerm" class="form-control">                              
                               <?php
-                                if($course[0]['fees'] == '0'){ ?>
+                                if($course[0]['fees_unit'] == '0'){ ?>
                                   <option value="0" selected>Free</option>
                                 <?php } else{ ?>
                                   <option value="0">Free</option>
@@ -183,7 +183,7 @@
                       </div>
                       <div class="row">
                         <div class="col-sm-12">
-                          <input type="text" name="inputAmount" id="inputAmount" class="form-control" value="<?php echo $course[0]['amount']; ?>">
+                          <input type="text" name="inputAmount" id="inputAmount" class="form-control" value="<?php echo $course[0]['fees']; ?>">
                           <?php if(validation_errors()) echo form_error('inputAmount'); ?>
                         </div>
                       </div>

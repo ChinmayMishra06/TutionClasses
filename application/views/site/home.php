@@ -6,14 +6,11 @@
                 <div class="col-lg-6 col-xl-6">
                     <div class="banner_text">
                         <div class="banner_text_iner">
-                            <h5>Every child yearns to learn</h5>
-                            <h1>Making Your Childs
-                                World Better</h1>
-                            <p>Replenish seasons may male hath fruit beast were seas saw you arrie said man beast whales
-                                his void unto last session for bite. Set have great you'll male grass yielding yielding
-                                man</p>
-                            <a href="#" class="btn_1">View Course </a>
-                            <a href="#" class="btn_2">Get Started </a>
+                            <h5>Best teaching, decides your future.</h5>
+                            <h1>Get your desire education with TutionClasses</h1>
+                            <p>With <b><a href="<?php echo base_url();?>">TuitionClasses</a></b> you can get a best teacher near your home place.
+                                And you can make your future bright.
+                                All the Best.</p>
                         </div>
                     </div>
                 </div>
@@ -104,19 +101,19 @@
     <section class="member_counter">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                     <div class="single_member_counter">
-                        <span class="counter">1024</span>
+                        <span class="counter"><?php echo $allTeachers; ?></span>
                         <h4>All Teachers</h4>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                     <div class="single_member_counter">
-                        <span class="counter">960</span>
+                        <span class="counter"><?php echo $allStudents; ?></span>
                         <h4> All Students</h4>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <!-- <div class="col-lg-3 col-sm-6">
                     <div class="single_member_counter">
                         <span class="counter">1020</span>
                         <h4>Online Students</h4>
@@ -127,7 +124,7 @@
                         <span class="counter">820</span>
                         <h4>Ofline Students</h4>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -156,41 +153,40 @@
             </div>
             <div class="row">
                 <?php foreach($courses as $course){ ?>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="single_special_cource">
-                            <img src="<?php echo base_url('public/uploads/institute/images/'. $course['banner_image']); ?>" height="100px;" width="400px;" class="special_img" alt="<?php echo $course['banner_image']; ?>">
-                            <!-- <div> -->
-                                <img src="<?php echo base_url('public/uploads/institute/images/'. $course['logo_image']); ?>" class="circle" alt="<?php echo $course['logo_image']; ?>">
-                            <!-- </div> -->
-                            <div class="special_cource_text">
-                                <a href="<?php echo base_url('site/courseDetails/'. $course['course_id']);?>" class="btn_4"><?php echo $course['course_name']; ?></a>
-                                <h4><?php echo $course['amount']; ?></h4>
-                                <a href="course-details.html"><h3><?php echo $course['course_name']; ?></h3></a>
-                                <p><?php echo $course['description']; ?></p>
-                                <div class="author_info">
-                                    <div class="author_img">
-                                        <img src="<?php echo base_url('public/uploads/institute/images/'. $course['image']); ?>" alt="<?php echo $course['image']; ?>" height="50px;" width="50px;" style="border-radius:50%;">
-                                        <div class="author_info_text">
-                                            <p>Conduct by:</p>
-                                            <h5><a href="#"><?php echo $course['name']; ?></a></h5>
-                                        </div>
+                <div class="col-sm-6 col-lg-4 mt-4">
+                    <div class="single_special_cource">
+                        <img src="<?php echo base_url('public/uploads/institute/images/'. $course['banner_image']); ?>" height="100px;" width="400px;" class="special_img" alt="<?php echo $course['banner_image']; ?>">
+                        <img src="<?php echo base_url('public/uploads/institute/images/'. $course['logo_image']); ?>" class="home-circle" alt="<?php echo $course['logo_image']; ?>">
+                        <div class="special_cource_text">
+                            <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>" class="btn_4"><?php echo $course['course_name']; ?></a>
+                            <h4><?php echo $course['fees']; ?></h4>
+                            <a href="course-details.html"><h3><?php echo $course['course_name']; ?></h3></a>
+                            <p><?php echo substr($course['description'], 0, 40); ?></p>
+                            <a href="<?php echo base_url('courseDetails/' . $course['course_id']); ?>">(Read more...)</a>
+                            <div class="author_info">
+                                <div>
+                                    <img src="<?php echo base_url('public/uploads/institute/images/'. $course['image']); ?>" alt="<?php echo $course['image']; ?>" height="50px;" width="50px;" style="border-radius:50%;">
+                                    <div class="author_info_text">
+                                        <p>Conduct by:</p>
+                                        <h5><a href="#"><?php echo $course['name']; ?></a></h5>
                                     </div>
-                                    <div class="author_rating">
-                                        <div class="rating">
-                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
-                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
-                                        </div>
-                                        <p>3.8 Ratings</p>
+                                </div>
+                                <div class="author_rating">
+                                    <div class="rating">
+                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
                                     </div>
+                                    <p>3.8 Ratings</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                <?php }?>
-            </div><br/>
+                    </div>
+                <?php } ?>
+            </div>
             <?php echo $this->pagination->create_links();?>
         </div>
     </section>

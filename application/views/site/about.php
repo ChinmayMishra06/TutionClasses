@@ -1,21 +1,4 @@
 <?php defined('BASEPATH') OR exit("No direct script access allowed."); ?>
-    <!-- breadcrumb start-->
-    <section class="breadcrumb breadcrumb_bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb_iner text-center">
-                        <div class="breadcrumb_iner_item">
-                            <h2>About Us</h2>
-                            <p>Home<span>/</span>About Us</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- breadcrumb start-->
-
     <!-- feature_part start-->
     <section class="feature_part single_feature_padding">
         <div class="container">

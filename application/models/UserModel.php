@@ -56,13 +56,13 @@ UserModel extends CI_Model
     }
 
     public function getAllCourses($userId=0, $courseId=0){
-        $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as term, tcf.category_name as period')
+        $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
                  ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
                  ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
-                 ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration')
-                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees')
+                 ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
+                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
                  ->where(TABLE_COURSE.".status=",1);
 
                  if($userId > 0)
@@ -75,27 +75,26 @@ UserModel extends CI_Model
     }
 
     public function countAllCourse(){
-        
-        $result = $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as term, tcf.category_name as period')
-                 ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
-                 ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
-                 ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
-                 ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
-                 ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration')
-                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees')
-                 ->get(TABLE_COURSE);
+        $result = $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
+        ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
+        ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
+        ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
+        ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
+        ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
+        ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
+        ->get(TABLE_COURSE);
         // echo "<pre>" ; print_r($result->num_rows()); die();
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
 
     public function getAllCoursesByConditions($limit, $page, $conditions = []){
-        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as term, tcf.category_name as period')
+        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
                  ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
                  ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
-                 ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration')
-                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees')
+                 ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
+                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')        
                 ->limit($limit, ($page - 1) * $limit)
                 ->where(TABLE_COURSE.".status=",1);
 
@@ -119,6 +118,14 @@ UserModel extends CI_Model
         
         if ($result->num_rows() > 0)
             return $result->row()->user_type;
+    }
+
+    public function countAllTeachersStudents($userType)
+    {
+        $result = $this->db->select('name')
+                 ->where('user_type', $userType)
+                 ->get(TABLE_USER);
+        return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
     
     public function getCourses($latitude, $longitude, $categoryId, $medium, $distance = 100)

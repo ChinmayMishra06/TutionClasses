@@ -3,20 +3,18 @@
 class AuthModel extends CI_Model
 {
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
         $this->load->database();
     }
     
-    public function getUser($email, $password, $userType)
-    {
+    public function getUser($email, $password, $userType){
         $result = $this->db->select("user_id, name, email")->from(TABLE_USER)->where(array('email' => $email, 'password' => $password, 'user_type' => $userType))->limit(1)->get();
 
         return ($result->num_rows() > 0) ? $result->row() : false;
     }
 
-    public function createSession($user) {
+    public function createSession($user){
         // print_r($user);die();
                 
         //create entry for single session with tracking.
@@ -35,8 +33,7 @@ class AuthModel extends CI_Model
         return $this->encryption->encrypt($sess_json);
     }
 
-    public function validateUser($userData)
-    {
+    public function validateUser($userData){
         $result = $this->db->select("user_id")->where($userData)->get(TABLE_SESS);
         
         if(!$result){
@@ -50,8 +47,7 @@ class AuthModel extends CI_Model
         return 0;
     }
 
-    public function signUp($name, $email, $password, $userType)
-    {
+    public function signUp($name, $email, $password, $userType){
         $userResult = $this->db->select('name')->where(array('email'=>$email, 'user_type'=>$userType))->get(TABLE_USER);
 
         if($userResult->num_rows() > 0){
@@ -63,13 +59,11 @@ class AuthModel extends CI_Model
         
     }
 
-    public function forget($email)
-    {
+    public function forget($email){
         return $this->db->where("email", $email)->get(TABLE_USER)->row()->email;
     }
 
-    public function reset($email, $newPassword)
-    {
+    public function reset($email, $newPassword){
         return $this->db->where("email", $email)->update(TABLE_USER, array("password" => "$newPassword"));
     }
 

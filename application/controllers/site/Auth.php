@@ -29,7 +29,6 @@
                 }
             }
             $data['title'] = "Login panel";
-            $data['className'] = "home_menu";
             $this->load->view('site/header', $data);
             $this->load->view('site/login');
             $this->load->view('site/footer');
@@ -64,7 +63,6 @@
                 }
             }
             $data['title'] = "Signup panel";
-            $data['className'] = "home_menu";
             $this->load->view('site/header', $data);
             $this->load->view('site/signup');
             $this->load->view('site/footer');

@@ -45,20 +45,21 @@ $route['institute/category'] = 'institute/category/getAllCategory';             
 
 //User profile panel.
 $route['site/'] = 'user';                                                       //Pending
-$route['site/logout'] = 'site/actionLogout';                                    //Pending
+$route['logout'] = 'site/actionLogout';                                    //Pending
 // $route['site/profile/add/$id'] = 'site/profile/add/$1';                         //Pending
-$route['site/profile/edit/$id'] = 'site/profile/edit/$1';                       //Pending
+$route['profile/edit/$id'] = 'site/profile/edit/$1';                       //Pending
 
 
 // Site panel
 $route['home'] = 'Home';                                        //Pending
 $route['home/(:num)'] = 'Home/$1';
-$route['site/contact'] = 'Home/contact';
-$route['site/about'] = 'site/About';
-$route['site/courses'] = 'site/Courses';
-$route['site/login'] = 'site/Auth';
-$route['site/signup'] = 'site/auth/pageSignup';                      //Pending
-$route['site/courseDetails/(:num)'] = 'site/courses/courseDetails/$1';
+$route['contact'] = 'Home/contact';
+$route['about'] = 'site/About';
+$route['courses'] = 'site/Courses';
+$route['courses/(:num)'] = 'site/Courses/$1';
+$route['login'] = 'site/Auth';
+$route['signup'] = 'site/auth/pageSignup';                      //Pending
+$route['courseDetails/(:num)'] = 'site/courses/courseDetails/$1';
 
 //Apis v1
 $route['api/v1/init'] = 'api/v1/BaseApi/apiInit';
