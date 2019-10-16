@@ -34,7 +34,8 @@
                     $this->load->model('AuthModel', 'authModel');
                     $user = $this->authModel->getUser($email, $password, 1);
                     if($user){
-                        $this->session->set_userdata(array('login'=>$user->email, 'user_id'=>$user->user_id));
+                        $login = array('login'=>$user->email, 'user_id'=>$user->user_id);
+                        $this->session->set_userdata($login);
                         redirect('institute');
                     }else{
                         $this->session->set_flashdata('message', 'Invalid credentials');
@@ -84,7 +85,7 @@
             if(!$this->session->userdata('login'))
                 redirect('institute/login');
             
-            $this->session->unset_userdata('login');
+            $this->session->unset_userdata(array('login', 'user_id'));
             $this->session->set_flashdata('message', 'Logout successfully.');
             $this->session->set_flashdata('status', 'success');
             redirect('institute/login');

@@ -70,6 +70,10 @@
                 font-size: 20px;
                 color: white;
             }
+
+            .star{
+                cursor:pointer;
+            }
         </style>
     </head>
     <body>
@@ -98,7 +102,11 @@
                                         <a class="nav-link" href="<?php echo base_url('about');?>">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo base_url('login');?>">Login</a>
+                                        <?php if(!$this->session->userdata('studentLogin')){ ?>
+                                            <a class="nav-link" href="<?php echo base_url('login');?>">Login</a>
+                                        <?php } else{  ?>
+                                            <a class="nav-link" href="<?php echo base_url('logout');?>">Logout</a>
+                                        <?php } ?>
                                     </li>
                                     <li class="nav-item">
                                         <form action="#">

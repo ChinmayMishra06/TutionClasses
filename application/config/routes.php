@@ -51,15 +51,17 @@ $route['profile/edit/$id'] = 'site/profile/edit/$1';                       //Pen
 
 
 // Site panel
-$route['home'] = 'Home';                                        //Pending
-$route['home/(:num)'] = 'Home/$1';
-$route['contact'] = 'Home/contact';
+$route['home'] = 'home';                                        //Pending
+$route['home/(:num)'] = 'home/$1';
+$route['contact'] = 'home/contact';
 $route['about'] = 'site/About';
 $route['courses'] = 'site/Courses';
 $route['courses/(:num)'] = 'site/Courses/$1';
 $route['login'] = 'site/Auth';
+$route['logout'] = 'site/Auth/logout';
 $route['signup'] = 'site/auth/pageSignup';                      //Pending
 $route['courseDetails/(:num)'] = 'site/courses/courseDetails/$1';
+$route['subscribe'] = 'home';
 
 //Apis v1
 $route['api/v1/init'] = 'api/v1/BaseApi/apiInit';

@@ -74,7 +74,7 @@ UserModel extends CI_Model
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
 
-    public function countAllCourse(){
+    public function countCourses(){
         $result = $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
         ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
         ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
@@ -84,6 +84,20 @@ UserModel extends CI_Model
         ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
         ->get(TABLE_COURSE);
         // echo "<pre>" ; print_r($result->num_rows()); die();
+        return ($result->num_rows() > 0) ? $result->num_rows() : false;
+    }
+
+    public function countTeachersStudents($userType)
+    {
+        $result = $this->db->select('name')
+                 ->where('user_type', $userType)
+                 ->get(TABLE_USER);
+        return ($result->num_rows() > 0) ? $result->num_rows() : false;
+    }
+
+    public function countSubscribers()
+    {
+        $result = $this->db->select('user_id')->where('deleted_at', 0)->get(TABLE_NEWS);
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
 
@@ -118,14 +132,6 @@ UserModel extends CI_Model
         
         if ($result->num_rows() > 0)
             return $result->row()->user_type;
-    }
-
-    public function countAllTeachersStudents($userType)
-    {
-        $result = $this->db->select('name')
-                 ->where('user_type', $userType)
-                 ->get(TABLE_USER);
-        return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
     
     public function getCourses($latitude, $longitude, $categoryId, $medium, $distance = 100)

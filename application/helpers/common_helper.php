@@ -13,6 +13,8 @@ define("TABLE_COURSE", "tc_courses");
 define("TABLE_CAT", "tc_categories");
 define("TABLE_FEED", "tc_feedbacks");
 define("TABLE_REPORT", "tc_reports");
+define("TABLE_NEWS", "tc_newsletters");
+define("TABLE_ENQ", "tc_enquiries");
 
 //data paths
 define("DIR_PRIVATE_DATA", "./private/data/");

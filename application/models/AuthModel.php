@@ -13,7 +13,7 @@ class AuthModel extends CI_Model
 
         return ($result->num_rows() > 0) ? $result->row() : false;
     }
-
+    
     public function createSession($user){
         // print_r($user);die();
                 

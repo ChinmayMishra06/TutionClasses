@@ -4010,9 +4010,15 @@ ul {
 
 /* line 42, E:/172 Etrain Education/172_Etrain_Education_html/sass/_special_cource.scss */
 .special_cource .single_special_cource .special_cource_text {
-  padding: 35px 35px 40px;
+  /* padding: 35px 35px 40px; */
+  padding: 20px 35px 5px; /* Changed by TutionClasses developer. */
   border: 1px solid #edeff2;
   border-top: 0px;
+}
+
+/*Add by TutionClasses developer.*/
+.single_special_cource:hover{
+  box-shadow: 5px 5px 20px 5px gray;
 }
 
 @media (max-width: 576px) {

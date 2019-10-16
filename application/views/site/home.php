@@ -101,30 +101,30 @@
     <section class="member_counter">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-sm-6">
+                <div class="col-lg-3 col-sm-6">
                     <div class="single_member_counter">
                         <span class="counter"><?php echo $allTeachers; ?></span>
-                        <h4>All Teachers</h4>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-6">
-                    <div class="single_member_counter">
-                        <span class="counter"><?php echo $allStudents; ?></span>
-                        <h4> All Students</h4>
-                    </div>
-                </div>
-                <!-- <div class="col-lg-3 col-sm-6">
-                    <div class="single_member_counter">
-                        <span class="counter">1020</span>
-                        <h4>Online Students</h4>
+                        <h4>Teachers/Institutes</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_member_counter">
-                        <span class="counter">820</span>
-                        <h4>Ofline Students</h4>
+                        <span class="counter"><?php echo $allStudents; ?></span>
+                        <h4>Students</h4>
                     </div>
-                </div> -->
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_member_counter">
+                        <span class="counter"><?php echo $allCourses; ?></span>
+                        <h4>Courses</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_member_counter">
+                        <span class="counter"><?php echo  $allSubscribers; ?></span>
+                        <h4>Subscribers</h4>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -153,37 +153,37 @@
             </div>
             <div class="row">
                 <?php foreach($courses as $course){ ?>
-                <div class="col-sm-6 col-lg-4 mt-4">
-                    <div class="single_special_cource">
-                        <img src="<?php echo base_url('public/uploads/institute/images/'. $course['banner_image']); ?>" height="100px;" width="400px;" class="special_img" alt="<?php echo $course['banner_image']; ?>">
-                        <img src="<?php echo base_url('public/uploads/institute/images/'. $course['logo_image']); ?>" class="home-circle" alt="<?php echo $course['logo_image']; ?>">
-                        <div class="special_cource_text">
-                            <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>" class="btn_4"><?php echo $course['course_name']; ?></a>
-                            <h4><?php echo $course['fees']; ?></h4>
-                            <a href="course-details.html"><h3><?php echo $course['course_name']; ?></h3></a>
-                            <p><?php echo substr($course['description'], 0, 40); ?></p>
-                            <a href="<?php echo base_url('courseDetails/' . $course['course_id']); ?>">(Read more...)</a>
-                            <div class="author_info">
-                                <div>
-                                    <img src="<?php echo base_url('public/uploads/institute/images/'. $course['image']); ?>" alt="<?php echo $course['image']; ?>" height="50px;" width="50px;" style="border-radius:50%;">
-                                    <div class="author_info_text">
-                                        <p>Conduct by:</p>
-                                        <h5><a href="#"><?php echo $course['name']; ?></a></h5>
+                    <div class="col-sm-6 col-lg-4 mt-4">
+                        <div class="single_special_cource">
+                            <img src="<?php echo base_url('public/uploads/institute/images/'. $course['banner_image']); ?>" height="100px;" width="400px;" class="special_img" alt="<?php echo $course['banner_image']; ?>">
+                            <img src="<?php echo base_url('public/uploads/institute/images/'. $course['logo_image']); ?>" class="home-circle" alt="<?php echo $course['logo_image']; ?>">
+                            <div class="special_cource_text">
+                                <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>" class="btn_4"><?php echo $course['category_name']; ?></a>
+                                <h4><?php echo $course['fees']; ?></h4>
+                                <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>"><h3><?php echo $course['course_name']; ?></h3></a>
+                                <p><?php echo substr($course['description'], 0, 40); ?></p>
+                                <a href="<?php echo base_url('courseDetails/' . $course['course_id']); ?>">(Read more...)</a>
+                                <div class="author_info">
+                                    <div>
+                                        <img src="<?php echo base_url('public/uploads/institute/images/'. $course['image']); ?>" alt="<?php echo $course['image']; ?>" height="50px;" width="50px;" style="border-radius:50%;">
+                                        <div class="author_info_text">
+                                            <p>Conduct by:</p>
+                                            <h5><a class="text-primary"><?php echo $course['name']; ?></a></h5>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="author_rating">
-                                    <div class="rating">
-                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
-                                        <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                    <div class="author_rating">
+                                        <div class="rating">
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                            <a href="#"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                        </div>
+                                        <p>3.8 Ratings</p>
                                     </div>
-                                    <p>3.8 Ratings</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 <?php } ?>
             </div>
@@ -233,121 +233,51 @@
     <!-- learning part end-->
 
     <!--::review_part start::-->
-    <section class="testimonial_part">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-xl-5">
-                    <div class="section_tittle text-center">
-                        <p>tesimonials</p>
-                        <h2>Happy Students</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="textimonial_iner owl-carousel">
-                        <div class="testimonial_slider">
-                            <div class="row">
-                                <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-2 col-sm-4">
-                                    <div class="testimonial_slider_img">
-                                        <img src="<?php echo base_url(); ?>public/site/img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 d-none d-xl-block">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 d-none d-xl-block">
-                                    <div class="testimonial_slider_img">
-                                        <img src="<?php echo base_url(); ?>public/site/img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial_slider">
-                            <div class="row">
-                                <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-2 col-sm-4">
-                                    <div class="testimonial_slider_img">
-                                        <img src="<?php echo base_url(); ?>public/site/img/testimonial_img_2.png" alt="#">
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 d-none d-xl-block">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 d-none d-xl-block">
-                                    <div class="testimonial_slider_img">
-                                        <img src="<?php echo base_url(); ?>public/site/img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial_slider">
-                            <div class="row">
-                                <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-2 col-sm-4">
-                                    <div class="testimonial_slider_img">
-                                        <img src="<?php echo base_url(); ?>public/site/img/testimonial_img_3.png" alt="#">
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 d-none d-xl-block">
-                                    <div class="testimonial_slider_text">
-                                        <p>Behold place was a multiply creeping creature his domin to thiren open void
-                                            hath herb divided divide creepeth living shall i call beginning
-                                            third sea itself set</p>
-                                        <h4>Michel Hashale</h4>
-                                        <h5> Sr. Web designer</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 d-none d-xl-block">
-                                    <div class="testimonial_slider_img">
-                                        <img src="<?php echo base_url(); ?>public/site/img/testimonial_img_1.png" alt="#">
-                                    </div>
-                                </div>
-                            </div>
+    <?php if(isset($happyFeedbacks) && is_array($happyFeedbacks)){ ?>
+        <section class="testimonial_part section_padding">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-xl-5">
+                        <div class="section_tittle text-center">
+                            <h2>Happy Students</h2>
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="textimonial_iner owl-carousel">
+                        <?php
+                            $count = 0;
+                            for($i=0; $i<count($happyFeedbacks); $i++){ ?>
+                            <div class="testimonial_slider">
+                                <div class="row">
+                                    <?php for($j=0; $j<2; $j++){
+                                        $count = $i + $j;
+                                        if($count == count($happyFeedbacks))
+                                            $count = 0; 
+                                    ?>
+                                    <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
+                                        <div class="testimonial_slider_text">
+                                            <p><?php echo $happyFeedbacks[$count]['description']; ?></p>
+                                            <h4><?php echo $happyFeedbacks[$count]['name']; ?></h4>
+                                            <h5><?php echo $happyFeedbacks[$count]['course_name']; ?></h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-xl-2 col-sm-4">
+                                        <div class="testimonial_slider_img">
+                                            <img src="<?php echo base_url('public/uploads/institute/images/'. $happyFeedbacks[$count]['image']); ?>" alt="<?php echo $happyFeedbacks[$count]['image']; ?>">
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    <?php } ?>
     <!--::blog_part end::-->
 
     <!--::blog_part start::-->

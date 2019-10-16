@@ -3,13 +3,38 @@
 
     class Home extends CI_Controller{
         public function index($page = 1){
+            if(isset($_REQUEST['btnSubscribe'])){
+                $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+                $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
+                if($this->form_validation->run() == true){
+                    $this->load->model('CommonModel', 'commonModel');
+                    $rspGetUer = $this->commonModel->getUserByEmail($this->input->post('email'));
+                    if($rspGetUer){
+                        $data['user_id'] = $rspGetUer;
+                        $rspSubscribe = $this->commonModel->subscribe($data);
+                        if($rspSubscribe){                        
+                            $this->session->set_flashdata('message', "You are subscribed successfully.");
+                            $this->session->set_flashdata('status', "success");
+                        }else{                        
+                            $this->session->set_flashdata('message', "You are not subscribed.");
+                            $this->session->set_flashdata('status', "danger");
+                        }
+                    }else{                        
+                        $this->session->set_flashdata('message', "You are not registered student.");
+                        $this->session->set_flashdata('status', "danger");
+                    }
+                    redirect('home');
+                }
+            }
+
             $data['title'] = "Home";
 
             $this->load->model('UserModel', 'userModel'); 
-            
+            $this->load->model('CommonModel', 'commonModel');
+                        
             $config['base_url'] = base_url() . "home/index";
             $config['per_page'] = 6;
-            $config['total_rows'] = $this->userModel->countAllCourse();
+            $config['total_rows'] = $this->userModel->countCourses();
     
             $this->pagination->initialize($config);
 
@@ -17,15 +42,23 @@
             if($rspAllCourses)
                 $data['courses'] = $rspAllCourses;
             
-            $rspCountTeachers = $this->userModel->countAllTeachersStudents(1);
+            $rspCountTeachers = $this->userModel->countTeachersStudents(1);
             if($rspCountTeachers)
                 $data['allTeachers'] = $rspCountTeachers;
             
-            $rspCountStudents = $this->userModel->countAllTeachersStudents(0);
+            $rspCountStudents = $this->userModel->countTeachersStudents(0);
             if($rspCountStudents)
                 $data['allStudents'] = $rspCountStudents;
-
-            // echo "<pre>"; print_r($rspCountTeacherStudent);die();
+            
+            $rspCountSubscribers = $this->userModel->countSubscribers();
+            if($rspCountSubscribers)
+                $data['allSubscribers'] = $rspCountSubscribers;
+            
+            $resHappyFeedbacks = $this->commonModel->getHappyFeedback(3);            
+            if($resHappyFeedbacks)
+                $data['happyFeedbacks'] = $resHappyFeedbacks;
+                
+            $data['allCourses'] = $config['total_rows'];
         
             $this->load->view('site/header', $data);
             $this->load->view('site/home');
