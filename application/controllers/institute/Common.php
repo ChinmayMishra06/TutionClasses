@@ -37,11 +37,5 @@
             $this->load->view('institute/report');
             $this->load->view('institute/footer');
         }
-
-        public function dummy(){
-            if(!$this->session->userdata('login'))
-                redirect('institute/login');
-            $this->load->view('institute/googleMap');
-        }
     }
 ?>

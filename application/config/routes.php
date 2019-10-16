@@ -40,28 +40,24 @@ $route['institute/reports'] = 'institute/common/report';                        
 $route['institute/feedbacks'] = 'institute/common/feedback';                    //Completed
 $route['institute/dummy'] = 'institute/common/dummy';                    //Completed
 $route['institute/category'] = 'institute/category/getAllCategory';                    //Completed
+$route['institute/enquiry/all'] = 'institute/common/getAllEnquiries';                      //pending
 // $route['institute/notifications'] = 'institute/notification';                   //Pending
 // $route['institute/subscriptions'] = 'institute/subscription';                   //Pending
 
-//User profile panel.
-$route['site/'] = 'user';                                                       //Pending
-$route['logout'] = 'site/actionLogout';                                    //Pending
-// $route['site/profile/add/$id'] = 'site/profile/add/$1';                         //Pending
-$route['profile/edit/$id'] = 'site/profile/edit/$1';                       //Pending
-
 
 // Site panel
-$route['home'] = 'home';                                        //Pending
-$route['home/(:num)'] = 'home/$1';
-$route['contact'] = 'home/contact';
-$route['about'] = 'site/About';
-$route['courses'] = 'site/Courses';
-$route['courses/(:num)'] = 'site/Courses/$1';
-$route['login'] = 'site/Auth';
-$route['logout'] = 'site/Auth/logout';
-$route['signup'] = 'site/auth/pageSignup';                      //Pending
-$route['courseDetails/(:num)'] = 'site/courses/courseDetails/$1';
-$route['subscribe'] = 'home';
+$route['home'] = 'home';                                        //Completed
+$route['home/(:num)'] = 'home/$1';                      //Completed
+$route['contact'] = 'home/contact';                      //Completed
+$route['about'] = 'site/About';                      //Completed
+$route['courses'] = 'site/Courses';                      //Completed
+$route['courses/(:num)'] = 'site/Courses/$1';                      //Completed
+$route['login'] = 'site/Auth';                      //Completed
+$route['logout'] = 'site/Auth/logout';                      //Completed
+$route['signup'] = 'site/auth/pageSignup';                      //Completed
+$route['courseDetails/(:num)'] = 'site/courses/courseDetails/$1';                      //Completed
+$route['subscribe'] = 'home';                      //Completed
+$route['enquiry'] = 'site/courses/enquiry';                      //pending
 
 //Apis v1
 $route['api/v1/init'] = 'api/v1/BaseApi/apiInit';

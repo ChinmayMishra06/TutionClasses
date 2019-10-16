@@ -91,6 +91,11 @@ class CommonModel extends CI_Model
         }        
     }
     
+    public function addEnquiry($data){
+        $result = $this->db->insert(TABLE_ENQ, $data);
+        return $result ? true : false;
+    }
+
     // public function getAllCategory($categoryName)    {
     //     $result = $this->db->select('category_id, category_type, category_name, parent_category')
     //                         ->like('category_name', $categoryName)

@@ -71,5 +71,19 @@
             $this->load->view('site/course_details');
             $this->load->view('site/footer');
         }
+
+        public function enquiry(){
+            if(!$this->session->userdata('studentLogin'))
+                redirect('login');
+
+            $data['course_id'] = $this->input->post('course_id');
+            $data['user_id'] = $this->session->userdata('studentId');
+            $this->load->model('CommonModel', 'commonModel');
+            $rspAddEnquiry = $this->commonModel->addEnquiry($data);
+
+            if($rspAddEnquiry){
+                $this->load->view('site/enquiry');
+            }
+        }
     }
 ?>
