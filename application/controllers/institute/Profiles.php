@@ -11,7 +11,7 @@
                 redirect('institute/login');
 
             $this->load->model('CommonModel', 'commonModel');            
-            if(isset($_REQUEST['profileSubmit'])){
+            if(isset($_REQUEST['inputProfileImage'])){
                 if(!empty($_FILES['inputProfileImage']['name'])){
                     // $config['upload_path'] = './public/uploads/institute/images/';
                     $config['upload_path'] = 'public/uploads/institute/images';

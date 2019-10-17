@@ -22,7 +22,7 @@
                     $this->load->model('AuthModel', 'authModel');
                     $user = $this->authModel->getUser($email, $password, 0);
                     if($user){
-                        $login = array('studentLogin'=>$user->email, 'studentId'=>$user->user_id);
+                        $login = array('studentLogin'=>$user->name, 'studentId'=>$user->user_id);
                         $this->session->set_userdata($login);
                         redirect('home');
                     }else{

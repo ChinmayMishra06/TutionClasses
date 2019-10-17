@@ -56,7 +56,7 @@
                 }
             }
             
-            $rspAllFeedback = $this->commonModel->getAllFeedbacks();
+            $rspAllFeedback = $this->commonModel->getAllFeedbacks($id);
             if($rspAllFeedback)
                 $data['feedbacks'] = $rspAllFeedback;
             

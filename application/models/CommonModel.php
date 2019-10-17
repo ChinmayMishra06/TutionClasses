@@ -23,7 +23,7 @@ class CommonModel extends CI_Model
         return ($result->num_rows() > 0) ? $result->row() : false;
     }
     
-    public function getAllFeedbacks($userId=false){
+    public function getAllFeedbacks($courseId=false, $userId=false){
         $this->db->select(TABLE_FEED.".*, name, email, course_name")
                  ->join(TABLE_USER, TABLE_USER.".user_id=" . TABLE_FEED.".user_id")
                  ->join(TABLE_COURSE, TABLE_COURSE.".course_id=" . TABLE_FEED.".course_id")
@@ -31,6 +31,8 @@ class CommonModel extends CI_Model
                  ->order_by(TABLE_FEED.'.feedback_id', 'desc');
                     if($userId)
                         $this->db->where(TABLE_FEED.'.user_id', $userId);
+                    if($courseId)
+                        $this->db->where(TABLE_FEED.'.course_id', $courseId);
                         
                 $result = $this->db->get(TABLE_FEED);
         // echo "<pre>"; print_r($result->result_array()); die();
@@ -59,17 +61,45 @@ class CommonModel extends CI_Model
     
     public function getUserByEmail($email){
         $result = $this->db->select("user_id")
-                           ->where(array('email' => $email, 'user_type' => 0))
+                           ->where(array('email' => $email))
                            ->limit(1)
                            ->get(TABLE_USER);
 
         return ($result->num_rows() > 0) ? $result->row()->user_id : false;
     }
     
-    public function subscribe($data){
-        $result = $this->db->insert(TABLE_NEWS, $data);
+    public function getSubscriber($userId, $deleted){
+        $result = $this->db->select("user_id")
+                           ->where(array('user_id' => $userId))
+                           ->where(array('deleted_at' => $deleted))
+                           ->limit(1)
+                           ->get(TABLE_NEWS);
+    
+        return ($result->num_rows() > 0) ? $result->row() : false;
+    }
+    
+    public function subscribe($userId){
+        $getSubscriberStatus = $this->getSubscriber($userId, 1);
+        if($getSubscriberStatus){
+            $updateSubscriber = $this->db->set('user_id', $userId)
+                                         ->set('deleted_at', 0)
+                                         ->where('user_id', $userId)
+                                         ->update(TABLE_NEWS);
+            return $updateSubscriber ? true : false;
+        }else{
+            $newSubscriber = $this->db->insert(TABLE_NEWS, array('user_id'=>$userId));
+            return $newSubscriber ? true : false;
+        }
+    }
 
-        return $result ? $result : false;
+    public function unsubscribe($userId){
+        $getSubscriberStatus = $this->getSubscriber($userId, 0);
+        if($getSubscriberStatus){
+            $updateSubscriber = $this->db->set('deleted_at', 1)
+                                         ->where('user_id', $userId)
+                                         ->update(TABLE_NEWS);
+            return $updateSubscriber ? true : false;
+        }
     }
 
     public function feedbackAdd($data)

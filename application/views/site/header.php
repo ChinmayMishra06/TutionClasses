@@ -101,13 +101,19 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="<?php echo base_url('about');?>">About</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <?php if(!$this->session->userdata('studentLogin')){ ?>
-                                            <a class="nav-link" href="<?php echo base_url('login');?>">Login</a>
-                                        <?php } else{  ?>
-                                            <a class="nav-link" href="<?php echo base_url('logout');?>">Logout</a>
-                                        <?php } ?>
-                                    </li>
+                                    <?php if(!$this->session->userdata('studentLogin')){ ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="<?php echo base_url('login'); ?>">Login</a>
+                                        </li>                                    
+                                    <?php } else{  ?>                                    
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata('studentLogin'); ?></a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                            
+                                                <a class="dropdown-item" href="<?php echo base_url('profile');?>">Profile</a>
+                                                <a class="dropdown-item" href="<?php echo base_url('logout');?>">Logout</a>
+                                            </div>
+                                        </li>
+                                    <?php } ?>
                                     <li class="nav-item">
                                         <form action="#">
                                             <div class="input-group pt-1">

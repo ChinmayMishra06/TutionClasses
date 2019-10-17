@@ -90,11 +90,23 @@
                                 </div>
                             </div>
                             <h4 class="title">Recent Feedbacks</h4>
+                            <?php
+                                if(isset($feedbacks) && is_array($feedbacks)){
+                                    $count = 0;
+                                    for($i=0; $i<count($feedbacks); $i++){
+                                        $count += $feedbacks[$i]['rating'];
+                                    }
+                                    $count = round(($count/count($feedbacks)), 0); ?>
+                                    <p>Overall rating</p>
+                                    <?php for($j=1; $j<=$count; $j++){ ?>
+                                        <a><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                    <?php }
+                                    for($j=1; $j<=(5-$count); $j++){ ?>
+                                        <a><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                    <?php }
+                            ?> <br><br>
                             <div style="max-height:300px; overflow: auto;">
-                                <?php
-                                    if(isset($feedbacks) && is_array($feedbacks)){
-                                        foreach($feedbacks as $feedback){
-                                ?>
+                                <?php foreach($feedbacks as $feedback){ ?>
                                 <div class="mt-2 border-bottom">
                                     <div class="comment-list">
                                         <div class="single-comment single-reviews justify-content-between d-flex">
@@ -117,13 +129,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php
-                                        }
-                                    }else{
-                                        echo '<p class="text-danger text-center">No feedback avaiable yet.</p>';
-                                    }
-                                ?>
+                                <?php } ?>
                             </div>
+                            <?php
+                                }else{
+                                    echo '<p class="text-info text-center">
+                                        If you are satisfy with this course, please provide your feedback to encourage our teacher.
+                                    </p>';
+                                }
+                            ?>
                         </div>
                     </form>
                 </div>
