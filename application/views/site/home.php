@@ -103,25 +103,25 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_member_counter">
-                        <span class="counter"><?php echo $allTeachers; ?></span>
+                        <span class="counter"><?php echo isset($allTeachers) ? $allTeachers : 0; ?></span>
                         <h4>Teachers/Institutes</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_member_counter">
-                        <span class="counter"><?php echo $allStudents; ?></span>
+                        <span class="counter"><?php echo isset($allStudents) ? $allStudents : 0; ?></span>
                         <h4>Students</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_member_counter">
-                        <span class="counter"><?php echo $allCourses; ?></span>
+                        <span class="counter"><?php echo isset($allCourses) ? $allCourses : 0; ?></span>
                         <h4>Courses</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="single_member_counter">
-                        <span class="counter"><?php echo  $allSubscribers; ?></span>
+                        <span class="counter"><?php echo  isset($allSubscribers) ? $allSubscribers : 0; ?></span>
                         <h4>Subscribers</h4>
                     </div>
                 </div>
@@ -141,19 +141,17 @@
                     </div>
                 </div>
             </div>
-            <div class="row" style="margin-bottom: 5%;">
-                <div class="col-sm-12">
-                    <div class="controls text-center">
-                        <a href="" class="filter btn btn_1">All</a>
-                        <a href="" class="filter btn btn_1">Category</a>
-                        <a href="" class="filter btn btn_1">Duration</a>
-                        <a href="" class="filter btn btn_1">Price</a>
-                    </div>
-                </div>
-            </div>
+
+            <ul class="">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            
             <div class="row">
                 <?php foreach($courses as $course){ ?>
-                    <div class="col-sm-6 col-lg-4 mt-4">
+                    <div class="col-sm-6 col-lg-4" style="margin-top: 28px;">
                         <div class="single_special_cource">
                             <img src="<?php echo base_url('public/uploads/institute/images/'. $course['banner_image']); ?>" height="100px;" width="400px;" class="special_img" alt="<?php echo $course['banner_image']; ?>">
                             <img src="<?php echo base_url('public/uploads/institute/images/'. $course['logo_image']); ?>" class="home-circle" alt="<?php echo $course['logo_image']; ?>">
@@ -161,7 +159,7 @@
                                 <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>" class="btn_4"><?php echo $course['category_name']; ?></a>
                                 <h4><?php echo $course['fees']; ?></h4>
                                 <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>"><h3><?php echo $course['course_name']; ?></h3></a>
-                                <p><?php echo substr($course['description'], 0, 40); ?></p>
+                                <p class="text-justify" style="min-height:80px; overflow:hidden;"><?php echo substr($course['description'], 0, 139); ?></p>
                                 <a href="<?php echo base_url('courseDetails/' . $course['course_id']); ?>">(Read more...)</a>
                                 <div class="author_info">
                                     <div>
@@ -186,7 +184,7 @@
                         </div>
                     </div>
                 <?php } ?>
-            </div>
+            </div><br>
             <?php echo $this->pagination->create_links();?>
         </div>
     </section>
@@ -278,75 +276,3 @@
             </div>
         </section>
     <?php } ?>
-    <!--::blog_part end::-->
-
-    <!--::blog_part start::-->
-    <section class="blog_part section_padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-5">
-                    <div class="section_tittle text-center">
-                        <p>Our Blog</p>
-                        <h2>Students Blog</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-lg-4 col-xl-4">
-                    <div class="single-home-blog">
-                        <div class="card">
-                            <img src="<?php echo base_url(); ?>public/site/img/blog/blog_1.png" class="card-img-top" alt="blog">
-                            <div class="card-body">
-                                <a href="#" class="btn_4">Design</a>
-                                <a href="blog.html">
-                                    <h5 class="card-title">Dry beginning sea over tree</h5>
-                                </a>
-                                <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                                <ul>
-                                    <li> <span class="ti-comments"></span>2 Comments</li>
-                                    <li> <span class="ti-heart"></span>2k Like</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xl-4">
-                    <div class="single-home-blog">
-                        <div class="card">
-                            <img src="<?php echo base_url(); ?>public/site/img/blog/blog_2.png" class="card-img-top" alt="blog">
-                            <div class="card-body">
-                                <a href="#" class="btn_4">Developing</a>
-                                <a href="blog.html">
-                                    <h5 class="card-title">All beginning air two likeness</h5>
-                                </a>
-                                <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                                <ul>
-                                    <li> <span class="ti-comments"></span>2 Comments</li>
-                                    <li> <span class="ti-heart"></span>2k Like</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xl-4">
-                    <div class="single-home-blog">
-                        <div class="card">
-                            <img src="<?php echo base_url(); ?>public/site/img/blog/blog_3.png" class="card-img-top" alt="blog">
-                            <div class="card-body">
-                                <a href="#" class="btn_4">Design</a>
-                                <a href="blog.html">
-                                    <h5 class="card-title">Form day seasons sea hand</h5>
-                                </a>
-                                <p>Which whose darkness saying were life unto fish wherein all fish of together called</p>
-                                <ul>
-                                    <li> <span class="ti-comments"></span>2 Comments</li>
-                                    <li> <span class="ti-heart"></span>2k Like</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--::blog_part end::-->

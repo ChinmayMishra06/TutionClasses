@@ -9,30 +9,26 @@ UserModel extends CI_Model
         $this->load->database();
     }
 
-    public function getUser($userId)
-    {
+    public function getUser($userId){
         $result = $this->db->select(array('name', 'contact', 'email', 'dob', 'image'))->where(array('user_id' => $userId))->get(TABLE_USER);
         return ($result->num_rows() > 0) ? $result->row() : false;
     }
 
-    public function editUser($userId, $userData)
-    {
+    public function editUser($userId, $userData){
         $result = $this->db->set($userData)->where('user_id', $userId)->update(TABLE_USER);
         return !$result ? false : true;
     }
 
-    public function addFeedback($userId, $categoryId, $description)
-    {
+    public function addFeedback($userId, $courseId, $description){
         $result = $this->db->insert(TABLE_FEED, array(
             "user_id" => $userId,
-            "category_id" => $categoryId,
+            "course_id" => $courseId,
             "description" => $description
         ));
         return $result ? true : false;
     }
 
-    public function addReport($categoryId, $victimId, $criminalId, $title, $description)
-    {
+    public function addReport($categoryId, $victimId, $criminalId, $title, $description){
         $result = $this->db->insert(TABLE_REPORT, array(
             "category_id" => $categoryId,
             "victim_id" => $victimId,
@@ -43,14 +39,12 @@ UserModel extends CI_Model
         return $result ? true : false;
     }
 
-    public function addCourse($courseData)
-    {
+    public function addCourse($courseData){
         $result = $this->db->insert(TABLE_COURSE, $courseData);
         return $result ? true : false;
     }
 
-    public function editCourse($courseId, $courseData)
-    {
+    public function editCourse($courseId, $courseData){
         $result = $this->db->set($courseData)->where('course_id', $courseId)->update(TABLE_COURSE);
         return $result ? true : false;
     }
@@ -87,17 +81,15 @@ UserModel extends CI_Model
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
 
-    public function countTeachersStudents($userType)
-    {
+    public function countTeachersStudents($userType){
         $result = $this->db->select('name')
                  ->where('user_type', $userType)
                  ->get(TABLE_USER);
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
 
-    public function countSubscribers()
-    {
-        $result = $this->db->select('user_id')->where('deleted_at', 0)->get(TABLE_NEWS);
+    public function countSubscribers(){
+        $result = $this->db->select('email')->where('deleted_at', 0)->get(TABLE_NEWS);
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
 
@@ -134,8 +126,7 @@ UserModel extends CI_Model
             return $result->row()->user_type;
     }
     
-    public function getCourses($latitude, $longitude, $categoryId, $medium, $distance = 100)
-    {
+    public function getCourses($latitude, $longitude, $categoryId, $medium, $distance = 100){
         $result = $this->db->select('user_id, ( 6371  * 
                     acos ( cos ( radians(' . $latitude . ') ) * 
                     cos( radians( latitude ) ) * 
@@ -178,5 +169,4 @@ UserModel extends CI_Model
         return $result->result_array();
     }
 }
-
 ?>

@@ -58,7 +58,7 @@ $route['profile'] = 'site/Profiles';                      //Completed
 $route['signup'] = 'site/auth/pageSignup';                      //Completed
 $route['courseDetails/(:num)'] = 'site/courses/courseDetails/$1';                      //Completed
 $route['subscribe'] = 'home';                      //Completed
-$route['unsubscribe'] = 'home';                      //Completed
+// $route['unsubscribe'] = 'home';                      //Completed
 $route['enquiry'] = 'site/courses/enquiry';                      //pending
 
 //Apis v1

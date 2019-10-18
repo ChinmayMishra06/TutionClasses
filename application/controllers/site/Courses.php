@@ -28,6 +28,9 @@
         }
 
         public function courseDetails($id){
+            if(!$this->session->userdata('studentLogin'))
+                redirect('login');
+
             $this->load->model('UserModel', 'userModel');
             $this->load->model('CommonModel', 'commonModel');
 
@@ -40,10 +43,10 @@
                     $data['description'] = $this->input->post('description');
                 }
 
-                $data['user_id'] = $this->input->post('user_id');
-                $data['course_id'] = $this->input->post('course_id');
+                $data['user_id'] = $this->session->userdata('studentId');
+                $data['course_id'] = $id;
 
-                if(($this->input->post('rating')!==null) || ($this->input->post('message')!==null)){
+                if(!empty($this->input->post('rating')) || !empty($this->input->post('message'))){
                     $rspFeedbackAdd = $this->commonModel->feedbackAdd($data);
                     if($rspFeedbackAdd){
                         $this->session->set_flashdata('message', "Feedback send successfully.");
@@ -64,7 +67,10 @@
             if($rspCourseById)
                 $data['course'] = $rspCourseById;
             
-                
+            $resUserFeedbacks = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('studentId'));
+            if($resUserFeedbacks)
+                $data['userFeedbacks'] = $resUserFeedbacks;
+            
             $data['title'] = "Course Details";
             
             $this->load->view('site/header', $data);

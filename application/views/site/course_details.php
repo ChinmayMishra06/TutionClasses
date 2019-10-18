@@ -67,16 +67,18 @@
                                 <div class="col-lg-12">
                                     <h6 class="mb-15">Provide Your Rating</h6>
                                     <div class="d-flex flex-row reviews justify-content-between">
-                                        <span>Quality</span>                                        
-                                        <input type="hidden" name="user_id" value="24">
-                                        <input type="hidden" name="course_id" value="<?php echo $course[0]['course_id']; ?>">
+                                        <span>Quality</span>
                                         <input type="hidden" name="rating" value="0" id="rating">
                                         <div class="rating">
+                                        <?php if($this->session->userdata('studentLogin')){?>
+                                            
+                                        <?php }else{ ?>
                                             <a class="star" id="1" data="Poor"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
                                             <a class="star" id="2" data="Fair"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
                                             <a class="star" id="3" data="Average"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
                                             <a class="star" id="4" data="Good"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
                                             <a class="star" id="5" data="Excellent"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                        <?php } ?>
                                         </div>
                                         <span id="remark">Give rating</span>
                                     </div>

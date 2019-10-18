@@ -8,52 +8,46 @@
                 $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
                 if($this->form_validation->run() == true){
                     $this->load->model('CommonModel', 'commonModel');
-                    $rspGetUer = $this->commonModel->getUserByEmail($this->input->post('email'));
-                    if($rspGetUer){
-                        $rspSubscriber = $this->commonModel->getSubscriber($rspGetUer, 0);
-                        if($rspSubscriber){                        
-                            $this->session->set_flashdata('message', "You have already subscribed.");
-                            $this->session->set_flashdata('status', "danger");
-                        }else{
-                            $rspSubscribe = $this->commonModel->subscribe($rspGetUer);
-                            if($rspSubscribe){                        
-                                $this->session->set_flashdata('message', "You are subscribed successfully.");
-                                $this->session->set_flashdata('status', "success");
-                            }else{                        
-                                $this->session->set_flashdata('message', "You are not subscribed.");
-                                $this->session->set_flashdata('status', "danger");
-                            }
-                        }
-                    }else{                        
-                        $this->session->set_flashdata('message', "You are not registered student.");
+                    $rspSubscriber = $this->commonModel->getSubscriber($this->input->post('email'), 0);
+                    if($rspSubscriber){
+                        $this->session->set_flashdata('message', "You have already subscribed.");
                         $this->session->set_flashdata('status', "danger");
+                    }else{
+                        $rspSubscribe = $this->commonModel->subscribe($this->input->post('email'));
+                        if($rspSubscribe){                        
+                            $this->session->set_flashdata('message', "You are subscribed successfully.");
+                            $this->session->set_flashdata('status', "success");
+                        }else{                        
+                            $this->session->set_flashdata('message', "You are not subscribed.");
+                            $this->session->set_flashdata('status', "danger");
+                        }
                     }
                     redirect('home');
                 }
             }
 
-            if(isset($_REQUEST['btnUnsubscribe'])){
-                $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-                $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
-                if($this->form_validation->run() == true){
-                    $this->load->model('CommonModel', 'commonModel');
-                    $rspGetUer = $this->commonModel->getUserByEmail($this->input->post('email'));
-                    if($rspGetUer){
-                        $rspSubscriber = $this->commonModel->getSubscriber($rspGetUer, 0);
-                        if($rspSubscriber){
-                            $rspUnsubscribe = $this->commonModel->unsubscribe($rspGetUer);
-                            if($rspUnsubscribe){                        
-                                $this->session->set_flashdata('message', "You are unsubscribed successfully.");
-                                $this->session->set_flashdata('status', "success");
-                            }
-                        }
-                    }else{                        
-                        $this->session->set_flashdata('message', "You are not registered student.");
-                        $this->session->set_flashdata('status', "danger");
-                    }
-                    redirect('home');
-                }
-            }
+            // if(isset($_REQUEST['btnUnsubscribe'])){
+            //     $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+            //     $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
+            //     if($this->form_validation->run() == true){
+            //         $this->load->model('CommonModel', 'commonModel');
+            //         $rspGetUer = $this->commonModel->getUserByEmail($this->input->post('email'));
+            //         if($rspGetUer){
+            //             $rspSubscriber = $this->commonModel->getSubscriber($rspGetUer, 0);
+            //             if($rspSubscriber){
+            //                 $rspUnsubscribe = $this->commonModel->unsubscribe($rspGetUer);
+            //                 if($rspUnsubscribe){                        
+            //                     $this->session->set_flashdata('message', "You are unsubscribed successfully.");
+            //                     $this->session->set_flashdata('status', "success");
+            //                 }
+            //             }
+            //         }else{                        
+            //             $this->session->set_flashdata('message', "You are not registered student.");
+            //             $this->session->set_flashdata('status', "danger");
+            //         }
+            //         redirect('home');
+            //     }
+            // }
             
             $data['title'] = "Home";
 
@@ -85,7 +79,7 @@
             $resHappyFeedbacks = $this->commonModel->getHappyFeedback(3);            
             if($resHappyFeedbacks)
                 $data['happyFeedbacks'] = $resHappyFeedbacks;
-                
+                    
             $rspSubscriber = $this->commonModel->getSubscriber($this->session->userdata('studentId'), 0);
             if($rspSubscriber)
                 $data['subscribed'] = $rspSubscriber;

@@ -12,14 +12,14 @@
                         <div class="single-footer-widget footer_2">
                             <h4>Newsletter</h4>
                             <p>Stay updated with our latest courses and news with TutionClasses.</p>
-                            <?php if(isset($subscribed)){ ?>
-                                <form action="<?php echo base_url('unsubscribe'); ?>" method="POST">
-                                    <?php if($this->session->flashdata('message')){ ?>
-                                        <div class="alert alert-<?php echo $this->session->flashdata('status'); ?>" data-dismiss="alert">
-                                            <?php echo $this->session->flashdata('message'); ?>
+                            <!-- < ?php if(isset($subscribed)){ ?>
+                                <form action="< ?php echo base_url('unsubscribe'); ?>" method="POST">
+                                    < ?php if($this->session->flashdata('message')){ ?>
+                                        <div class="alert alert-< ?php echo $this->session->flashdata('status'); ?>" data-dismiss="alert">
+                                            < ?php echo $this->session->flashdata('message'); ?>
                                             <button class="close">&times;</button>
                                         </div>
-                                    <?php } ?>
+                                    < ?php } ?>
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
@@ -27,10 +27,10 @@
                                                 <button class="btn btn_1" name="btnUnsubscribe" type="submit" style="width:85px;">Unsubscribe</button>
                                             </div>
                                         </div>
-                                        <?php if(validation_errors()) echo form_error('email'); ?>
+                                        < ?php if(validation_errors()) echo form_error('email'); ?>
                                     </div>
                                 </form>
-                            <?php } else{ ?>
+                            < ?php } else{ ?> -->
                                 <form action="<?php echo base_url('subscribe'); ?>" method="POST">
                                     <?php if($this->session->flashdata('message')){ ?>
                                         <div class="alert alert-<?php echo $this->session->flashdata('status'); ?>" data-dismiss="alert">
@@ -48,7 +48,7 @@
                                         <?php if(validation_errors()) echo form_error('email'); ?>
                                     </div>
                                 </form>
-                            <?php } ?>
+                            <!-- < ?php } ?> -->
                             <div class="social_icon">
                                 <a href="#"> <i class="ti-facebook"></i> </a>
                                 <a href="#"> <i class="ti-twitter-alt"></i> </a>
