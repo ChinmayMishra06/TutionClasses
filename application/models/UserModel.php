@@ -50,7 +50,7 @@ UserModel extends CI_Model
     }
 
     public function getAllCourses($userId=0, $courseId=0){
-        $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
+        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'.  TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
                  ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
@@ -65,9 +65,10 @@ UserModel extends CI_Model
                     $this->db->where(TABLE_COURSE.".course_id=", $courseId);
         
         $result = $this->db->get(TABLE_COURSE);
+        // echo "<pre>"; print_r($result->result_array()); die();
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
-
+    
     public function countCourses(){
         $result = $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
         ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
@@ -94,15 +95,33 @@ UserModel extends CI_Model
     }
 
     public function getAllCoursesByConditions($limit, $page, $conditions = []){
-        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
+        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'. TABLE_USER.'.image,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
                  ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
                  ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
                  ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
-                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')        
+                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
                 ->limit($limit, ($page - 1) * $limit)
                 ->where(TABLE_COURSE.".status=",1);
+
+                if($conditions != [])
+                    $this->db->where($conditions);
+        
+        $result = $this->db->get(TABLE_COURSE);
+        // echo '<pre>'; print_r($result->result_array()); die();
+        return ($result->num_rows() > 0) ? $result->result_array() : false;
+    }
+    
+    public function getAllCoursesByCondition($conditions = []){
+        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'. TABLE_USER.'.image,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
+                 ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
+                 ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
+                 ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
+                 ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
+                 ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
+                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
+                 ->where(TABLE_COURSE.".status=",1);
 
                 if($conditions != [])
                     $this->db->where($conditions);

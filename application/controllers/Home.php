@@ -3,27 +3,68 @@
 
     class Home extends CI_Controller{
         public function index($page = 1){
+            $this->load->model('UserModel', 'userModel'); 
+            $this->load->model('CommonModel', 'commonModel');
+            $this->load->model('DataModel', 'dataModel');
+            
+            
+            $config['base_url'] = base_url() . "home/index";
+            $config['per_page'] = 6;
+            $config['total_rows'] = $this->userModel->countCourses();
+    
+            $this->pagination->initialize($config);
+
             if(isset($_REQUEST['btnSubscribe'])){
                 $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
                 $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
                 if($this->form_validation->run() == true){
-                    $this->load->model('CommonModel', 'commonModel');
                     $rspSubscriber = $this->commonModel->getSubscriber($this->input->post('email'), 0);
                     if($rspSubscriber){
-                        $this->session->set_flashdata('message', "You have already subscribed.");
-                        $this->session->set_flashdata('status', "danger");
+                        $this->session->set_flashdata('footer_message', "You have already subscribed.");
+                        $this->session->set_flashdata('footer_status', "danger");
                     }else{
                         $rspSubscribe = $this->commonModel->subscribe($this->input->post('email'));
                         if($rspSubscribe){                        
-                            $this->session->set_flashdata('message', "You are subscribed successfully.");
-                            $this->session->set_flashdata('status', "success");
+                            $this->session->set_flashdata('footer_message', "You are subscribed successfully.");
+                            $this->session->set_flashdata('footer_status', "success");
                         }else{                        
-                            $this->session->set_flashdata('message', "You are not subscribed.");
-                            $this->session->set_flashdata('status', "danger");
+                            $this->session->set_flashdata('footer_message', "You are not subscribed.");
+                            $this->session->set_flashdata('footer_status', "danger");
                         }
                     }
                     redirect('home');
                 }
+            }
+            
+            if(isset($_REQUEST['btnApply'])){
+                // $config['base_url'] = base_url() . "home/index";
+                // $config['per_page'] = 6;
+                // $config['total_rows'] = $this->userModel->countCourses();
+        
+                // $this->pagination->initialize($config);
+
+                if(!empty($_REQUEST['category']))
+                    $data[TABLE_COURSE.'.category_id'] = $this->input->post('category');
+
+                if(!empty($_REQUEST['duration']))
+                    $data[TABLE_COURSE.'.duration_unit'] = $this->input->post('duration');
+
+                if(!empty($_REQUEST['price']))
+                    $data[TABLE_COURSE.'.fees<='] = $this->input->post('price');
+
+                if((!empty($_REQUEST['category'])) || (!empty($_REQUEST['duration'])) || (!empty($_REQUEST['price']))){                    
+                    $rspAllCourses = $this->userModel->getAllCoursesByCondition($data);
+                    if($rspAllCourses)
+                        $data['courses'] = $rspAllCourses;
+                }else{
+                    $rspAllCourses = $this->userModel->getAllCoursesByConditions(6, $page);
+                    if($rspAllCourses)
+                        $data['courses'] = $rspAllCourses;
+                }
+            }else{
+                $rspAllCourses = $this->userModel->getAllCoursesByConditions(6, $page);
+                if($rspAllCourses)
+                    $data['courses'] = $rspAllCourses;
             }
 
             // if(isset($_REQUEST['btnUnsubscribe'])){
@@ -50,19 +91,14 @@
             // }
             
             $data['title'] = "Home";
-
-            $this->load->model('UserModel', 'userModel'); 
-            $this->load->model('CommonModel', 'commonModel');
-                        
-            $config['base_url'] = base_url() . "home/index";
-            $config['per_page'] = 6;
-            $config['total_rows'] = $this->userModel->countCourses();
-    
-            $this->pagination->initialize($config);
-
-            $rspAllCourses = $this->userModel->getAllCoursesByConditions(6, $page);
-            if($rspAllCourses)
-                $data['courses'] = $rspAllCourses;
+            
+            $rspAllCategory = $this->dataModel->getCategory(0, 0);
+            if($rspAllCategory)
+                $data['categories'] = $rspAllCategory;
+            
+            $rspAllDuration = $this->dataModel->getCategory(0, 2);
+            if($rspAllDuration)
+                $data['durations'] = $rspAllDuration;
             
             $rspCountTeachers = $this->userModel->countTeachersStudents(1);
             if($rspCountTeachers)

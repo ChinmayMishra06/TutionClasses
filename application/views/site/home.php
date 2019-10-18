@@ -141,13 +141,40 @@
                     </div>
                 </div>
             </div>
-
-            <ul class="">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
+            <div class="row" style="margin-bottom: 3%; margin-top:-25px;">
+                <div class="col-sm-12">                    
+                    <form action="<?php echo base_url(); ?>" method="post">
+                        <ul class="text-center">
+                        <?php if(isset($categories) && is_array($categories)){ ?>
+                            <li class="btn col-md-3 col-lg-2">
+                                <select id="category_list" class="form-control" name="category">
+                                    <option value="">Category</option>
+                                    <option value="0" >All</option>
+                                    <?php foreach($categories as $category){ ?>
+                                        <option value="<?php echo $category['category_id'] ?>" ><?php echo $category['category_name'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </li>
+                        <?php } ?>
+                        <?php if(isset($durations) && is_array($durations)){ ?>
+                            <li class="btn col-md-3 col-lg-2">
+                                <select class="form-control" name="duration">
+                                    <option value="">Duration</option> 
+                                    <option value="0">All</option>
+                                    <?php foreach($durations as $duration){ ?>
+                                        <option value="<?php echo $duration['category_id'] ?>" ><?php echo $duration['category_name'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </li>
+                        <?php } ?>
+                            <li class="btn col-md-3 col-lg-2">
+                                <input type="text" class="form-control" name="price" id="price" placeholder="Price">
+                            </li>
+                            <button class="btn_1" type="submit" name="btnApply">Apply</button>
+                        </ul>
+                    </form>
+                </div>
+            </div>
             
             <div class="row">
                 <?php foreach($courses as $course){ ?>
@@ -276,3 +303,8 @@
             </div>
         </section>
     <?php } ?>
+
+    <script>        
+        
+        
+    </script>
