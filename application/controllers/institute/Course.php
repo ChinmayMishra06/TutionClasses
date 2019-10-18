@@ -45,7 +45,7 @@
                 $this->form_validation->set_rules('inputCategory', 'Category', 'required|trim|regex_match[/^[0-9]+$/]');
                 $this->form_validation->set_rules('inputCourseName', 'Name', 'required|trim|regex_match[/^([-a-z ])+$/i]');
                 $this->form_validation->set_rules('inputMedium', 'Medium', 'required|trim|regex_match[/^[0-9]+$/]');
-                $this->form_validation->set_rules('inputDescription', 'Description', 'required|trim|max_length[200]');
+                $this->form_validation->set_rules('inputDescription', 'Description', 'required|trim|max_length[500]');
                 $this->form_validation->set_rules('inputTimingTerm', 'Duration term', 'required|trim|regex_match[/^[0-9]+$/]');
                 $this->form_validation->set_rules('inputTime', 'Time', 'required|trim|regex_match[/^[0-9]+$/]');
                 $this->form_validation->set_rules('inputStartDate', 'Start joining date', 'required');

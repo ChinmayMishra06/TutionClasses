@@ -58,16 +58,7 @@ class CommonModel extends CI_Model
         // echo "<pre>"; print_r($result->result_array()); die();
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
-    
-    // public function getUserByEmail($email){
-    //     $result = $this->db->select("user_id")
-    //                        ->where(array('email' => $email))
-    //                        ->limit(1)
-    //                        ->get(TABLE_USER);
-
-    //     return ($result->num_rows() > 0) ? $result->row()->user_id : false;
-    // }
-    
+        
     public function getSubscriber($email, $deleted){
         $result = $this->db->select("email")
                            ->where(array('email' => $email))
@@ -101,8 +92,7 @@ class CommonModel extends CI_Model
     //     }
     // }
 
-    public function feedbackAdd($data)
-    {
+    public function feedbackAdd($data){
         $getFeedback = $this->db
                              ->select('feedback_id')
                              ->where('user_id', $data['user_id'])
@@ -125,7 +115,7 @@ class CommonModel extends CI_Model
         return $result ? true : false;
     }
 
-    // public function getAllCategory($categoryName)    {
+    // public function getAllCategory($categoryName){
     //     $result = $this->db->select('category_id, category_type, category_name, parent_category')
     //                         ->like('category_name', $categoryName)
     //                         ->where('status', 1)

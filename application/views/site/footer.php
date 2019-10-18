@@ -32,9 +32,9 @@
                                 </form>
                             < ?php } else{ ?> -->
                                 <form action="<?php echo base_url('subscribe'); ?>" method="POST">
-                                    <?php if($this->session->flashdata('message')){ ?>
-                                        <div class="alert alert-<?php echo $this->session->flashdata('status'); ?>" data-dismiss="alert">
-                                            <?php echo $this->session->flashdata('message'); ?>
+                                    <?php if($this->session->flashdata('footer_message')){ ?>
+                                        <div class="alert alert-<?php echo $this->session->flashdata('footer_status'); ?>" data-dismiss="alert">
+                                            <?php echo $this->session->flashdata('footer_message'); ?>
                                             <button class="close">&times;</button>
                                         </div>
                                     <?php } ?>
@@ -98,12 +98,12 @@
         <script src="<?php echo base_url(); ?>public/site/js/masonry.pkgd.js"></script>
         <!-- particles js -->
         <script src="<?php echo base_url(); ?>public/site/js/owl.carousel.min.js"></script>
-        <script src="<?php echo base_url(); ?>public/site/js/jquery.nice-select.min.js"></script>
+        <!-- <script src="< ?php echo base_url(); ?>public/site/js/jquery.nice-select.min.js"></script> -->
         <!-- swiper js -->
         <script src="<?php echo base_url(); ?>public/site/js/slick.min.js"></script>
         <script src="<?php echo base_url(); ?>public/site/js/jquery.counterup.min.js"></script>
         <script src="<?php echo base_url(); ?>public/site/js/waypoints.min.js"></script>
         <!-- custom js -->
-        <script src="<?php echo base_url(); ?>public/site/js/custom.js"></script>
+        <!-- <script src="< ?php echo base_url(); ?>public/site/js/custom.js"></script> -->
     </body>
 </html>

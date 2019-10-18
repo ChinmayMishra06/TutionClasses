@@ -68,25 +68,48 @@
                                     <h6 class="mb-15">Provide Your Rating</h6>
                                     <div class="d-flex flex-row reviews justify-content-between">
                                         <span>Quality</span>
-                                        <input type="hidden" name="rating" value="0" id="rating">
+                                        <input type="hidden" name="rating" value="<?php if(($this->session->userdata('studentLogin')) && isset($userFeedbacks)){
+                                                echo $userFeedbacks[0]['rating'];
+                                            }else{
+                                                echo "0";
+                                            } ?>" id="rating">
                                         <div class="rating">
-                                        <?php if($this->session->userdata('studentLogin')){?>
-                                            
-                                        <?php }else{ ?>
-                                            <a class="star" id="1" data="Poor"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
-                                            <a class="star" id="2" data="Fair"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
-                                            <a class="star" id="3" data="Average"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
-                                            <a class="star" id="4" data="Good"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
-                                            <a class="star" id="5" data="Excellent"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
-                                        <?php } ?>
+                                            <?php if(($this->session->userdata('studentLogin')) && isset($userFeedbacks)){ ?>
+                                                <?php
+                                                    $feedbackArray = array("Poor", "Fair", "Average", "Good", "Excellent");
+                                                    $count = 0; 
+                                                    for($i=0; $i<$userFeedbacks[0]['rating']; $i++){ ?>
+                                                        <a class="star" id="<?php echo $count+1; ?>" data="<?php echo $feedbackArray[$count]; ?>"><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                                    <?php $count++; }
+                                                    for($j=0; $j<(5-$userFeedbacks[0]['rating']); $j++){ ?>
+                                                        <a class="star" id="<?php echo $count+1; ?>" data="<?php echo $feedbackArray[$count]; ?>"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                                    <?php $count++; } ?>    
+                                            <?php } else{ ?>
+                                                <a class="star" id="1" data="Poor"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                                <a class="star" id="2" data="Fair"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                                <a class="star" id="3" data="Average"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                                <a class="star" id="4" data="Good"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                                <a class="star" id="5" data="Excellent"><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>                                                
+                                            <?php } ?>
                                         </div>
-                                        <span id="remark">Give rating</span>
+                                        <span id="remark">
+                                            <?php if(($this->session->userdata('studentLogin')) && isset($userFeedbacks)){
+                                                echo $feedbackArray[$userFeedbacks[0]['rating']-1];
+                                            }else{
+                                                echo "Give rating";
+                                            } ?>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="feedeback mb-4">
                                 <h6>Feedback message</h6>
-                                <textarea name="description" class="form-control" cols="10" rows="10"></textarea>
+                                <textarea name="description" class="form-control" cols="10" rows="10"><?php if(($this->session->userdata('studentLogin')) && isset($userFeedbacks)){
+                                        echo $userFeedbacks[0]['description'];
+                                    }else{
+                                        echo "0";
+                                    } ?>
+                                </textarea>
                                 <div class="mt-10 text-right">
                                     <input type="submit" class="btn_1" value="Send" name="btnFeedbackAdd">
                                 </div>
@@ -105,8 +128,7 @@
                                     <?php }
                                     for($j=1; $j<=(5-$count); $j++){ ?>
                                         <a><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
-                                    <?php }
-                            ?> <br><br>
+                                    <?php } ?> <br><br>
                             <div style="max-height:300px; overflow: auto;">
                                 <?php foreach($feedbacks as $feedback){ ?>
                                 <div class="mt-2 border-bottom">
@@ -135,7 +157,7 @@
                             </div>
                             <?php
                                 }else{
-                                    echo '<p class="text-info text-center">
+                                    echo '<p class="text-info">
                                         If you are satisfy with this course, please provide your feedback to encourage our teacher.
                                     </p>';
                                 }

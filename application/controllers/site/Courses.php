@@ -26,15 +26,16 @@
             $this->load->view('site/courses');
             $this->load->view('site/footer');
         }
-
+        
         public function courseDetails($id){
-            if(!$this->session->userdata('studentLogin'))
-                redirect('login');
 
             $this->load->model('UserModel', 'userModel');
             $this->load->model('CommonModel', 'commonModel');
 
             if(isset($_REQUEST['btnFeedbackAdd'])){
+                if(!$this->session->userdata('studentLogin'))
+                    redirect('login');
+                    
                 if(!empty($this->input->post('rating'))){
                     $data['rating'] = $this->input->post('rating');
                 }
@@ -43,10 +44,9 @@
                     $data['description'] = $this->input->post('description');
                 }
 
-                $data['user_id'] = $this->session->userdata('studentId');
-                $data['course_id'] = $id;
-
                 if(!empty($this->input->post('rating')) || !empty($this->input->post('message'))){
+                    $data['user_id'] = $this->session->userdata('studentId');
+                    $data['course_id'] = $id;
                     $rspFeedbackAdd = $this->commonModel->feedbackAdd($data);
                     if($rspFeedbackAdd){
                         $this->session->set_flashdata('message', "Feedback send successfully.");

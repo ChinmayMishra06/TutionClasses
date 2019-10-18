@@ -74,6 +74,7 @@
             .star{
                 cursor:pointer;
             }
+
         </style>
     </head>
     <body>
@@ -115,13 +116,14 @@
                                         </li>
                                     <?php } ?>
                                     <li class="nav-item">
-                                        <form action="#">
+                                        <form action="<?php echo base_url(); ?>search" method="post">
                                             <div class="input-group pt-1">
-                                                <input type="text" class="form-control myTextBox" placeholder="Search here..." aria-label="Search here..." aria-describedby="basic-addon2">
+                                                <input type="text" class="form-control myTextBox" name="search" placeholder="Search here..." aria-label="Search here..." aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
-                                                    <button type="button" class="input-group-text" style="background-color:#ee390f;" id="basic-addon2"><i class="fa fa-search text-white"></i></button type="button">
+                                                    <button type="submit" class="input-group-text" style="background-color:#ee390f;" id="btnSearch" name="btnSearch"><i class="fa fa-search text-white"></i></button>
                                                 </div>
                                             </div>
+                                            <?php if(validation_errors()) echo form_error('search'); ?>
                                         </form>
                                     </li>
                                 </ul>

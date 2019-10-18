@@ -5,6 +5,11 @@
   background-image: linear-gradient(to left, #ee390f 0%, #f9b700 51%, #ee390f 100%);
 }
 
+/* Developed by TutionClasses Developer. */
+.login_sigup{
+  background-image: linear-gradient(to left, #F8AF28 30%, #F16620 100%);
+}
+
 /* line 6, E:/172 Etrain Education/172_Etrain_Education_html/sass/_extends.scss */
 .member_counter {
   background-image: -moz-linear-gradient(0deg, #ee390f 0%, #f9b700 100%);

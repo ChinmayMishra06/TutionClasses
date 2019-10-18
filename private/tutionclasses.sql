@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2019 at 11:25 AM
+-- Generation Time: Oct 18, 2019 at 03:28 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -28,7 +28,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `tc_categories`
 --
 
-DROP TABLE IF EXISTS `tc_categories`;
 CREATE TABLE `tc_categories` (
   `category_id` int(11) UNSIGNED NOT NULL,
   `category_type` int(11) UNSIGNED DEFAULT '0',
@@ -58,8 +57,6 @@ INSERT INTO `tc_categories` (`category_id`, `category_type`, `parent_category`, 
 (12, 2, 0, 'Day', '0', '2019-10-07 13:25:19', '1'),
 (13, 2, 0, 'Weak', '0', '2019-10-07 13:25:19', '1'),
 (14, 2, 0, 'Month', '0', '2019-10-07 13:26:25', '1'),
-(15, 2, 0, 'Quarter', '0', '2019-10-07 13:26:25', '1'),
-(16, 2, 0, 'Half Year', '0', '2019-10-07 13:27:21', '1'),
 (17, 2, 0, 'Year', '0', '2019-10-07 13:27:21', '1'),
 (18, 0, 0, 'Python', '0', '2019-10-13 10:57:16', '1'),
 (21, 0, 18, 'Core Python', '0', '2019-10-13 11:07:12', '1'),
@@ -78,7 +75,6 @@ INSERT INTO `tc_categories` (`category_id`, `category_type`, `parent_category`, 
 -- Table structure for table `tc_courses`
 --
 
-DROP TABLE IF EXISTS `tc_courses`;
 CREATE TABLE `tc_courses` (
   `course_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
@@ -105,14 +101,13 @@ CREATE TABLE `tc_courses` (
 --
 
 INSERT INTO `tc_courses` (`course_id`, `user_id`, `category_id`, `sub_category_id`, `medium`, `course_name`, `description`, `duration_unit`, `duration`, `start_date`, `end_date`, `logo_image`, `banner_image`, `fees_unit`, `fees`, `delete_flag`, `status`, `created_at`) VALUES
-(16, 17, 1, 2, '8', 'Java Development', 'Java is a simple and robust programming language.', '12', 2, '2019-10-01', '2019-10-31', 'Java.png', 'bannerdummy.jpg', '0', '1000.00', '0', '1', '2019-10-10 13:10:36'),
-(19, 19, 4, 5, '8', 'PHP Development', 'PHP is a server side scripting language.', '16', 1, '2019-10-01', '2019-10-31', 'PHP.png', 'php.jpg', '17', '15000.00', '0', '1', '2019-10-13 13:32:02'),
-(20, 18, 11, 28, '8', 'Csharp Development', 'Csharp is a good progamming language.', '14', 1, '2019-11-01', '2019-11-30', 'CSharp.png', 'cBanner.jpg', '14', '1000.00', '0', '1', '2019-10-13 13:35:04'),
-(21, 18, 23, 24, '26', 'Android Development', 'Android is a operating system.', '15', 1, '2019-09-01', '2019-10-03', 'Android.png', 'android.jpg', '15', '6000.00', '0', '1', '2019-10-13 13:38:41'),
-(22, 17, 23, 25, '10', 'Android', 'Android is a mobile application language.', '15', 2, '2019-12-01', '2019-10-07', 'Android.png', 'android.jpg', '17', '40000.00', '0', '1', '2019-10-14 15:24:06'),
-(23, 19, 11, 29, '9', 'ADO DOT NET', 'ADO i.e. Active Data Object.', '14', 2, '2019-10-01', '2019-12-31', 'ADO.NET.png', 'ado-.net_.jpg', '14', '2000.00', '0', '1', '2019-10-14 15:28:48'),
-(24, 17, 1, 3, '8', 'Advance Java', 'Advance java is a highly secure language.', '17', 1, '2019-09-01', '2019-12-31', 'Advance_Java_Logo.png', 'Advance_JAVA.png', '17', '50000.00', '0', '1', '2019-10-14 15:31:56'),
-(25, 17, 18, 22, '27', 'Python with OOPS', 'Python is a multiple purpose language with which we can develop multi type softeware like, Machine Learning,  Artificial Intelligent.', '17', 2, '2019-09-01', '2020-01-01', 'python_logo.png', 'pythonBanner.jpg', '15', '10000.00', '0', '1', '2019-10-14 17:54:25');
+(26, 17, 1, 2, '7', 'Core Java', 'Java is a general-purpose programming language that is class-based, object-oriented, and designed to have as few implementation dependencies as possible', '13', 10, '2019-07-01', '2019-10-31', 'Javalogo.png', 'javaBanner.jpg', '12', '100.00', '0', '1', '2019-10-18 18:03:17'),
+(27, 17, 4, 5, '8', 'Core Php', 'PHP: Hypertext Preprocessor is a general-purpose programming language originally designed for web development. It was originally created by Rasmus Lerdorf in 1994; the PHP reference implementation is now produced by The PHP Group.', '13', 10, '2019-08-01', '2019-08-31', 'PHP.png', 'php.jpg', '13', '1000.00', '0', '1', '2019-10-18 18:10:47'),
+(28, 17, 11, 28, '9', 'CSharp', 'C# is a general-purpose, multi-paradigm programming language encompassing strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented, and component-oriented programming disciplines. W', '14', 10, '2019-09-01', '2019-10-31', 'CSharp.png', 'cBanner.jpg', '14', '1000.00', '0', '1', '2019-10-18 18:11:33'),
+(29, 17, 18, 21, '10', 'Core Python', 'Core Python Programming is a textbook on the Python programming language, written by Wesley J. Chun. The first edition of the book was released on December 14, 2000. The second edition was released several years later on September 18, 2006.', '17', 2, '2019-10-01', '2019-10-31', 'python_logo.png', 'pythonBanner.jpg', '17', '20000.00', '0', '1', '2019-10-18 18:12:38'),
+(30, 17, 23, 24, '26', 'Android Development', 'Android is a mobile operating system based on a modified version of the Linux kernel and other open source software, designed primarily for touchscreen mobile devices such as smartphones and tablets.', '14', 10, '2019-11-01', '2019-10-30', 'Android.png', 'android.jpg', '14', '5000.00', '0', '1', '2019-10-18 18:13:48'),
+(31, 17, 11, 29, '27', 'ADO Development', 'ADO.NET is a data access technology from the Microsoft .NET Framework that provides communication between relational and non-relational systems through a common set of components. ADO.NET is a set of computer software components that programmers can use to access data and data services from a database.', '17', 2, '2019-12-01', '2019-10-31', 'ADO.NET.png', 'ado-.net_.jpg', '17', '50000.00', '0', '1', '2019-10-18 18:15:03'),
+(32, 17, 23, 25, '8', 'Jelly Bean', 'Android \"Jelly Bean\" is the tenth version of Android and the codename given to three major point releases of the Android mobile operating system developed by Google, spanning versions between 4.1 and 4.3.1. Some operating systems that run Android 4.3/4.4 are Asus Nexus 7.', '13', 50, '2020-01-01', '2019-10-31', 'Android.png', 'android.jpg', '13', '1000.00', '0', '1', '2019-10-18 18:16:29');
 
 -- --------------------------------------------------------
 
@@ -120,7 +115,6 @@ INSERT INTO `tc_courses` (`course_id`, `user_id`, `category_id`, `sub_category_i
 -- Table structure for table `tc_data`
 --
 
-DROP TABLE IF EXISTS `tc_data`;
 CREATE TABLE `tc_data` (
   `id` int(11) UNSIGNED NOT NULL,
   `key` varchar(30) NOT NULL DEFAULT '',
@@ -142,7 +136,6 @@ INSERT INTO `tc_data` (`id`, `key`, `value`, `create_on`) VALUES
 -- Table structure for table `tc_enquiries`
 --
 
-DROP TABLE IF EXISTS `tc_enquiries`;
 CREATE TABLE `tc_enquiries` (
   `enquiry_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT '0',
@@ -158,7 +151,6 @@ CREATE TABLE `tc_enquiries` (
 -- Table structure for table `tc_feedbacks`
 --
 
-DROP TABLE IF EXISTS `tc_feedbacks`;
 CREATE TABLE `tc_feedbacks` (
   `feedback_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
@@ -176,10 +168,11 @@ CREATE TABLE `tc_feedbacks` (
 INSERT INTO `tc_feedbacks` (`feedback_id`, `user_id`, `course_id`, `description`, `rating`, `status`, `created_at`) VALUES
 (1, 22, 19, 'Average learning', 3, '1', '2019-09-18 09:28:57'),
 (2, 23, 19, 'Fair study', 2, '1', '2019-10-16 10:12:19'),
-(3, 24, 19, 'Nice learning', 4, '1', '2019-10-16 10:14:37'),
+(3, 24, 19, 'Nice learning', 3, '1', '2019-10-16 10:14:37'),
 (4, 33, 19, 'Excellent study', 5, '1', '2019-10-16 10:16:00'),
 (5, 34, 19, 'Poor study', 1, '1', '2019-10-16 10:21:51'),
-(6, 35, 19, 'Fair study', 2, '1', '2019-10-16 10:21:51');
+(6, 35, 19, 'Fair study', 2, '1', '2019-10-16 10:21:51'),
+(7, 24, 20, 'very very very good learning\r\n\r\n                                                                                                ', 4, '1', '2019-10-18 14:50:13');
 
 -- --------------------------------------------------------
 
@@ -187,10 +180,9 @@ INSERT INTO `tc_feedbacks` (`feedback_id`, `user_id`, `course_id`, `description`
 -- Table structure for table `tc_newsletters`
 --
 
-DROP TABLE IF EXISTS `tc_newsletters`;
 CREATE TABLE `tc_newsletters` (
   `newsletter_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED DEFAULT '0',
+  `email` varchar(100) DEFAULT '',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` int(10) UNSIGNED DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -199,9 +191,9 @@ CREATE TABLE `tc_newsletters` (
 -- Dumping data for table `tc_newsletters`
 --
 
-INSERT INTO `tc_newsletters` (`newsletter_id`, `user_id`, `created_at`, `deleted_at`) VALUES
-(1, 24, '2019-10-15 14:53:46', 0),
-(5, 22, '2019-10-15 15:00:34', 0);
+INSERT INTO `tc_newsletters` (`newsletter_id`, `email`, `created_at`, `deleted_at`) VALUES
+(1, 'chinmaymishra.falna@gmail.com', '2019-10-17 18:18:44', 0),
+(2, 'mohitmishra.falna@gmail.com', '2019-10-17 18:19:01', 0);
 
 -- --------------------------------------------------------
 
@@ -209,7 +201,6 @@ INSERT INTO `tc_newsletters` (`newsletter_id`, `user_id`, `created_at`, `deleted
 -- Table structure for table `tc_reports`
 --
 
-DROP TABLE IF EXISTS `tc_reports`;
 CREATE TABLE `tc_reports` (
   `report_id` int(10) UNSIGNED NOT NULL,
   `course_id` int(10) UNSIGNED DEFAULT NULL,
@@ -233,7 +224,6 @@ INSERT INTO `tc_reports` (`report_id`, `course_id`, `victim_id`, `title`, `descr
 -- Table structure for table `tc_sessions`
 --
 
-DROP TABLE IF EXISTS `tc_sessions`;
 CREATE TABLE `tc_sessions` (
   `sess_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
@@ -269,7 +259,6 @@ INSERT INTO `tc_sessions` (`sess_id`, `user_id`, `email`, `created_at`, `status`
 -- Table structure for table `tc_users`
 --
 
-DROP TABLE IF EXISTS `tc_users`;
 CREATE TABLE `tc_users` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `name` varchar(40) NOT NULL DEFAULT '',
@@ -387,7 +376,7 @@ ALTER TABLE `tc_categories`
 -- AUTO_INCREMENT for table `tc_courses`
 --
 ALTER TABLE `tc_courses`
-  MODIFY `course_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `course_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tc_data`
@@ -405,13 +394,13 @@ ALTER TABLE `tc_enquiries`
 -- AUTO_INCREMENT for table `tc_feedbacks`
 --
 ALTER TABLE `tc_feedbacks`
-  MODIFY `feedback_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `feedback_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tc_newsletters`
 --
 ALTER TABLE `tc_newsletters`
-  MODIFY `newsletter_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `newsletter_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tc_reports`

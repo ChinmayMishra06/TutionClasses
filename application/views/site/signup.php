@@ -4,7 +4,7 @@
       <div class="row">
         <div class="offset-md-3 offset-lg-3 offset-xl-3 col-md-6 col-lg-6 col-xl-6">
           <div class="card">
-            <div class="card-header" style="background-image: linear-gradient(to left, #ee390f 0%, #f9b700 51%, #ee390f 100%);">
+            <div class="card-header login_sigup">
               <h2 class="contact-title m-1 text-center">Signup</h2>
             </div>
             <div class="card-body">
@@ -47,7 +47,7 @@
                       </div>
                   </div>
                   <input type="submit" href="#" class="btn_1" id="btnLogin" name="signup_student" value="Signup">
-                  <a href="<?php echo base_url('login'); ?>" class="btn_2">Login</a>
+                  <a href="<?php echo base_url('login'); ?>" class="btn_2 float-right">Login</a>
               </form>
             </div>
           </div>
