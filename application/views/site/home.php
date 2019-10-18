@@ -99,6 +99,7 @@
 
     <!-- member_counter counter start -->
     <section class="member_counter">
+        
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
@@ -129,7 +130,6 @@
         </div>
     </section>
     <!-- member_counter counter end -->
-
     <!--::review_part start::-->
     <section class="special_cource padding_top">
         <div class="container">
