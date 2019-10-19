@@ -7,11 +7,9 @@
             $this->load->model('CommonModel', 'commonModel');
             $this->load->model('DataModel', 'dataModel');
             
-            
             $config['base_url'] = base_url() . "home/index";
             $config['per_page'] = 6;
-            $config['total_rows'] = $this->userModel->countCourses();
-    
+            $config['total_rows'] = $this->userModel->countCourses();    
             $this->pagination->initialize($config);
 
             if(isset($_REQUEST['btnSubscribe'])){
@@ -52,19 +50,40 @@
                 if(!empty($_REQUEST['price']))
                     $data[TABLE_COURSE.'.fees<='] = $this->input->post('price');
 
-                if((!empty($_REQUEST['category'])) || (!empty($_REQUEST['duration'])) || (!empty($_REQUEST['price']))){                    
-                    $rspAllCourses = $this->userModel->getAllCoursesByCondition($data);
+                if((!empty($_REQUEST['category'])) || (!empty($_REQUEST['duration'])) || (!empty($_REQUEST['price']))){
+                    $rspAllCourses = $this->userModel->getAllCourses(false, false, $data);
                     if($rspAllCourses)
                         $data['courses'] = $rspAllCourses;
                 }else{
-                    $rspAllCourses = $this->userModel->getAllCoursesByConditions(6, $page);
+                    $rspAllCourses = $this->userModel->getAllCourses(6, $page);
                     if($rspAllCourses)
                         $data['courses'] = $rspAllCourses;
                 }
-            }else{
-                $rspAllCourses = $this->userModel->getAllCoursesByConditions(6, $page);
-                if($rspAllCourses)
+            }elseif(isset($_REQUEST['btnSearch'])){
+                    $this->form_validation->set_rules('searchItem', 'Search item', 'trim|required|regex_match[/^([-a-z ])+$/i]');
+                    $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
+                    if($this->form_validation->run() === true){
+                        $data['course_name'] = $this->input->post('searchItem');
+                        $rspSearch = $this->userModel->getAllCourses(false, false, $data);
+                        if($rspSearch){
+                            $data['courses'] = $rspSearch;
+                        }else{
+                            $rspAllCourses = $this->userModel->getAllCourses(6, $page);
+                            if($rspAllCourses){
+                                $data['courses'] = $rspAllCourses;
+                            }
+                        }
+                    }else{
+                        $rspAllCourses = $this->userModel->getAllCourses(6, $page);
+                        if($rspAllCourses){ 
+                            $data['courses'] = $rspAllCourses;
+                        }
+                    }
+                }else{
+                $rspAllCourses = $this->userModel->getAllCourses(6, $page);
+                if($rspAllCourses){
                     $data['courses'] = $rspAllCourses;
+                }
             }
 
             // if(isset($_REQUEST['btnUnsubscribe'])){
@@ -112,11 +131,11 @@
             if($rspCountSubscribers)
                 $data['allSubscribers'] = $rspCountSubscribers;
             
-            $resHappyFeedbacks = $this->commonModel->getHappyFeedback(3);            
+            $resHappyFeedbacks = $this->commonModel->getAllFeedbacks(false, false, 3);
             if($resHappyFeedbacks)
                 $data['happyFeedbacks'] = $resHappyFeedbacks;
                     
-            $rspSubscriber = $this->commonModel->getSubscriber($this->session->userdata('studentId'), 0);
+            $rspSubscriber = $this->commonModel->getSubscriber($this->session->userdata('student_id'), 0);
             if($rspSubscriber)
                 $data['subscribed'] = $rspSubscriber;
                 
@@ -126,7 +145,7 @@
             $this->load->view('site/home');
             $this->load->view('site/footer');
         }
-
+        
         public function contact(){
             if(isset($_REQUEST['btnSendMessage'])){
                 $this->form_validation->set_rules('name', 'Name', 'trim|required|regex_match[/^([-a-z ])+$/i]');

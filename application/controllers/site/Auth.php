@@ -7,7 +7,7 @@
         }
 
         public function index(){
-            if($this->session->userdata('studentLogin'))
+            if($this->session->userdata('student_login'))
                 redirect('home');
                 
             if(isset($_REQUEST['btnLogin'])){
@@ -22,7 +22,7 @@
                     $this->load->model('AuthModel', 'authModel');
                     $user = $this->authModel->getUser($email, $password, 0);
                     if($user){
-                        $login = array('studentLogin'=>$user->name, 'studentId'=>$user->user_id);
+                        $login = array('student_login'=>$user->name, 'student_id'=>$user->user_id);
                         $this->session->set_userdata($login);
                         redirect('home');
                     }else{
@@ -55,9 +55,9 @@
                     $password = $this->input->post('password');
                     
                     $this->load->model('AuthModel', 'authModel');
-                    $resSignUp = $this->authModel->signUp($username, $email, $password, 0);
+                    $rspSignUp = $this->authModel->signUp($username, $email, $password, 0);
                     
-                    if($resSignUp == ""){
+                    if($rspSignUp == ""){
                         $this->session->set_flashdata('message', 'Account already exist.');
                         $this->session->set_flashdata('status', 'danger');
                     }else{
@@ -76,10 +76,10 @@
         }
 
         public function logout(){
-            if(!$this->session->userdata('studentLogin'))
+            if(!$this->session->userdata('student_login'))
                 redirect('login');
             
-            $this->session->unset_userdata(array('studentLogin', 'studentId'));
+            $this->session->unset_userdata(array('student_login', 'student_id'));
             $this->session->set_flashdata('message', 'Logout successfully.');
             $this->session->set_flashdata('status', 'success');
             redirect('login');

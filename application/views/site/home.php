@@ -186,7 +186,7 @@
                                 <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>" class="btn_4"><?php echo $course['category_name']; ?></a>
                                 <h4><?php echo $course['fees']; ?></h4>
                                 <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>"><h3><?php echo $course['course_name']; ?></h3></a>
-                                <p class="text-justify" style="min-height:80px; overflow:hidden;"><?php echo substr($course['description'], 0, 139); ?></p>
+                                <p class="text-justify" style="min-height:80px; overflow:hidden;"><?php echo substr($course['description'], 0, 120); ?></p>
                                 <a href="<?php echo base_url('courseDetails/' . $course['course_id']); ?>">(Read more...)</a>
                                 <div class="author_info">
                                     <div>
@@ -271,32 +271,35 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="textimonial_iner owl-carousel">
-                        <?php
-                            $count = 0;
-                            for($i=0; $i<count($happyFeedbacks); $i++){ ?>
-                            <div class="testimonial_slider">
-                                <div class="row">
-                                    <?php for($j=0; $j<2; $j++){
-                                        $count = $i + $j;
-                                        if($count == count($happyFeedbacks))
-                                            $count = 0; 
-                                    ?>
-                                    <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
-                                        <div class="testimonial_slider_text">
-                                            <p><?php echo $happyFeedbacks[$count]['description']; ?></p>
-                                            <h4><?php echo $happyFeedbacks[$count]['name']; ?></h4>
-                                            <h5><?php echo $happyFeedbacks[$count]['course_name']; ?></h5>
-                                        </div>
+                            <?php
+                                $count = 0;
+                                for($i=0; $i<count($happyFeedbacks); $i++){
+                            ?>
+                                <div class="testimonial_slider">
+                                    <div class="row">
+                                        <?php
+                                            for($j=0; $j<2; $j++){
+                                                $count = $i + $j;
+                                                if($count == count($happyFeedbacks)){
+                                                    $count = 0;
+                                                }                                                     
+                                        ?>
+                                            <div class="col-lg-8 col-xl-4 col-sm-8 align-self-center">
+                                                <div class="testimonial_slider_text">
+                                                    <p><?php echo $happyFeedbacks[$count]['description']; ?></p>
+                                                    <h4><?php echo $happyFeedbacks[$count]['name']; ?></h4>
+                                                    <h5><?php echo $happyFeedbacks[$count]['course_name']; ?></h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-xl-2 col-sm-4">
+                                                <div class="testimonial_slider_img">
+                                                    <img src="<?php echo base_url('public/uploads/institute/images/'. $happyFeedbacks[$count]['image']); ?>" alt="<?php echo $happyFeedbacks[$count]['image']; ?>">
+                                                </div>
+                                            </div>
+                                        <?php } ?>
                                     </div>
-                                    <div class="col-lg-4 col-xl-2 col-sm-4">
-                                        <div class="testimonial_slider_img">
-                                            <img src="<?php echo base_url('public/uploads/institute/images/'. $happyFeedbacks[$count]['image']); ?>" alt="<?php echo $happyFeedbacks[$count]['image']; ?>">
-                                        </div>
-                                    </div>
-                                    <?php } ?>
                                 </div>
-                            </div>
-                        <?php } ?>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

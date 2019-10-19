@@ -33,7 +33,7 @@
             $this->load->model('CommonModel', 'commonModel');
 
             if(isset($_REQUEST['btnFeedbackAdd'])){
-                if(!$this->session->userdata('studentLogin'))
+                if(!$this->session->userdata('student_login'))
                     redirect('login');
                     
                 if(!empty($this->input->post('rating'))){
@@ -45,9 +45,9 @@
                 }
 
                 if(!empty($this->input->post('rating')) || !empty($this->input->post('message'))){
-                    $data['user_id'] = $this->session->userdata('studentId');
+                    $data['user_id'] = $this->session->userdata('student_id');
                     $data['course_id'] = $id;
-                    $rspFeedbackAdd = $this->commonModel->feedbackAdd($data);
+                    $rspFeedbackAdd = $this->commonModel->addFeedback($data);
                     if($rspFeedbackAdd){
                         $this->session->set_flashdata('message', "Feedback send successfully.");
                         $this->session->set_flashdata('status', "success");
@@ -67,7 +67,7 @@
             if($rspCourseById)
                 $data['course'] = $rspCourseById;
             
-            $resUserFeedbacks = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('studentId'));
+            $resUserFeedbacks = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));
             if($resUserFeedbacks)
                 $data['userFeedbacks'] = $resUserFeedbacks;
             
@@ -79,11 +79,11 @@
         }
 
         public function enquiry(){
-            if(!$this->session->userdata('studentLogin'))
+            if(!$this->session->userdata('student_login'))
                 redirect('login');
 
             $data['course_id'] = $this->input->post('course_id');
-            $data['user_id'] = $this->session->userdata('studentId');
+            $data['user_id'] = $this->session->userdata('student_id');
             $this->load->model('CommonModel', 'commonModel');
             $rspAddEnquiry = $this->commonModel->addEnquiry($data);
 

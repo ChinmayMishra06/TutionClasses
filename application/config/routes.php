@@ -48,6 +48,7 @@ $route['institute/enquiry/all'] = 'institute/common/getAllEnquiries';           
 // Site panel
 $route['home'] = 'home';                                        //Completed
 $route['home/(:num)'] = 'home/$1';                      //Completed
+// $route['home'] = 'home/search';                      //Completed
 $route['contact'] = 'home/contact';                      //Completed
 $route['about'] = 'site/About';                      //Completed
 $route['courses'] = 'site/Courses';                      //Completed

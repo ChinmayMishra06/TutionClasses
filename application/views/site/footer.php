@@ -104,6 +104,6 @@
         <script src="<?php echo base_url(); ?>public/site/js/jquery.counterup.min.js"></script>
         <script src="<?php echo base_url(); ?>public/site/js/waypoints.min.js"></script>
         <!-- custom js -->
-        <!-- <script src="< ?php echo base_url(); ?>public/site/js/custom.js"></script> -->
+        <script src="<?php echo base_url(); ?>public/site/js/custom.js"></script>
     </body>
 </html>

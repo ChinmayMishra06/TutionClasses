@@ -10,13 +10,10 @@ class AuthModel extends CI_Model
     
     public function getUser($email, $password, $userType){
         $result = $this->db->select("user_id, name, email")->from(TABLE_USER)->where(array('email' => $email, 'password' => $password, 'user_type' => $userType))->limit(1)->get();
-
         return ($result->num_rows() > 0) ? $result->row() : false;
     }
     
-    public function createSession($user){
-        // print_r($user);die();
-                
+    public function createSession($user){                
         //create entry for single session with tracking.
         // $this->db->where(array('user_id'=>$user->user_id))->update(TABLE_SESS, array('status'=> '0'));
         // $this->db->insert(TABLE_SESS, array('user_id'=>$user->user_id, 'email'=>$user->email));
@@ -35,16 +32,7 @@ class AuthModel extends CI_Model
 
     public function validateUser($userData){
         $result = $this->db->select("user_id")->where($userData)->get(TABLE_SESS);
-        
-        if(!$result){
-            return 0;
-        }
-
-        if($result -> num_rows() > 0){
-            return $result->row()->user_id;
-        }
-
-        return 0;
+        return ($result -> num_rows() > 0) ? $result->row()->user_id : false;
     }
 
     public function signUp($name, $email, $password, $userType){
@@ -72,14 +60,6 @@ class AuthModel extends CI_Model
         $authToken = json_decode($authToken);
         // $result = $this->db->update(TABLE_SESS, ["status" => 0]); // Uncomment for use single session and comment multisession.
         $result = $this->db->where("sess_id", $authToken->sess_id)->update(TABLE_SESS, ["status" => 0]); // Uncomment for use multiple session and comment single session.
-        if(!$result){
-            return false;
-        }
-
-        if($result == 1){
-            return true;
-        }
-
-        return false;
+        return $result ? true : false;
     }
 }

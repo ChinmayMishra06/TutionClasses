@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit("No direct script access allowed."); 
     class Profiles extends CI_Controller{
         public function index(){
-            if(!$this->session->userdata('studentLogin'))
+            if(!$this->session->userdata('student_login'))
                 redirect('login');
 
             $this->load->model('CommonModel', 'commonModel');            
@@ -33,7 +33,7 @@
                     $data['dob'] = $this->input->post('dob');
                     $data['address'] = $this->input->post('city');
 
-                    $rspEdit = $this->commonModel->editProfileData($this->session->userdata('studentId'), $data);
+                    $rspEdit = $this->commonModel->editProfileData($this->session->userdata('student_id'), $data);
                     if($rspEdit){
                         $this->session->set_flashdata('message', 'Profile details updated successfully.');
                         $this->session->set_flashdata('status', 'success');
@@ -44,7 +44,7 @@
                     redirect('profile');
                 }
             }
-            $rspProfileData = $this->commonModel->getProfileData($this->session->userdata('studentId'));
+            $rspProfileData = $this->commonModel->getProfileData($this->session->userdata('student_id'));
             $data['profileData'] = $rspProfileData;
             $data['title'] = "Edit profile";
             $this->load->view('site/header', $data);

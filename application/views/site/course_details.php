@@ -68,13 +68,15 @@
                                     <h6 class="mb-15">Provide Your Rating</h6>
                                     <div class="d-flex flex-row reviews justify-content-between">
                                         <span>Quality</span>
-                                        <input type="hidden" name="rating" value="<?php if(($this->session->userdata('studentLogin')) && isset($userFeedbacks)){
-                                                echo $userFeedbacks[0]['rating'];
-                                            }else{
-                                                echo "0";
-                                            } ?>" id="rating">
+                                        <input type="hidden" name="rating" value="
+                                            <?php
+                                                if(($this->session->userdata('student_login')) && is_array($userFeedbacks)){
+                                                    echo $userFeedbacks[0]['rating'];
+                                                } else{ echo "0"; }
+                                            ?>" id="rating"
+                                        >                                            
                                         <div class="rating">
-                                            <?php if(($this->session->userdata('studentLogin')) && isset($userFeedbacks)){ ?>
+                                            <?php if(($this->session->userdata('student_login')) && isset($userFeedbacks)){ ?>
                                                 <?php
                                                     $feedbackArray = array("Poor", "Fair", "Average", "Good", "Excellent");
                                                     $count = 0; 
@@ -93,7 +95,7 @@
                                             <?php } ?>
                                         </div>
                                         <span id="remark">
-                                            <?php if(($this->session->userdata('studentLogin')) && isset($userFeedbacks)){
+                                            <?php if(($this->session->userdata('student_login')) && isset($userFeedbacks)){
                                                 echo $feedbackArray[$userFeedbacks[0]['rating']-1];
                                             }else{
                                                 echo "Give rating";
@@ -104,12 +106,8 @@
                             </div>
                             <div class="feedeback mb-4">
                                 <h6>Feedback message</h6>
-                                <textarea name="description" class="form-control" cols="10" rows="10"><?php if(($this->session->userdata('studentLogin')) && isset($userFeedbacks)){
-                                        echo $userFeedbacks[0]['description'];
-                                    }else{
-                                        echo "0";
-                                    } ?>
-                                </textarea>
+                                <textarea name="description" class="form-control" cols="10" rows="10"><?php if(($this->session->userdata('student_login')) && isset($userFeedbacks)){
+                                        echo $userFeedbacks[0]['description']; } ?></textarea>
                                 <div class="mt-10 text-right">
                                     <input type="submit" class="btn_1" value="Send" name="btnFeedbackAdd">
                                 </div>

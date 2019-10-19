@@ -102,13 +102,13 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="<?php echo base_url('about');?>">About</a>
                                     </li>
-                                    <?php if(!$this->session->userdata('studentLogin')){ ?>
+                                    <?php if(!$this->session->userdata('student_login')){ ?>
                                         <li class="nav-item">
                                             <a class="nav-link" href="<?php echo base_url('login'); ?>">Login</a>
                                         </li>                                    
                                     <?php } else{  ?>                                    
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata('studentLogin'); ?></a>
+                                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata('student_login'); ?></a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                            
                                                 <a class="dropdown-item" href="<?php echo base_url('profile');?>">Profile</a>
                                                 <a class="dropdown-item" href="<?php echo base_url('logout');?>">Logout</a>
@@ -116,14 +116,14 @@
                                         </li>
                                     <?php } ?>
                                     <li class="nav-item">
-                                        <form action="<?php echo base_url(); ?>search" method="post">
+                                        <form action="<?php echo base_url(); ?>home" method="post">
                                             <div class="input-group pt-1">
-                                                <input type="text" class="form-control myTextBox" name="search" placeholder="Search here..." aria-label="Search here..." aria-describedby="basic-addon2">
+                                                <input type="text" class="form-control myTextBox" name="searchItem" id="searchItem" placeholder="Search here..." aria-label="Search here..." aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
                                                     <button type="submit" class="input-group-text" style="background-color:#ee390f;" id="btnSearch" name="btnSearch"><i class="fa fa-search text-white"></i></button>
                                                 </div>
                                             </div>
-                                            <?php if(validation_errors()) echo form_error('search'); ?>
+                                            <?php if(validation_errors()) echo form_error('searchItem'); ?>
                                         </form>
                                     </li>
                                 </ul>

@@ -1,90 +1,55 @@
 <?php
 
-class /**/
-UserModel extends CI_Model
+class UserModel extends CI_Model
 {
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
         $this->load->database();
     }
 
-    public function getUser($userId){
-        $result = $this->db->select(array('name', 'contact', 'email', 'dob', 'image'))->where(array('user_id' => $userId))->get(TABLE_USER);
+    public function getUser($user_id){
+        $result = $this->db->select(array('name', 'contact', 'email', 'dob', 'image'))->where(array('user_id' => $user_id))->get(TABLE_USER);
         return ($result->num_rows() > 0) ? $result->row() : false;
     }
 
-    public function editUser($userId, $userData){
-        $result = $this->db->set($userData)->where('user_id', $userId)->update(TABLE_USER);
+    public function editUser($user_id, $userData){
+        $result = $this->db->set($userData)->where('user_id', $user_id)->update(TABLE_USER);
         return !$result ? false : true;
     }
 
-    public function addFeedback($userId, $courseId, $description){
+    public function addFeedback($user_id, $course_id, $description){
         $result = $this->db->insert(TABLE_FEED, array(
-            "user_id" => $userId,
-            "course_id" => $courseId,
+            "user_id" => $user_id,
+            "course_id" => $course_id,
             "description" => $description
         ));
         return $result ? true : false;
     }
 
-    public function addReport($categoryId, $victimId, $criminalId, $title, $description){
+    public function addReport($category_id, $victim_id, $criminal_id, $title, $description){
         $result = $this->db->insert(TABLE_REPORT, array(
-            "category_id" => $categoryId,
-            "victim_id" => $victimId,
-            "criminal_id" => $criminalId,
+            "category_id" => $category_id,
+            "victim_id" => $victim_id,
+            "criminal_id" => $criminal_id,
             "title" => $title,
             "description" => $description
         ));
         return $result ? true : false;
     }
 
-    public function addCourse($courseData){
-        $result = $this->db->insert(TABLE_COURSE, $courseData);
+    public function addCourse($course_data){
+        $result = $this->db->insert(TABLE_COURSE, $course_data);
         return $result ? true : false;
     }
 
-    public function editCourse($courseId, $courseData){
-        $result = $this->db->set($courseData)->where('course_id', $courseId)->update(TABLE_COURSE);
+    public function editCourse($course_id, $course_data){
+        $result = $this->db->set($course_data)->where('course_id', $course_id)->update(TABLE_COURSE);
         return $result ? true : false;
     }
 
-    public function getAllCourses($userId=0, $courseId=0){
-        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'.  TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
-                 ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
-                 ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
-                 ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
-                 ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
-                 ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
-                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
-                 ->where(TABLE_COURSE.".status=",1);
-
-                 if($userId > 0)
-                    $this->db->where(TABLE_COURSE.".user_id=", $userId);
-                 if($courseId > 0)
-                    $this->db->where(TABLE_COURSE.".course_id=", $courseId);
-        
-        $result = $this->db->get(TABLE_COURSE);
-        // echo "<pre>"; print_r($result->result_array()); die();
-        return ($result->num_rows() > 0) ? $result->result_array() : false;
-    }
-    
-    public function countCourses(){
-        $result = $this->db->select(TABLE_USER.'.name,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
-        ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
-        ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
-        ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
-        ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
-        ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
-        ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
-        ->get(TABLE_COURSE);
-        // echo "<pre>" ; print_r($result->num_rows()); die();
-        return ($result->num_rows() > 0) ? $result->num_rows() : false;
-    }
-
-    public function countTeachersStudents($userType){
+    public function countTeachersStudents($user_type){
         $result = $this->db->select('name')
-                 ->where('user_type', $userType)
+                 ->where('user_type', $user_type)
                  ->get(TABLE_USER);
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
@@ -93,28 +58,29 @@ UserModel extends CI_Model
         $result = $this->db->select('email')->where('deleted_at', 0)->get(TABLE_NEWS);
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
-
-    public function getAllCoursesByConditions($limit, $page, $conditions = []){
-        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'. TABLE_USER.'.image,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
+    
+    public function countCourses($user_id=false, $course_id=false, $conditions = []){
+        $this->db->select(TABLE_USER.'.name')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
                  ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
                  ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
                  ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
-                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
-                ->limit($limit, ($page - 1) * $limit)
-                ->where(TABLE_COURSE.".status=",1);
+                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit');
+                 if($user_id > 0)
+                     $this->db->where(TABLE_COURSE.".user_id=", $user_id);
+                 if($course_id > 0)
+                     $this->db->where(TABLE_COURSE.".course_id=", $course_id);                 
+                 if($conditions != [])
+                     $this->db->like($conditions);
 
-                if($conditions != [])
-                    $this->db->where($conditions);
-        
         $result = $this->db->get(TABLE_COURSE);
-        // echo '<pre>'; print_r($result->result_array()); die();
-        return ($result->num_rows() > 0) ? $result->result_array() : false;
+        // echo "<pre>" ; print_r($result->num_rows()); die();
+        return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
-    
-    public function getAllCoursesByCondition($conditions = []){
-        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'. TABLE_USER.'.image,'. TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
+
+    public function getAllCourses($limit=false, $page=false, $conditions = [], $user_id=false, $course_id=false){
+        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'.  TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
                  ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
@@ -122,30 +88,30 @@ UserModel extends CI_Model
                  ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
                  ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
                  ->where(TABLE_COURSE.".status=",1);
-
-                if($conditions != [])
-                    $this->db->where($conditions);
+                 
+                 if($user_id > 0)
+                    $this->db->where(TABLE_COURSE.".user_id=", $user_id);
+                 if($course_id > 0)
+                    $this->db->where(TABLE_COURSE.".course_id=", $course_id);                 
+                 if($conditions != [])
+                    $this->db->like($conditions);
+                 if(($limit != false) && ($page != false))
+                    $this->db->limit($limit, ($page - 1) * $limit);
         
         $result = $this->db->get(TABLE_COURSE);
-        // echo '<pre>'; print_r($result->result_array()); die();
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
 
-    public function getUserType($userId){
+    public function getuserType($user_id){
         //checking for user type is tutor
         $result = $this->db->select('user_type')
-                            ->where('user_id', $userId)
+                            ->where('user_id', $user_id)
                             ->where('status',1)
                             ->get(TABLE_USER);
-
-        if (!$result)
-            return false;
-        
-        if ($result->num_rows() > 0)
-            return $result->row()->user_type;
+        return ($result->num_rows() > 0) ? $result->row()->user_type : false;
     }
     
-    public function getCourses($latitude, $longitude, $categoryId, $medium, $distance = 100){
+    public function getCourses($latitude, $longitude, $category_id, $medium, $distance = 100){
         $result = $this->db->select('user_id, ( 6371  * 
                     acos ( cos ( radians(' . $latitude . ') ) * 
                     cos( radians( latitude ) ) * 
@@ -172,8 +138,8 @@ UserModel extends CI_Model
             ->join(TABLE_CAT . ' tct', 'tct.category_id = tc.category_id')
             ->join(TABLE_CAT . ' tcm', 'tcm.category_id = tc.medium');
 
-        if ($categoryId !== false)
-            $this->db->where('tc.category_id', $categoryId);
+        if ($category_id !== false)
+            $this->db->where('tc.category_id', $category_id);
 
         if ($medium !== false)
             $this->db->where('tc.medium', $medium);
@@ -182,10 +148,7 @@ UserModel extends CI_Model
             ->where('tc.status', 1)
             ->get();
 
-        if ($result->num_rows() == 0)
-            return false;
-        
-        return $result->result_array();
+        return ($result->num_rows() == 0) ? false : $result->result_array();
     }
 }
 ?>
