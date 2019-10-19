@@ -9,19 +9,11 @@
             
             $config['base_url'] = base_url() . "courses/index";
             $config['per_page'] = 6;
-            $config['total_rows'] = $this->userModel->countCourses();
-    
+            $config['total_rows'] = $this->userModel->countCourses();    
             $this->pagination->initialize($config);
 
-            $rspAllCourses = $this->userModel->getAllCoursesByConditions(6, $page);
-            if($rspAllCourses){
-                $data['courses'] = $rspAllCourses;
-            }
-
-            $resHappyFeedbacks = $this->commonModel->getHappyFeedback(3);
-            if($resHappyFeedbacks)
-                $data['happyFeedbacks'] = $resHappyFeedbacks;
-
+            $data['courses'] = $this->userModel->getAllCoursesByConditions(6, $page);
+            $data['happyFeedbacks'] = $this->commonModel->getHappyFeedback(3);
             $this->load->view('site/header', $data);
             $this->load->view('site/courses');
             $this->load->view('site/footer');
@@ -59,20 +51,11 @@
                 }
             }
             
-            $rspAllFeedback = $this->commonModel->getAllFeedbacks($id);
-            if($rspAllFeedback)
-                $data['feedbacks'] = $rspAllFeedback;
+            $data['feedbacks'] = $this->commonModel->getAllFeedbacks($id);
+            $data['course'] = $this->userModel->getAllCourses(0, $id);
+            $data['userFeedbacks'] = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));
             
-            $rspCourseById = $this->userModel->getAllCourses(0, $id);
-            if($rspCourseById)
-                $data['course'] = $rspCourseById;
-            
-            $resUserFeedbacks = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));
-            if($resUserFeedbacks)
-                $data['userFeedbacks'] = $resUserFeedbacks;
-            
-            $data['title'] = "Course Details";
-            
+            $data['title'] = "Course Details";            
             $this->load->view('site/header', $data);
             $this->load->view('site/course_details');
             $this->load->view('site/footer');

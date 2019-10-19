@@ -59,7 +59,7 @@ class UserModel extends CI_Model
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
     
-    public function countCourses($user_id=false, $course_id=false, $conditions = []){
+    public function countCourses($user_id=false, $course_id=false, $conditions = false){  
         $this->db->select(TABLE_USER.'.name')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
@@ -70,16 +70,21 @@ class UserModel extends CI_Model
                  if($user_id > 0)
                      $this->db->where(TABLE_COURSE.".user_id=", $user_id);
                  if($course_id > 0)
-                     $this->db->where(TABLE_COURSE.".course_id=", $course_id);                 
-                 if($conditions != [])
-                     $this->db->like($conditions);
+                     $this->db->where(TABLE_COURSE.".course_id=", $course_id);
+                 if($conditions != false){
+                    if(array_key_exists('course_name', $conditions)){
+                        $this->db->like($conditions);
+                    }else{
+                        $this->db->where($conditions);
+                    }
+                }
 
         $result = $this->db->get(TABLE_COURSE);
         // echo "<pre>" ; print_r($result->num_rows()); die();
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
 
-    public function getAllCourses($limit=false, $page=false, $conditions = [], $user_id=false, $course_id=false){
+    public function getAllCourses($limit=false, $page=false, $conditions = false, $user_id=false, $course_id=false){
         $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'.  TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
@@ -87,20 +92,31 @@ class UserModel extends CI_Model
                  ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
                  ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
                  ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
+                 ->join(TABLE_FEED . ' tfr', 'tfr.course_id ='. TABLE_COURSE . '.course_id')
                  ->where(TABLE_COURSE.".status=",1);
                  
                  if($user_id > 0)
                     $this->db->where(TABLE_COURSE.".user_id=", $user_id);
                  if($course_id > 0)
-                    $this->db->where(TABLE_COURSE.".course_id=", $course_id);                 
-                 if($conditions != [])
-                    $this->db->like($conditions);
+                    $this->db->where(TABLE_COURSE.".course_id=", $course_id);
+                 if($conditions != false){
+                    if(array_key_exists('course_name', $conditions)){
+                        $this->db->like($conditions);
+                    }else{
+                        $this->db->where($conditions);
+                    }
+                }
                  if(($limit != false) && ($page != false))
                     $this->db->limit($limit, ($page - 1) * $limit);
         
         $result = $this->db->get(TABLE_COURSE);
+        // echo "<pre>"; print_r($result->result_array());die();
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
+
+    // public function avrage(){
+    //     # code...
+    // }
 
     public function getuserType($user_id){
         //checking for user type is tutor

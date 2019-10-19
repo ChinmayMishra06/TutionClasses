@@ -9,7 +9,7 @@
             
             $config['base_url'] = base_url() . "home/index";
             $config['per_page'] = 6;
-            $config['total_rows'] = $this->userModel->countCourses();    
+            $config['total_rows'] = $this->userModel->countCourses();
             $this->pagination->initialize($config);
 
             if(isset($_REQUEST['btnSubscribe'])){
@@ -35,14 +35,9 @@
             }
             
             if(isset($_REQUEST['btnApply'])){
-                // $config['base_url'] = base_url() . "home/index";
-                // $config['per_page'] = 6;
-                // $config['total_rows'] = $this->userModel->countCourses();
-        
-                // $this->pagination->initialize($config);
-
                 if(!empty($_REQUEST['category']))
                     $data[TABLE_COURSE.'.category_id'] = $this->input->post('category');
+                    // echo $this->input->post('category');die();
 
                 if(!empty($_REQUEST['duration']))
                     $data[TABLE_COURSE.'.duration_unit'] = $this->input->post('duration');
@@ -50,40 +45,45 @@
                 if(!empty($_REQUEST['price']))
                     $data[TABLE_COURSE.'.fees<='] = $this->input->post('price');
 
-                if((!empty($_REQUEST['category'])) || (!empty($_REQUEST['duration'])) || (!empty($_REQUEST['price']))){
-                    $rspAllCourses = $this->userModel->getAllCourses(false, false, $data);
-                    if($rspAllCourses)
+                if((!empty($_REQUEST['category'])) || (!empty($_REQUEST['duration'])) || (!empty($_REQUEST['price']))){                    
+                    $config['total_rows'] = $this->userModel->countCourses(false, false, $data);
+                    $this->pagination->initialize($config);
+                    $rspAllCourses = $this->userModel->getAllCourses(6, $page, $data);
+                    if($rspAllCourses){
                         $data['courses'] = $rspAllCourses;
-                }else{
-                    $rspAllCourses = $this->userModel->getAllCourses(6, $page);
-                    if($rspAllCourses)
-                        $data['courses'] = $rspAllCourses;
-                }
-            }elseif(isset($_REQUEST['btnSearch'])){
-                    $this->form_validation->set_rules('searchItem', 'Search item', 'trim|required|regex_match[/^([-a-z ])+$/i]');
-                    $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
-                    if($this->form_validation->run() === true){
-                        $data['course_name'] = $this->input->post('searchItem');
-                        $rspSearch = $this->userModel->getAllCourses(false, false, $data);
-                        if($rspSearch){
-                            $data['courses'] = $rspSearch;
-                        }else{
-                            $rspAllCourses = $this->userModel->getAllCourses(6, $page);
-                            if($rspAllCourses){
-                                $data['courses'] = $rspAllCourses;
-                            }
-                        }
                     }else{
                         $rspAllCourses = $this->userModel->getAllCourses(6, $page);
-                        if($rspAllCourses){ 
+                        if($rspAllCourses){
                             $data['courses'] = $rspAllCourses;
                         }
                     }
                 }else{
-                $rspAllCourses = $this->userModel->getAllCourses(6, $page);
-                if($rspAllCourses){
-                    $data['courses'] = $rspAllCourses;
+                    $rspAllCourses = $this->userModel->getAllCourses(6, $page);
+                    if($rspAllCourses){
+                        $data['courses'] = $rspAllCourses;
+                    }
                 }
+            }elseif(isset($_REQUEST['btnSearch'])){
+                $this->form_validation->set_rules('searchItem', 'Search item', 'trim|required|regex_match[/^([-a-z ])+$/i]');
+                $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
+                if($this->form_validation->run() === true){
+                    $searchItem = $this->input->post('searchItem');
+                    $config['total_rows'] = $this->userModel->countCourses(false, false, array('course_name' => $searchItem));
+                    $this->pagination->initialize($config);
+                    $rspCourses = $this->userModel->getAllCourses(6, $page, array('course_name' => $searchItem));
+                    if($rspCourses){                        
+                        $data['courses'] = $rspCourses;
+                    }
+                    else{             
+                        $config['total_rows'] = $this->userModel->countCourses();
+                        $this->pagination->initialize($config);
+                        $data['courses'] = $this->userModel->getAllCourses(6, $page);
+                    }
+                }else{
+                    $data['courses'] = $this->userModel->getAllCourses(6, $page);
+                }
+            }else{
+                $data['courses'] = $this->userModel->getAllCourses(6, $page);
             }
 
             // if(isset($_REQUEST['btnUnsubscribe'])){
@@ -111,35 +111,15 @@
             
             $data['title'] = "Home";
             
-            $rspAllCategory = $this->dataModel->getCategory(0, 0);
-            if($rspAllCategory)
-                $data['categories'] = $rspAllCategory;
-            
-            $rspAllDuration = $this->dataModel->getCategory(0, 2);
-            if($rspAllDuration)
-                $data['durations'] = $rspAllDuration;
-            
-            $rspCountTeachers = $this->userModel->countTeachersStudents(1);
-            if($rspCountTeachers)
-                $data['allTeachers'] = $rspCountTeachers;
-            
-            $rspCountStudents = $this->userModel->countTeachersStudents(0);
-            if($rspCountStudents)
-                $data['allStudents'] = $rspCountStudents;
-            
-            $rspCountSubscribers = $this->userModel->countSubscribers();
-            if($rspCountSubscribers)
-                $data['allSubscribers'] = $rspCountSubscribers;
-            
-            $resHappyFeedbacks = $this->commonModel->getAllFeedbacks(false, false, 3);
-            if($resHappyFeedbacks)
-                $data['happyFeedbacks'] = $resHappyFeedbacks;
-                    
-            $rspSubscriber = $this->commonModel->getSubscriber($this->session->userdata('student_id'), 0);
-            if($rspSubscriber)
-                $data['subscribed'] = $rspSubscriber;
-                
-            $data['allCourses'] = $config['total_rows'];
+            $data['categories'] = $this->dataModel->getCategory(0, 0);            
+            $data['durations'] = $this->dataModel->getCategory(0, 2);            
+            $data['allTeachers'] = $this->userModel->countTeachersStudents(1);
+            $data['allStudents'] = $this->userModel->countTeachersStudents(0);
+            $data['allSubscribers'] = $this->userModel->countSubscribers();
+            $data['happyFeedbacks'] = $this->commonModel->getAllFeedbacks(false, false, 3);
+            // $data['overallFeedbacks'] = $this->commonModel->getAllFeedbacks($id);
+            $data['subscribed'] = $this->commonModel->getSubscriber($this->session->userdata('student_id'), 0);                
+            $data['allCourses'] = $this->userModel->countCourses();
         
             $this->load->view('site/header', $data);
             $this->load->view('site/home');

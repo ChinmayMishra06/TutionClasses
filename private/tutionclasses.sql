@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2019 at 03:28 PM
+-- Generation Time: Oct 19, 2019 at 10:23 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `tc_categories`
 --
 
+DROP TABLE IF EXISTS `tc_categories`;
 CREATE TABLE `tc_categories` (
   `category_id` int(11) UNSIGNED NOT NULL,
   `category_type` int(11) UNSIGNED DEFAULT '0',
@@ -75,6 +76,7 @@ INSERT INTO `tc_categories` (`category_id`, `category_type`, `parent_category`, 
 -- Table structure for table `tc_courses`
 --
 
+DROP TABLE IF EXISTS `tc_courses`;
 CREATE TABLE `tc_courses` (
   `course_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
@@ -115,6 +117,7 @@ INSERT INTO `tc_courses` (`course_id`, `user_id`, `category_id`, `sub_category_i
 -- Table structure for table `tc_data`
 --
 
+DROP TABLE IF EXISTS `tc_data`;
 CREATE TABLE `tc_data` (
   `id` int(11) UNSIGNED NOT NULL,
   `key` varchar(30) NOT NULL DEFAULT '',
@@ -136,6 +139,7 @@ INSERT INTO `tc_data` (`id`, `key`, `value`, `create_on`) VALUES
 -- Table structure for table `tc_enquiries`
 --
 
+DROP TABLE IF EXISTS `tc_enquiries`;
 CREATE TABLE `tc_enquiries` (
   `enquiry_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT '0',
@@ -151,6 +155,7 @@ CREATE TABLE `tc_enquiries` (
 -- Table structure for table `tc_feedbacks`
 --
 
+DROP TABLE IF EXISTS `tc_feedbacks`;
 CREATE TABLE `tc_feedbacks` (
   `feedback_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
@@ -166,13 +171,13 @@ CREATE TABLE `tc_feedbacks` (
 --
 
 INSERT INTO `tc_feedbacks` (`feedback_id`, `user_id`, `course_id`, `description`, `rating`, `status`, `created_at`) VALUES
-(1, 22, 19, 'Average learning', 3, '1', '2019-09-18 09:28:57'),
-(2, 23, 19, 'Fair study', 2, '1', '2019-10-16 10:12:19'),
-(3, 24, 19, 'Nice learning', 3, '1', '2019-10-16 10:14:37'),
-(4, 33, 19, 'Excellent study', 5, '1', '2019-10-16 10:16:00'),
-(5, 34, 19, 'Poor study', 1, '1', '2019-10-16 10:21:51'),
-(6, 35, 19, 'Fair study', 2, '1', '2019-10-16 10:21:51'),
-(7, 24, 20, 'very very very good learning\r\n\r\n                                                                                                ', 4, '1', '2019-10-18 14:50:13');
+(1, 22, 26, 'Average learning', 3, '1', '2019-09-18 09:28:57'),
+(2, 23, 26, 'Fair study', 2, '1', '2019-10-16 10:12:19'),
+(3, 24, 26, 'Nice learning', 3, '1', '2019-10-16 10:14:37'),
+(4, 33, 26, 'Excellent study', 5, '1', '2019-10-16 10:16:00'),
+(5, 34, 27, 'Poor study', 1, '1', '2019-10-16 10:21:51'),
+(6, 35, 28, 'Fair study', 2, '1', '2019-10-16 10:21:51'),
+(7, 24, 28, 'very very very good learning\r\n\r\n                                                                                                ', 4, '1', '2019-10-18 14:50:13');
 
 -- --------------------------------------------------------
 
@@ -180,6 +185,7 @@ INSERT INTO `tc_feedbacks` (`feedback_id`, `user_id`, `course_id`, `description`
 -- Table structure for table `tc_newsletters`
 --
 
+DROP TABLE IF EXISTS `tc_newsletters`;
 CREATE TABLE `tc_newsletters` (
   `newsletter_id` int(10) UNSIGNED NOT NULL,
   `email` varchar(100) DEFAULT '',
@@ -201,6 +207,7 @@ INSERT INTO `tc_newsletters` (`newsletter_id`, `email`, `created_at`, `deleted_a
 -- Table structure for table `tc_reports`
 --
 
+DROP TABLE IF EXISTS `tc_reports`;
 CREATE TABLE `tc_reports` (
   `report_id` int(10) UNSIGNED NOT NULL,
   `course_id` int(10) UNSIGNED DEFAULT NULL,
@@ -224,6 +231,7 @@ INSERT INTO `tc_reports` (`report_id`, `course_id`, `victim_id`, `title`, `descr
 -- Table structure for table `tc_sessions`
 --
 
+DROP TABLE IF EXISTS `tc_sessions`;
 CREATE TABLE `tc_sessions` (
   `sess_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED DEFAULT NULL,
@@ -259,6 +267,7 @@ INSERT INTO `tc_sessions` (`sess_id`, `user_id`, `email`, `created_at`, `status`
 -- Table structure for table `tc_users`
 --
 
+DROP TABLE IF EXISTS `tc_users`;
 CREATE TABLE `tc_users` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `name` varchar(40) NOT NULL DEFAULT '',
