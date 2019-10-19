@@ -12,32 +12,7 @@
                         <div class="single-footer-widget footer_2">
                             <h4>Newsletter</h4>
                             <p>Stay updated with our latest courses and news with TutionClasses.</p>
-                            <!-- < ?php if(isset($subscribed)){ ?>
-                                <form action="< ?php echo base_url('unsubscribe'); ?>" method="POST">
-                                    < ?php if($this->session->flashdata('message')){ ?>
-                                        <div class="alert alert-< ?php echo $this->session->flashdata('status'); ?>" data-dismiss="alert">
-                                            < ?php echo $this->session->flashdata('message'); ?>
-                                            <button class="close">&times;</button>
-                                        </div>
-                                    < ?php } ?>
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-                                            <div class="input-group-append">
-                                                <button class="btn btn_1" name="btnUnsubscribe" type="submit" style="width:85px;">Unsubscribe</button>
-                                            </div>
-                                        </div>
-                                        < ?php if(validation_errors()) echo form_error('email'); ?>
-                                    </div>
-                                </form>
-                            < ?php } else{ ?> -->
-                                <form action="<?php echo base_url('subscribe'); ?>" method="POST">
-                                    <?php if($this->session->flashdata('footer_message')){ ?>
-                                        <div class="alert alert-<?php echo $this->session->flashdata('footer_status'); ?>" data-dismiss="alert">
-                                            <?php echo $this->session->flashdata('footer_message'); ?>
-                                            <button class="close">&times;</button>
-                                        </div>
-                                    <?php } ?>
+                                <form id="subscribeForm">
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
@@ -47,6 +22,7 @@
                                         </div>
                                         <?php if(validation_errors()) echo form_error('email'); ?>
                                     </div>
+                                    <div id="status_message"></div>
                                 </form>
                             <!-- < ?php } ?> -->
                             <div class="social_icon">
@@ -61,7 +37,7 @@
                         <div class="single-footer-widget footer_2">
                             <h4>Contact us</h4>
                             <div class="contact_info">
-                                <p><span> Email : </span>info@tutionclasses.com </p>
+                                <p><span> Email : <a href="mailto:info@tutionclasses.com" target="_top"><span>( info@tutionclasses.com )</span></a></p>
                             </div>
                         </div>
                     </div>
@@ -105,5 +81,54 @@
         <script src="<?php echo base_url(); ?>public/site/js/waypoints.min.js"></script>
         <!-- custom js -->
         <script src="<?php echo base_url(); ?>public/site/js/custom.js"></script>
+        <script>
+            "use strict";
+            let subscribeForm = document.getElementById("subscribeForm");
+            subscribeForm.addEventListener("submit", function(e){
+                e.preventDefault();
+                // // Creating object
+                let req = new XMLHttpRequest();
+
+                console.log(new FormData(subscribeForm));
+                // Creating ajax request
+                req.open("post", "<?php echo base_url()?>subscribe");
+                req.send(new FormData(subscribeForm));
+
+                // Getting response
+                req.onreadystatechange = function(){
+                    if((req.readyState == 4) && (req.status == 200)){
+                        let response = JSON.parse(req.responseText);
+                        console.log(response);
+                        
+                        let message_print = document.getElementById("status_message");
+                        
+                        message_print.innerHTML = "";
+                        if(response.footer_message != undefined){
+                            let div_message = document.createElement('div');                    
+                            let close_button = document.createElement('button');
+
+                            close_button.className = "close";
+                            close_button.setAttribute("data-dismiss", "alert");
+                            close_button.innerHTML="&times;";
+                            div_message.insertAdjacentText('afterbegin', response.footer_message);
+                            div_message.appendChild(close_button);
+                            if(response.footer_status == "success"){                   
+                                div_message.className = "alert alert-success";
+                                message_print.appendChild(div_message);
+                                contactForm.name.value = "";
+                                contactForm.email.value = "";
+                                contactForm.message.value = "";
+                            }else{
+                                div_message.className = "alert alert-danger";
+                                message_print.appendChild(div_message);
+                            }
+                        }
+                        if(response.validation_errors != undefined){
+                            message_print.innerHTML = response.validation_errors;
+                        }
+                    }
+                }      
+            });
+        </script>
     </body>
 </html>

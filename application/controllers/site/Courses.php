@@ -47,12 +47,12 @@
                         $this->session->set_flashdata('message', "Feedback not send.");
                         $this->session->set_flashdata('status', "danger");
                     }
-                    redirect('courseDetails/'. $data['course_id']);
+                    redirect('courseDetails/'. $id);
                 }
             }
             
             $data['feedbacks'] = $this->commonModel->getAllFeedbacks($id);
-            $data['course'] = $this->userModel->getAllCourses(0, $id);
+            $data['course'] = $this->userModel->getAllCourses(false, false, false, false, $id);
             $data['userFeedbacks'] = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));
             
             $data['title'] = "Course Details";            

@@ -57,9 +57,11 @@ $route['login'] = 'site/Auth';                      //Completed
 $route['logout'] = 'site/Auth/logout';                      //Completed
 $route['profile'] = 'site/Profiles';                      //Completed
 $route['signup'] = 'site/auth/pageSignup';                      //Completed
-$route['courseDetails/(:num)'] = 'site/courses/courseDetails/$1';                      //Completed
-$route['subscribe'] = 'home';                      //Completed
+$route['filter'] = 'home/filter';                      //Completed
+$route['filter/(:num)'] = 'home/filter/$1';                      //Completed
+$route['subscribe'] = 'home/subscribe';                      //Completed
 // $route['unsubscribe'] = 'home';                      //Completed
+// $route['searchCourse'] = 'home/searchCourse';                      //Completed
 $route['enquiry'] = 'site/courses/enquiry';                      //pending
 
 //Apis v1

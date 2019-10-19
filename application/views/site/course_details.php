@@ -95,7 +95,7 @@
                                             <?php } ?>
                                         </div>
                                         <span id="remark">
-                                            <?php if(($this->session->userdata('student_login')) && isset($userFeedbacks)){
+                                            <?php if(($this->session->userdata('student_login')) && isset($userFeedbacks) && is_array($userFeedbacks)){
                                                 echo $feedbackArray[$userFeedbacks[0]['rating']-1];
                                             }else{
                                                 echo "Give rating";

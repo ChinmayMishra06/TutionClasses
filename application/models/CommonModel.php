@@ -30,14 +30,36 @@ class CommonModel extends CI_Model
                              ->where('course_id', $data['course_id'])
                              ->get(TABLE_FEED);
         if($get_feedback->num_rows() > 0){
-            $result = $this->db
-                           ->set($data)
-                           ->where('feedback_id', $get_feedback->row()->feedback_id)
-                           ->update(TABLE_FEED);
-            return $result ? true : false;
+            $update_feedback = $this->db
+                                    ->set($data)
+                                    ->where('feedback_id', $get_feedback->row()->feedback_id)
+                                    ->update(TABLE_FEED);
+            if($update_feedback){
+                $select_course_feedback = $this->db->select('AVG('. TABLE_FEED .'.rating) avg_rating')
+                                   ->where('course_id', $data['course_id'])
+                                   ->get(TABLE_FEED);
+
+                if($select_course_feedback->num_rows() > 0){
+                    $update_course_feedback = $this->db->set(array('avg_rating'=>round($select_course_feedback->row()->avg_rating, 0)))
+                                                       ->where('course_id', $data['course_id'])                   
+                                                       ->update(TABLE_COURSE);
+                    return $update_course_feedback ? true : false;
+                }
+            }
         }else{
-            $result = $this->db->insert(TABLE_FEED, $data);
-            return $result ? true : false;
+            $insert_feedback = $this->db->insert(TABLE_FEED, $data);
+            if($insert_feedback){
+                $select_course_feedback = $this->db->select('AVG('. TABLE_FEED .'.rating) avg_rating')
+                                   ->where('course_id', $data['course_id'])
+                                   ->get(TABLE_FEED);
+
+                if($select_course_feedback->num_rows() > 0){
+                    $update_course_feedback = $this->db->set(array('avg_rating'=>round($select_course_feedback->row()->avg_rating, 0)))
+                                                       ->where('course_id', $data['course_id'])
+                                                       ->update(TABLE_COURSE);
+                    return $update_course_feedback ? true : false;
+                }
+            }
         }        
     }
     

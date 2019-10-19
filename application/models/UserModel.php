@@ -92,7 +92,6 @@ class UserModel extends CI_Model
                  ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
                  ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
                  ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
-                 ->join(TABLE_FEED . ' tfr', 'tfr.course_id ='. TABLE_COURSE . '.course_id')
                  ->where(TABLE_COURSE.".status=",1);
                  
                  if($user_id > 0)
@@ -113,10 +112,6 @@ class UserModel extends CI_Model
         // echo "<pre>"; print_r($result->result_array());die();
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
-
-    // public function avrage(){
-    //     # code...
-    // }
 
     public function getuserType($user_id){
         //checking for user type is tutor

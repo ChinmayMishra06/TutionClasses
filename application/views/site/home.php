@@ -130,8 +130,7 @@
     </section>
     <!-- member_counter counter end -->
 
-    <?php
-    if(isset($courses) && is_array($courses)){ ?>
+    <?php if(isset($courses) && is_array($courses)){ ?>
         <!--::review_part start::-->
         <section class="special_cource padding_top">
             <div class="container">
@@ -145,7 +144,7 @@
                 </div>
                 <div class="row" style="margin-bottom: 3%; margin-top:-25px;">
                     <div class="col-sm-12">                    
-                        <form action="<?php echo base_url(); ?>" method="post">
+                        <form action="<?php echo base_url('filter'); ?>" method="GET">
                             <ul class="text-center">
                             <?php if(isset($categories) && is_array($categories)){ ?>
                                 <li class="btn col-md-3 col-lg-2">
@@ -200,24 +199,20 @@
                                         </div>
                                         <div class="author_rating">
                                             <div class="rating">
-                                                <!-- < ?php
-                                                if($course['course_id'] == $feed['course_id']){
-                                                    if(isset($feedbacks) && is_array($feedbacks)){
-                                                        $count = 0;
-                                                        for($i=0; $i<count($feedbacks); $i++){
-                                                            $count += $feedbacks[$i]['rating'];
-                                                        }
-                                                        $rating = $count;
-                                                        $count = round(($count/count($feedbacks)), 0); ?>
-                                                        < ?php for($j=1; $j<=$count; $j++){ ?>
-                                                            <a><img src="< ?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
-                                                        < ?php }
-                                                        for($j=1; $j<=(5-$count); $j++){ ?>
-                                                            < ?php echo $rating; ?>              <a><img src="< ?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
-                                                    < ?php } ?> -->
-                                                <!-- < ?php } } ?> -->
+                                                <?php 
+                                                    for($j=1; $j<=$course['avg_rating']; $j++){ ?>
+                                                        <a><img src="<?php echo base_url(); ?>public/site/img/icon/color_star.svg" alt=""></a>
+                                                    <?php }
+                                                    for($j=1; $j<=(5-$course['avg_rating']); $j++){ ?>
+                                                        <a><img src="<?php echo base_url(); ?>public/site/img/icon/star.svg" alt=""></a>
+                                                <?php } ?>
                                             </div>
-                                            <p>Ratings</p>
+                                            <p>
+                                                <?php
+                                                    if($course['avg_rating'] > 1){ echo $course['avg_rating'] . " Ratings"; }
+                                                    else{ echo $course['avg_rating'] . " Rating"; }
+                                                ?>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -320,8 +315,3 @@
             </div>
         </section>
     <?php } ?>
-
-    <script>        
-        
-        
-    </script>

@@ -11,7 +11,38 @@
             $config['per_page'] = 6;
             $config['total_rows'] = $this->userModel->countCourses();
             $this->pagination->initialize($config);
-            if(isset($_REQUEST['btnSearch'])){
+
+            
+            if(isset($_REQUEST['btnApply'])){
+                if(!empty($_REQUEST['category']))
+                    $data[TABLE_COURSE.'.category_id'] = $this->input->post('category');
+                    // echo $this->input->post('category');die();
+
+                if(!empty($_REQUEST['duration']))
+                    $data[TABLE_COURSE.'.duration_unit'] = $this->input->post('duration');
+
+                if(!empty($_REQUEST['price']))
+                    $data[TABLE_COURSE.'.fees<='] = $this->input->post('price');
+
+                if((!empty($_REQUEST['category'])) || (!empty($_REQUEST['duration'])) || (!empty($_REQUEST['price']))){                    
+                    $config['total_rows'] = $this->userModel->countCourses(false, false, $data);
+                    $this->pagination->initialize($config);
+                    $rspAllCourses = $this->userModel->getAllCourses(6, $page, $data);
+                    if($rspAllCourses){
+                        $data['courses'] = $rspAllCourses;
+                    }else{
+                        $rspAllCourses = $this->userModel->getAllCourses(6, $page);
+                        if($rspAllCourses){
+                            $data['courses'] = $rspAllCourses;
+                        }
+                    }
+                }else{
+                    $rspAllCourses = $this->userModel->getAllCourses(6, $page);
+                    if($rspAllCourses){
+                        $data['courses'] = $rspAllCourses;
+                    }
+                }
+            }elseif(isset($_REQUEST['btnSearch'])){
                 $this->form_validation->set_rules('searchItem', 'Search item', 'trim|required|regex_match[/^([-a-z ])+$/i]');
                 $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
                 if($this->form_validation->run() === true){
@@ -22,6 +53,11 @@
                     if($rspCourses){                        
                         $data['courses'] = $rspCourses;
                     }
+                    else{             
+                        $config['total_rows'] = $this->userModel->countCourses();
+                        $this->pagination->initialize($config);
+                        $data['courses'] = $this->userModel->getAllCourses(6, $page);
+                    }
                 }else{
                     $data['courses'] = $this->userModel->getAllCourses(6, $page);
                 }
@@ -29,7 +65,8 @@
                 $data['courses'] = $this->userModel->getAllCourses(6, $page);
             }
             
-            $data['title'] = "Home";               
+            $data['title'] = "Home";
+               
             $data['categories'] = $this->dataModel->getCategory(0, 0);            
             $data['durations'] = $this->dataModel->getCategory(0, 2);            
             $data['allTeachers'] = $this->userModel->countTeachersStudents(1);
@@ -41,47 +78,6 @@
         
             $this->load->view('site/header', $data);
             $this->load->view('site/home');
-            $this->load->view('site/footer');
-        }
-        
-        public function filter($page = 1){
-            $this->load->model('UserModel', 'userModel'); 
-            $this->load->model('CommonModel', 'commonModel');
-            $this->load->model('DataModel', 'dataModel');
-            
-            $config['base_url'] = base_url() . "home/filter";
-            $config['per_page'] = 6;
-
-            if(!empty($_REQUEST['category']))
-                $data[TABLE_COURSE.'.category_id'] = $this->input->get('category');
-
-            if(!empty($_REQUEST['duration']))
-                $data[TABLE_COURSE.'.duration_unit'] = $this->input->get('duration');
-
-            if(!empty($_REQUEST['price']))
-                $data[TABLE_COURSE.'.fees<='] = $this->input->get('price');
-
-            if((!empty($_REQUEST['category'])) || (!empty($_REQUEST['duration'])) || (!empty($_REQUEST['price']))){
-                if (count($_GET) > 0) { $config['suffix'] = '?' . http_build_query($_GET, '', "&"); }
-                $config['total_rows'] = $this->userModel->countCourses(false, false, $data);
-                $this->pagination->initialize($config);
-                $rspAllCourses = $this->userModel->getAllCourses(6, $page, $data);
-                if($rspAllCourses){
-                    $data['courses'] = $rspAllCourses;
-                }
-            }else{
-                $config['total_rows'] = $this->userModel->countCourses();
-                $this->pagination->initialize($config);
-                $rspAllCourses = $this->userModel->getAllCourses(6, $page);
-                if($rspAllCourses){
-                    $data['courses'] = $rspAllCourses;
-                }         
-            }
-            $data['categories'] = $this->dataModel->getCategory(0, 0);            
-            $data['durations'] = $this->dataModel->getCategory(0, 2);                        
-            $data['title'] = "Course Search Result";
-            $this->load->view('site/header', $data);
-            $this->load->view('site/search_course');
             $this->load->view('site/footer');
         }
         

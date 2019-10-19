@@ -91,7 +91,7 @@
                             <div class="collapse navbar-collapse main-menu-item justify-content-end" id="navbarSupportedContent">
                                 <ul class="navbar-nav align-items-center">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="<?php echo base_url('home');?>">Home</a>
+                                        <a class="nav-link" href="<?php echo base_url();?>">Home</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="<?php echo base_url('courses');?>">Courses</a>

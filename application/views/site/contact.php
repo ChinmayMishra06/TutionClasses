@@ -76,7 +76,7 @@
           <div class="media contact-info">
             <span class="contact-info__icon"><i class="ti-email"></i></span>
             <div class="media-body">
-              <h3>info@tutionclasses.com</h3>
+              <h3><span> Email : <a href="mailto:info@tutionclasses.com" target="_top"><span>( info@tutionclasses.com )</span></a></h3>
               <p>Send us your query anytime!</p>
             </div>
           </div>
