@@ -7,14 +7,10 @@
                 redirect('institute/login');
             
             $this->load->model('CommonModel', 'commonModel');
-            $rspProfileData = $this->commonModel->getProfileData(false, $this->session->userdata('user_id'));
-            $data['profileData'] = $rspProfileData;
-            
-            $resAllFeedbacks = $this->commonModel->getAllFeedbacks(false, $this->session->userdata('user_id'));
-            $data['feedbacks'] = $resAllFeedbacks;
+            $data['profileData'] = $this->commonModel->getProfileData($this->session->userdata('user_id'));            
+            $data['feedbacks']  = $this->commonModel->getAllFeedbacks(false, $this->session->userdata('user_id'));            
             $data['siteTitle'] = "All feedbacks";
-            $data['sectionTitle'] = "All feedbacks";
-            
+            $data['sectionTitle'] = "All feedbacks";            
             $this->load->view('institute/header', $data);
             $this->load->view('institute/feedback');
             $this->load->view('institute/footer');

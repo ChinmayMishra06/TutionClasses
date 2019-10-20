@@ -52,9 +52,8 @@
             }
             
             $data['feedbacks'] = $this->commonModel->getAllFeedbacks($id);
-            $data['course'] = $this->userModel->getAllCourses(false, false, false, false, $id);
-            $data['userFeedbacks'] = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));
-            
+            $data['course'] = $this->userModel->getAllCourses(false, false, false, false, $id);            
+            $data['userFeedbacks'] = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));            
             $data['title'] = "Course Details";            
             $this->load->view('site/header', $data);
             $this->load->view('site/course_details');

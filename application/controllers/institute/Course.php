@@ -199,7 +199,7 @@
             $data['profileData'] = $rspProfileData;
 
             $this->load->model('UserModel', 'userModel');
-            $courseDetails = $this->userModel->getAllCourses($this->session->userdata('user_id'), $id);
+            $courseDetails = $this->userModel->getAllCourses(false, false, false, $this->session->userdata('user_id'), $id);
             $data['course'] = $courseDetails;
             $data['siteTitle'] = "Course details";
             $data['sectionTitle'] = "Course details";
