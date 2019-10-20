@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2019 at 10:23 AM
+-- Generation Time: Oct 20, 2019 at 07:02 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -93,6 +93,7 @@ CREATE TABLE `tc_courses` (
   `banner_image` varchar(100) DEFAULT 'bannerdummy.jpg',
   `fees_unit` varchar(255) DEFAULT '',
   `fees` decimal(10,2) DEFAULT NULL,
+  `avg_rating` int(10) UNSIGNED DEFAULT '0',
   `delete_flag` char(1) DEFAULT '0',
   `status` char(1) DEFAULT '1',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP
@@ -102,14 +103,14 @@ CREATE TABLE `tc_courses` (
 -- Dumping data for table `tc_courses`
 --
 
-INSERT INTO `tc_courses` (`course_id`, `user_id`, `category_id`, `sub_category_id`, `medium`, `course_name`, `description`, `duration_unit`, `duration`, `start_date`, `end_date`, `logo_image`, `banner_image`, `fees_unit`, `fees`, `delete_flag`, `status`, `created_at`) VALUES
-(26, 17, 1, 2, '7', 'Core Java', 'Java is a general-purpose programming language that is class-based, object-oriented, and designed to have as few implementation dependencies as possible', '13', 10, '2019-07-01', '2019-10-31', 'Javalogo.png', 'javaBanner.jpg', '12', '100.00', '0', '1', '2019-10-18 18:03:17'),
-(27, 17, 4, 5, '8', 'Core Php', 'PHP: Hypertext Preprocessor is a general-purpose programming language originally designed for web development. It was originally created by Rasmus Lerdorf in 1994; the PHP reference implementation is now produced by The PHP Group.', '13', 10, '2019-08-01', '2019-08-31', 'PHP.png', 'php.jpg', '13', '1000.00', '0', '1', '2019-10-18 18:10:47'),
-(28, 17, 11, 28, '9', 'CSharp', 'C# is a general-purpose, multi-paradigm programming language encompassing strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented, and component-oriented programming disciplines. W', '14', 10, '2019-09-01', '2019-10-31', 'CSharp.png', 'cBanner.jpg', '14', '1000.00', '0', '1', '2019-10-18 18:11:33'),
-(29, 17, 18, 21, '10', 'Core Python', 'Core Python Programming is a textbook on the Python programming language, written by Wesley J. Chun. The first edition of the book was released on December 14, 2000. The second edition was released several years later on September 18, 2006.', '17', 2, '2019-10-01', '2019-10-31', 'python_logo.png', 'pythonBanner.jpg', '17', '20000.00', '0', '1', '2019-10-18 18:12:38'),
-(30, 17, 23, 24, '26', 'Android Development', 'Android is a mobile operating system based on a modified version of the Linux kernel and other open source software, designed primarily for touchscreen mobile devices such as smartphones and tablets.', '14', 10, '2019-11-01', '2019-10-30', 'Android.png', 'android.jpg', '14', '5000.00', '0', '1', '2019-10-18 18:13:48'),
-(31, 17, 11, 29, '27', 'ADO Development', 'ADO.NET is a data access technology from the Microsoft .NET Framework that provides communication between relational and non-relational systems through a common set of components. ADO.NET is a set of computer software components that programmers can use to access data and data services from a database.', '17', 2, '2019-12-01', '2019-10-31', 'ADO.NET.png', 'ado-.net_.jpg', '17', '50000.00', '0', '1', '2019-10-18 18:15:03'),
-(32, 17, 23, 25, '8', 'Jelly Bean', 'Android \"Jelly Bean\" is the tenth version of Android and the codename given to three major point releases of the Android mobile operating system developed by Google, spanning versions between 4.1 and 4.3.1. Some operating systems that run Android 4.3/4.4 are Asus Nexus 7.', '13', 50, '2020-01-01', '2019-10-31', 'Android.png', 'android.jpg', '13', '1000.00', '0', '1', '2019-10-18 18:16:29');
+INSERT INTO `tc_courses` (`course_id`, `user_id`, `category_id`, `sub_category_id`, `medium`, `course_name`, `description`, `duration_unit`, `duration`, `start_date`, `end_date`, `logo_image`, `banner_image`, `fees_unit`, `fees`, `avg_rating`, `delete_flag`, `status`, `created_at`) VALUES
+(26, 17, 1, 2, '7', 'Core Java', 'Java is a general-purpose programming language that is class-based, object-oriented, and designed to have as few implementation dependencies as possible', '13', 10, '2019-07-01', '2019-10-31', 'Javalogo.png', 'javaBanner.jpg', '12', '100.00', 2, '0', '1', '2019-10-18 18:03:17'),
+(27, 17, 4, 5, '8', 'Core Php', 'PHP: Hypertext Preprocessor is a general-purpose programming language originally designed for web development. It was originally created by Rasmus Lerdorf in 1994; the PHP reference implementation is now produced by The PHP Group.', '13', 10, '2019-08-01', '2019-08-31', 'PHP.png', 'php.jpg', '13', '1000.00', 3, '0', '1', '2019-10-18 18:10:47'),
+(28, 17, 11, 28, '9', 'CSharp', 'C# is a general-purpose, multi-paradigm programming language encompassing strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented, and component-oriented programming disciplines. W', '14', 10, '2019-09-01', '2019-10-31', 'CSharp.png', 'cBanner.jpg', '14', '1000.00', 4, '0', '1', '2019-10-18 18:11:33'),
+(29, 17, 18, 21, '10', 'Core Python', 'Core Python Programming is a textbook on the Python programming language, written by Wesley J. Chun. The first edition of the book was released on December 14, 2000. The second edition was released several years later on September 18, 2006.', '17', 2, '2019-10-01', '2019-10-31', 'python_logo.png', 'pythonBanner.jpg', '17', '20000.00', 5, '0', '1', '2019-10-18 18:12:38'),
+(30, 17, 23, 24, '26', 'Android Development', 'Android is a mobile operating system based on a modified version of the Linux kernel and other open source software, designed primarily for touchscreen mobile devices such as smartphones and tablets.', '14', 10, '2019-11-01', '2019-10-30', 'Android.png', 'android.jpg', '14', '5000.00', 1, '0', '1', '2019-10-18 18:13:48'),
+(31, 17, 11, 29, '27', 'ADO Development', 'ADO.NET is a data access technology from the Microsoft .NET Framework that provides communication between relational and non-relational systems through a common set of components. ADO.NET is a set of computer software components that programmers can use to access data and data services from a database.', '17', 2, '2019-12-01', '2019-10-31', 'ADO.NET.png', 'ado-.net_.jpg', '17', '50000.00', 4, '0', '1', '2019-10-18 18:15:03'),
+(32, 17, 23, 25, '8', 'Jelly Bean', 'Android \"Jelly Bean\" is the tenth version of Android and the codename given to three major point releases of the Android mobile operating system developed by Google, spanning versions between 4.1 and 4.3.1. Some operating systems that run Android 4.3/4.4 are Asus Nexus 7.', '13', 50, '2020-01-01', '2019-10-31', 'Android.png', 'android.jpg', '13', '1000.00', 5, '0', '1', '2019-10-18 18:16:29');
 
 -- --------------------------------------------------------
 
@@ -192,14 +193,7 @@ CREATE TABLE `tc_newsletters` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` int(10) UNSIGNED DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tc_newsletters`
---
-
-INSERT INTO `tc_newsletters` (`newsletter_id`, `email`, `created_at`, `deleted_at`) VALUES
-(1, 'chinmaymishra.falna@gmail.com', '2019-10-17 18:18:44', 0),
-(2, 'mohitmishra.falna@gmail.com', '2019-10-17 18:19:01', 0);
+-- Error reading data for table tutionclasses.tc_newsletters: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `tutionclasses`.`tc_newsletters`' at line 1
 
 -- --------------------------------------------------------
 
