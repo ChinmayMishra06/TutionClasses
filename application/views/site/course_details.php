@@ -26,13 +26,21 @@
                             <li>
                                 <a class="justify-content-between d-flex">
                                     <p>Course Fee </p>
-                                    <span><?php echo $course[0]['fees'] . ' per ' . $course[0]['fees_unit']; ?></span>
+                                    <span><?php echo $course[0]['fees'] . ' per ' . $course[0]['fees_name']; ?></span>
                                 </a>
                             </li>
                             <li>
                                 <a class="justify-content-between d-flex">
                                     <p>Schedule </p>
-                                    <span><?php echo $course[0]['duration'] . ' ' . $course[0]['duration_unit']; ?></span>
+                                    <span>
+                                        <?php
+                                            if($course[0]['duration'] > 1){
+                                                echo $course[0]['duration'] . ' ' . $course[0]['duration_name'] . 's';
+                                            }else{                                                
+                                                echo $course[0]['duration'] . ' ' . $course[0]['duration_name'];
+                                            }
+                                        ?>
+                                    </span>
                                 </a>
                             </li>
                             <li>
@@ -96,7 +104,9 @@
                                         </div>
                                         <span id="remark">
                                             <?php if(($this->session->userdata('student_login')) && isset($userFeedbacks) && is_array($userFeedbacks)){
-                                                echo $feedbackArray[$userFeedbacks[0]['rating']-1];
+                                                    if($userFeedbacks[0]['rating'] != 0){
+                                                        echo $feedbackArray[$userFeedbacks[0]['rating']-1];
+                                                    }
                                             }else{
                                                 echo "Give rating";
                                             } ?>

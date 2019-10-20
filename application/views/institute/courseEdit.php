@@ -4,7 +4,7 @@
             <li class="active"><a href="#profile" data-toggle="tab">Courses</a></li>
           </ul>          
           <div class="tab-content">
-            <form class="form-horizontal" action="<?php echo base_url('institute/course/edit/'. $course[0]['course_id']); ?>" method="POST" enctype="multipart/form-data">
+            <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
               <?php if($this->session->flashdata('message')){ ?>
                   <div class="col-sm-offset-2 alert alert-<?php echo $this->session->flashdata('status')?>" data-dismiss="alert">
                       <?php echo $this->session->flashdata('message'); ?>
@@ -21,7 +21,7 @@
                           <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
                         <?php
                         }else{?>
-                          <option selected value="<?php echo $course[0]['category_id'];?>"><?php echo $course[0]['category_name'];?></option>
+                          <option selected="selected" value="<?php echo $course[0]['category_id'];?>"><?php echo $course[0]['category_name'];?></option>
                         <?php }
                       } ?>
                   </select>
@@ -42,11 +42,11 @@
                     <select name="inputMedium" id="inputMedium" class="form-control">
                         <option value="">Choose Medium</option>
                         <?php foreach($mediums as $medium){ ?>
-                          <?php if($medium['category_name'] != $course[0]['medium']){?>
+                          <?php if($medium['category_id'] != $course[0]['medium']){?>
                             <option value="<?php echo $medium['category_id']; ?>"><?php echo $medium['category_name']; ?></option>
                         <?php
                         }else{?>
-                            <option selected value="<?php echo $medium['category_id']; ?>"><?php echo $medium['category_name']; ?></option>
+                            <option selected="selected" value="<?php echo $medium['category_id']; ?>"><?php echo $medium['category_name']; ?></option>
                         <?php }
                       } ?>
                     </select>
@@ -118,7 +118,7 @@
                                 <option value="<?php echo $term['category_id']; ?>"><?php echo $term['category_name']; ?></option>
                               <?php
                               }else{?>
-                                <option selected value="<?php echo $term['category_id'];?>"><?php echo $term['category_name'];?></option>
+                                <option selected="selected" value="<?php echo $term['category_id'];?>"><?php echo $term['category_name'];?></option>
                               <?php }
                             } ?>
                           </select>
@@ -156,18 +156,18 @@
                         <div class="col-sm-12">
                           <select name="inputFeesTerm" id="inputFeesTerm" class="form-control">                              
                               <?php
-                                if($course[0]['fees_unit'] == '0'){ ?>
-                                  <option value="0" selected>Free</option>
+                                if($course[0]['fees_unit'] == 0){ ?>
+                                  <option value="0" selected="selected">Free</option>
                                 <?php } else{ ?>
                                   <option value="0">Free</option>
                                 <?php }
 
                                 foreach($terms as $term){                                
-                                  if($term['category_id'] != $course[0]['fees']){?>
+                                  if($term['category_id'] != $course[0]['fees_unit']){?>
                                     <option value="<?php echo $term['category_id']; ?>"><?php echo $term['category_name']; ?></option>
                                   <?php
                                   }else{?>
-                                    <option selected value="<?php echo $term['category_id'];?>"><?php echo $term['category_name'];?></option>
+                                    <option selected="selected" value="<?php echo $term['category_id'];?>"><?php echo $term['category_name'];?></option>
                                   <?php }
                                 } ?>
                           </select>                          

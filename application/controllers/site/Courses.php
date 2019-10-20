@@ -3,17 +3,19 @@
 
     class Courses extends CI_Controller{
         public function index($page = 1){
-            $data['title'] = "All Courses";
             $this->load->model('UserModel', 'userModel'); 
             $this->load->model('CommonModel', 'commonModel');
+            $this->load->model('DataModel', 'dataModel');
             
             $config['base_url'] = base_url() . "courses/index";
             $config['per_page'] = 6;
-            $config['total_rows'] = $this->userModel->countCourses();    
-            $this->pagination->initialize($config);
+            $config['total_rows'] = $this->userModel->countCourses();
+            
+            $data['courses'] = $this->userModel->getAllCourses(6, $page);
+            $data['title'] = "All courses";
+            $data['categories'] = $this->dataModel->getCategory(0, 0);            
+            $data['durations'] = $this->dataModel->getCategory(0, 2);
 
-            $data['courses'] = $this->userModel->getAllCoursesByConditions(6, $page);
-            $data['happyFeedbacks'] = $this->commonModel->getHappyFeedback(3);
             $this->load->view('site/header', $data);
             $this->load->view('site/courses');
             $this->load->view('site/footer');
@@ -51,8 +53,12 @@
                 }
             }
             
-            $data['feedbacks'] = $this->commonModel->getAllFeedbacks($id);
-            $data['course'] = $this->userModel->getAllCourses(false, false, false, false, $id);            
+            // $data['feedbacks'] = $this->commonModel->getAllFeedbacks($id);
+            $data['course'] = $this->userModel->getAllCourses(false, false, false, false, $id);
+            // echo "<pre>";
+            // print_r($data['course']);
+            // die();
+
             $data['userFeedbacks'] = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));            
             $data['title'] = "Course Details";            
             $this->load->view('site/header', $data);

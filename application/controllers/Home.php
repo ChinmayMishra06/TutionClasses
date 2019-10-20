@@ -10,8 +10,9 @@
             $config['base_url'] = base_url() . "home/index";
             $config['per_page'] = 6;
             $config['total_rows'] = $this->userModel->countCourses();
-
-            $data['courses'] = $this->userModel->getAllCourses(6, $page);            
+            $this->pagination->initialize($config);
+            
+            $data['courses'] = $this->userModel->getAllCourses(6, $page);
             $data['title'] = "Home";               
             $data['categories'] = $this->dataModel->getCategory(0, 0);            
             $data['durations'] = $this->dataModel->getCategory(0, 2);            
@@ -21,7 +22,7 @@
             $data['happyFeedbacks'] = $this->commonModel->getAllFeedbacks(false, false, 3);
             $data['subscribed'] = $this->commonModel->getSubscriber($this->session->userdata('student_id'), 0);                
             $data['allCourses'] = $this->userModel->countCourses();
-        
+
             $this->load->view('site/header', $data);
             $this->load->view('site/home');
             $this->load->view('site/footer');

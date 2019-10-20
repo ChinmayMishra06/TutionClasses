@@ -15,7 +15,7 @@
                 <th>Fees</th>
                 <td>
                   <?php
-                    echo $course[0]['fees'] . ' per '. $course[0]['fees_unit'];
+                    echo $course[0]['fees'] . ' per '. $course[0]['fees_name'];
                   ?>
                 </td>
               </tr>
@@ -30,9 +30,9 @@
                       <td>
                         <?php
                           if($course[0]['duration'] > 1)
-                            echo $course[0]['duration'] . ' ' . $course[0]['duration_unit'] . 's';
+                            echo $course[0]['duration'] . ' ' . $course[0]['duration_name'] . 's';
                           else
-                            echo $course[0]['duration'] . ' ' . $course[0]['duration_unit'];
+                            echo $course[0]['duration'] . ' ' . $course[0]['duration_name'];
                         ?>
                       </td>
                     </tr>

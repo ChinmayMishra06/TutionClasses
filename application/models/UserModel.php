@@ -85,7 +85,13 @@ class UserModel extends CI_Model
     }
 
     public function getAllCourses($limit=false, $page=false, $conditions = false, $user_id=false, $course_id=false){
-        $this->db->select(TABLE_USER.'.name,'. TABLE_USER.'.image,'.  TABLE_COURSE.'.*, tct.category_name, tcs.category_name as sub_category, tcm.category_name as medium, tcd.category_name as duration_unit, tcf.category_name as fees_unit')
+        $this->db->select(
+                    TABLE_USER.'.name,'. TABLE_USER.'.image,'.  TABLE_COURSE.'.*,
+                    tct.category_name, tcs.category_name as sub_category,
+                    tcm.category_name as medium_name,
+                    tcd.category_name as duration_name,
+                    tcf.category_name as fees_name'
+                )
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
                  ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
@@ -94,10 +100,12 @@ class UserModel extends CI_Model
                  ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
                  ->where(TABLE_COURSE.".status=",1);
                  
-                 if($user_id > 0)
+                 if($user_id > 0){
                     $this->db->where(TABLE_COURSE.".user_id=", $user_id);
-                 if($course_id > 0)
+                 }
+                 if($course_id > 0){
                     $this->db->where(TABLE_COURSE.".course_id=", $course_id);
+                 }
                  if($conditions != false){
                     if(array_key_exists('course_name', $conditions)){
                         $this->db->like($conditions);
@@ -105,8 +113,9 @@ class UserModel extends CI_Model
                         $this->db->where($conditions);
                     }
                 }
-                 if(($limit != false) && ($page != false))
+                 if(($limit != false) && ($page != false)){
                     $this->db->limit($limit, ($page - 1) * $limit);
+                 }
         
         $result = $this->db->get(TABLE_COURSE);
         // echo "<pre>"; print_r($result->result_array());die();

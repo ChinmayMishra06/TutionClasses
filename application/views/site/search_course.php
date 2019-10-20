@@ -48,7 +48,11 @@
                                 </li>
                             <?php } ?>
                                 <li class="btn col-md-3 col-lg-2">
-                                    <input type="text" class="form-control" name="price" id="price" placeholder="Price">
+                                    <?php if(!empty($this->input->get('price'))){?>
+                                        <input type="text" class="form-control" name="price" id="price" placeholder="Price" value="<?php echo $this->input->get('price'); ?>">
+                                    <?php }else{?>
+                                        <input type="text" class="form-control" name="price" id="price" placeholder="Price">
+                                    <?php } ?>
                                 </li>
                                 <button class="btn_1" type="submit" name="btnApply">Apply</button>
                             </ul>
@@ -122,8 +126,13 @@
                                         <option value="">Category</option>
                                         <option value="0" >All</option>
                                         <?php foreach($categories as $category){ ?>
-                                            <option value="<?php echo $category['category_id'] ?>" ><?php echo $category['category_name'] ?></option>
-                                        <?php } ?>
+                                            <?php if($category['category_id'] != $this->input->get('category')){?>
+                                                <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
+                                            <?php
+                                            }else{?>
+                                                <option selected value="<?php echo $category['category_id'] ?>" ><?php echo $category['category_name'] ?></option>
+                                            <?php }
+                                        } ?>
                                     </select>
                                 </li>
                             <?php } ?>
@@ -132,14 +141,23 @@
                                     <select class="form-control" name="duration">
                                         <option value="">Duration</option> 
                                         <option value="0">All</option>
-                                        <?php foreach($durations as $duration){ ?>
-                                            <option value="<?php echo $duration['category_id'] ?>" ><?php echo $duration['category_name'] ?></option>
-                                        <?php } ?>
+                                        <?php foreach($durations as $category){ ?>
+                                            <?php if($category['category_id'] != $this->input->get('duration')){?>
+                                                <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
+                                            <?php
+                                            }else{?>
+                                                <option selected value="<?php echo $category['category_id'] ?>" ><?php echo $category['category_name']; ?></option>
+                                            <?php }
+                                        } ?>
                                     </select>
                                 </li>
                             <?php } ?>
                                 <li class="btn col-md-3 col-lg-2">
-                                    <input type="text" class="form-control" name="price" id="price" placeholder="Price">
+                                    <?php if(!empty($this->input->get('price'))){?>
+                                        <input type="text" class="form-control" name="price" id="price" placeholder="Price" value="<?php echo $this->input->get('price'); ?>">
+                                    <?php }else{?>
+                                        <input type="text" class="form-control" name="price" id="price" placeholder="Price">
+                                    <?php } ?>
                                 </li>
                                 <button class="btn_1" type="submit" name="btnApply">Apply</button>
                             </ul>
