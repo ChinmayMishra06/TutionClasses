@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit("No direct script access allowed."); ?>
-    <?php if(isset($courses) && is_array($courses)){ ?>
+    <?php //echo "<pre>"; print_r($courses); die(); 
+    if(isset($courses) && is_array($courses)){ ?>
         <!--::review_part start::-->
         <section class="special_cource padding_top" id="search_course">
             <div class="container">

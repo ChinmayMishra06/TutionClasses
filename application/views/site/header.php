@@ -116,7 +116,7 @@
                                         </li>
                                     <?php } ?>
                                     <li class="nav-item">
-                                        <form action="<?php echo base_url(); ?>home" method="post">
+                                        <form action="<?php echo base_url('filter'); ?>" method="GET">
                                             <div class="input-group pt-1">
                                                 <input type="text" class="form-control myTextBox" name="searchItem" id="searchItem" placeholder="Search here..." aria-label="Search here..." aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
