@@ -19,7 +19,6 @@
                                 <li class="btn col-md-3 col-lg-2">
                                     <select id="category_list" class="form-control" name="category">
                                         <option value="">Category</option>
-                                        <option value="0" >All</option>
                                         <?php foreach($categories as $category){ ?>
                                             <?php if($category['category_id'] != $this->input->get('category')){?>
                                                 <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
@@ -35,7 +34,6 @@
                                 <li class="btn col-md-3 col-lg-2">
                                     <select class="form-control" name="duration">
                                         <option value="">Duration</option> 
-                                        <option value="0">All</option>
                                         <?php foreach($durations as $category){ ?>
                                             <?php if($category['category_id'] != $this->input->get('duration')){?>
                                                 <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
@@ -61,12 +59,12 @@
                 </div>                
                 <div class="row">
                     <?php foreach($courses as $course){ ?>
-                        <div class="col-sm-6 col-lg-4" style="margin-top: 28px;">
+                        <div class="col-sm-6 col-lg-4 all_course" style="margin-top: 28px;">
                             <div class="single_special_cource">
                                 <img src="<?php echo base_url('public/uploads/institute/images/'. $course['banner_image']); ?>" height="100px;" width="400px;" class="special_img" alt="<?php echo $course['banner_image']; ?>">
                                 <img src="<?php echo base_url('public/uploads/institute/images/'. $course['logo_image']); ?>" class="home-circle" alt="<?php echo $course['logo_image']; ?>">
                                 <div class="special_cource_text">
-                                    <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>" class="btn_4"><?php echo $course['category_name']; ?></a>
+                                    <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>" class="btn_4 card_click"><?php echo $course['category_name']; ?></a>
                                     <h4><?php echo $course['fees']; ?></h4>
                                     <a href="<?php echo base_url('courseDetails/'. $course['course_id']);?>"><h3><?php echo $course['course_name']; ?></h3></a>
                                     <p class="text-justify" style="min-height:80px; overflow:hidden;"><?php echo substr($course['description'], 0, 120); ?></p>
@@ -124,7 +122,6 @@
                                 <li class="btn col-md-3 col-lg-2">
                                     <select id="category_list" class="form-control" name="category">
                                         <option value="">Category</option>
-                                        <option value="0" >All</option>
                                         <?php foreach($categories as $category){ ?>
                                             <?php if($category['category_id'] != $this->input->get('category')){?>
                                                 <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
@@ -140,7 +137,6 @@
                                 <li class="btn col-md-3 col-lg-2">
                                     <select class="form-control" name="duration">
                                         <option value="">Duration</option> 
-                                        <option value="0">All</option>
                                         <?php foreach($durations as $category){ ?>
                                             <?php if($category['category_id'] != $this->input->get('duration')){?>
                                                 <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
@@ -174,3 +170,13 @@
             </div><br>
         </section>
 <?php } ?>
+
+<script type="text/javascript">
+        'use strict';
+        let allCourse = document.getElementsByClassName('all_course');
+        for(let i=0; i<allCourse.length; i++){
+            allCourse[i].addEventListener('click', function(){
+                document.getElementsByClassName('card_click')[i].click();
+            });
+        }
+    </script>

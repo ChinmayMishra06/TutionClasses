@@ -40,11 +40,7 @@
                 if(!empty($_REQUEST['category'])){
                     $data[TABLE_COURSE.'.category_id'] = $this->input->get('category');
                 }
-                if(($this->input->get('category') == 0) || ($this->input->get('duration') == 0)){
-                    $config['total_rows'] = $this->userModel->countCourses();
-                    $this->pagination->initialize($config);
-                    $data['courses'] = $this->userModel->getAllCourses(6, $page);
-                }
+                
                 if(!empty($_REQUEST['duration']))
                     $data[TABLE_COURSE.'.duration_unit'] = $this->input->get('duration');
 

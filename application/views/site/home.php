@@ -150,7 +150,6 @@
                                 <li class="btn col-md-3 col-lg-2">
                                     <select id="category_list" class="form-control" name="category">
                                         <option value="">Category</option>
-                                        <option value="0" >All</option>
                                         <?php foreach($categories as $category){ ?>
                                             <option value="<?php echo $category['category_id'] ?>" ><?php echo $category['category_name'] ?></option>
                                         <?php } ?>
@@ -161,7 +160,6 @@
                                 <li class="btn col-md-3 col-lg-2">
                                     <select class="form-control" name="duration">
                                         <option value="">Duration</option> 
-                                        <option value="0">All</option>
                                         <?php foreach($durations as $duration){ ?>
                                             <option value="<?php echo $duration['category_id'] ?>" ><?php echo $duration['category_name'] ?></option>
                                         <?php } ?>
