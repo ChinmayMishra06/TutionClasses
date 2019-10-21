@@ -19,7 +19,7 @@
             $data['allTeachers'] = $this->userModel->countTeachersStudents(1);
             $data['allStudents'] = $this->userModel->countTeachersStudents(0);
             $data['allSubscribers'] = $this->userModel->countSubscribers();
-            $data['happyFeedbacks'] = $this->commonModel->getAllFeedbacks(false, false, 3);
+            $data['happyFeedbacks'] = $this->commonModel->getHappyFeedbacks(3);
             $data['subscribed'] = $this->commonModel->getSubscriber($this->session->userdata('student_id'), 0);                
             $data['allCourses'] = $this->userModel->countCourses();
 

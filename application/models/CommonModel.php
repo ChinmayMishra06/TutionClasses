@@ -2,7 +2,6 @@
 
 class CommonModel extends CI_Model
 {
-
     public function __construct(){
         parent::__construct();
         $this->load->database();
@@ -76,6 +75,19 @@ class CommonModel extends CI_Model
                     if($limit > 0)
                         $this->db->limit($limit);
                         
+                $result = $this->db->get(TABLE_FEED);
+        return ($result->num_rows() > 0) ? $result->result_array() : false;
+    }
+    
+    public function getHappyFeedbacks($limit=false){
+        $this->db->select(TABLE_FEED.".*, name, image, email, course_name")
+                 ->join(TABLE_USER, TABLE_USER.".user_id=" . TABLE_FEED.".user_id")
+                 ->join(TABLE_COURSE, TABLE_COURSE.".course_id=" . TABLE_FEED.".course_id")
+                 ->where(TABLE_FEED.'.status', 1)
+                 ->order_by(TABLE_FEED.'.feedback_id', 'desc');
+                    if($limit > 0){
+                        $this->db->limit($limit);
+                    }                        
                 $result = $this->db->get(TABLE_FEED);
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }

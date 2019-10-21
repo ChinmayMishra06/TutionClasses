@@ -76,13 +76,11 @@
                                     <h6 class="mb-15">Provide Your Rating</h6>
                                     <div class="d-flex flex-row reviews justify-content-between">
                                         <span>Quality</span>
-                                        <input type="hidden" name="rating" value="
-                                            <?php
-                                                if(($this->session->userdata('student_login')) && is_array($userFeedbacks)){
-                                                    echo $userFeedbacks[0]['rating'];
-                                                } else{ echo "0"; }
-                                            ?>" id="rating"
-                                        >                                            
+                                        <?php if(($this->session->userdata('student_login')) && is_array($userFeedbacks)){ ?>
+                                            <input type="hidden" name="rating" value="<?php echo $userFeedbacks[0]['rating']; ?>" id="rating">
+                                        <?php } else{ ?>
+                                            <input type="hidden" name="rating" value="0" id="rating">
+                                        <?php } ?>
                                         <div class="rating">
                                             <?php if(($this->session->userdata('student_login')) && isset($userFeedbacks)){ ?>
                                                 <?php

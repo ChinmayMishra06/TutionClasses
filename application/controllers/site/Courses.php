@@ -41,6 +41,7 @@
                 if(!empty($this->input->post('rating')) || !empty($this->input->post('message'))){
                     $data['user_id'] = $this->session->userdata('student_id');
                     $data['course_id'] = $id;
+                    
                     $rspFeedbackAdd = $this->commonModel->addFeedback($data);
                     if($rspFeedbackAdd){
                         $this->session->set_flashdata('message', "Feedback send successfully.");
@@ -53,12 +54,8 @@
                 }
             }
             
-            // $data['feedbacks'] = $this->commonModel->getAllFeedbacks($id);
+            $data['feedbacks'] = $this->commonModel->getAllFeedbacks($id);
             $data['course'] = $this->userModel->getAllCourses(false, false, false, false, $id);
-            // echo "<pre>";
-            // print_r($data['course']);
-            // die();
-
             $data['userFeedbacks'] = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));            
             $data['title'] = "Course Details";            
             $this->load->view('site/header', $data);

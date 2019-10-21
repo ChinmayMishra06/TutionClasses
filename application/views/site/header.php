@@ -75,6 +75,10 @@
                 cursor:pointer;
             }
 
+            .all_course{
+                cursor: pointer;
+            }
+
         </style>
     </head>
     <body>
