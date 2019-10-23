@@ -26,19 +26,20 @@
                                 </form>
                             <!-- < ?php } ?> -->
                             <div class="social_icon">
-                                <a href="#"> <i class="ti-facebook"></i> </a>
-                                <a href="#"> <i class="ti-twitter-alt"></i> </a>
-                                <a href="#"> <i class="ti-instagram"></i> </a>
-                                <a href="#"> <i class="ti-skype"></i> </a>
+                                <a target="_blank" href="https://www.facebook.com/adoisstudio"> <i class="ti-facebook"></i> </a>
+                                <a target="_blank" href="https://twitter.com/AdoisStudio"> <i class="ti-twitter-alt"></i> </a>
+                                <a target="_blank" href="https://www.instagram.com/adois.studio/"> <i class="ti-instagram"></i> </a>
+                                <a target="_blank" href="https://in.linkedin.com/in/AdoisStudio"> <i class="fa fa-linkedin"></i> </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-sm-6 col-md-4">
-                        <div class="single-footer-widget footer_2">
-                            <h4>Contact us</h4>
-                            <div class="contact_info">
-                                <p><span> Email : <a href="mailto:info@tutionclasses.com" target="_top"><span>( info@tutionclasses.com )</span></a></p>
+                    <div class="col-xl-3 col-sm-6 col-md-4 col-lg-4">
+                        <div class="media contact-info">
+                            <div class="media-body">
+                                <h4>Contact us</h4>
+                                <h3><span> Email : <a href="mailto:info@tutionclasses.com" target="_top"><span class="small">( info@tutionclasses.com )</span></a></h3>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

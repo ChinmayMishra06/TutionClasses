@@ -51,7 +51,7 @@
             }
             $rspProfileData = $this->commonModel->getProfileData($this->session->userdata('user_id'));
             $data['profileData'] = $rspProfileData;
-            $data['siteTitle'] = "Edit profile";
+            $data['siteTitle'] = "Edit Profile";
             $data['sectionTitle'] = "Edit Profile";
 
             $this->load->view('institute/header', $data);

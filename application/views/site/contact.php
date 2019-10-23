@@ -34,13 +34,13 @@
           <h2 class="contact-title">Get in Touch</h2>
         </div>
         <div class="col-lg-8">
-          <?php if($this->session->flashdata('message')){ ?>
-              <div class="alert alert-<?php echo $this->session->flashdata('status'); ?>" data-dismiss="alert">
-                  <?php echo $this->session->flashdata('message'); ?>
-                  <button class="close">&times;</button>
-              </div>
-          <?php } ?>
           <form class="form-contact contact_form" action="<?php echo base_url('contact') ?>" method="post" id="contactForm">
+            <?php if($this->session->flashdata('message')){ ?>
+                <div class="alert alert-<?php echo $this->session->flashdata('status'); ?>" data-dismiss="alert">
+                    <?php echo $this->session->flashdata('message'); ?>
+                    <button class="close">&times;</button>
+                </div>
+            <?php } ?>
             <div class="row">
               <div class="col-12">
                 <div class="form-group">                  
@@ -68,7 +68,7 @@
               </div>
             </div>
             <div class="form-group mt-3">
-              <button type="submit" class="button button-contactForm btn_1" name="btnProfiel">Send Message</button>
+              <button type="submit" class="button button-contactForm btn_1" name="btnSendMessage">Send Message</button>
             </div>
           </form>
         </div>

@@ -9,9 +9,10 @@
             
             $config['base_url'] = base_url() . "courses/index";
             $config['per_page'] = 6;
-            $config['total_rows'] = $this->userModel->countCourses();
-            
-            $data['courses'] = $this->userModel->getAllCourses(6, $page);
+            $config['total_rows'] = $this->userModel->countCourses(false, false, 1);
+            $this->pagination->initialize($config);
+
+            $data['courses'] = $this->userModel->getAllCourses(6, $page, array('status'=>1));
             $data['title'] = "All courses";
             $data['categories'] = $this->dataModel->getCategory(0, 0);            
             $data['durations'] = $this->dataModel->getCategory(0, 2);
@@ -22,7 +23,6 @@
         }
         
         public function courseDetails($id){
-
             $this->load->model('UserModel', 'userModel');
             $this->load->model('CommonModel', 'commonModel');
 
@@ -55,7 +55,7 @@
             }
             
             $data['feedbacks'] = $this->commonModel->getAllFeedbacks($id);
-            $data['course'] = $this->userModel->getAllCourses(false, false, false, false, $id);
+            $data['course'] = $this->userModel->getAllCourses(false, false, array(TABLE_COURSE.'.status'=> 1), false, $id);
             $data['userFeedbacks'] = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));            
             $data['title'] = "Course Details";            
             $this->load->view('site/header', $data);
@@ -64,16 +64,26 @@
         }
 
         public function enquiry(){
-            if(!$this->session->userdata('student_login'))
+            if(!$this->session->userdata('student_login')){
+                $source = 'enquiry';
+                $course_id = $this->input->post('course_id');            
+                $this->session->set_userdata(array('source'=>$source, 'course_id'=>$course_id));
                 redirect('login');
+            }
 
-            $data['course_id'] = $this->input->post('course_id');
+            if(($this->session->userdata('source')) && ($this->session->userdata('course_id'))){
+                $data['course_id'] = $this->session->userdata('course_id');
+                $this->session->unset_userdata('source');
+                $this->session->unset_userdata('course_id');
+            }else{
+                $data['course_id'] = $this->input->post('course_id');
+            }
+            
             $data['user_id'] = $this->session->userdata('student_id');
             $this->load->model('CommonModel', 'commonModel');
             $rspAddEnquiry = $this->commonModel->addEnquiry($data);
-
             if($rspAddEnquiry){
-                $this->load->view('site/enquiry');
+                $this->load->view('site/enquiry', $data);
             }
         }
     }

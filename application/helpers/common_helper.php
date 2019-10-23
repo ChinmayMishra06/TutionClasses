@@ -15,6 +15,7 @@ define("TABLE_FEED", "tc_feedbacks");
 define("TABLE_REPORT", "tc_reports");
 define("TABLE_NEWS", "tc_newsletters");
 define("TABLE_ENQ", "tc_enquiries");
+define("TABLE_CONTACT", "tc_contacts");
 
 //data paths
 define("DIR_PRIVATE_DATA", "./private/data/");

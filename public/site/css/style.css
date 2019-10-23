@@ -4069,6 +4069,11 @@ ul {
   color: #ff663b;
 }
 
+/* Change by the TutionClasses developer. */
+.hover_color:hover {
+  color: #ff663b;
+}
+
 @media (max-width: 576px) {
   /* line 67, E:/172 Etrain Education/172_Etrain_Education_html/sass/_special_cource.scss */
   .special_cource .single_special_cource .special_cource_text h3 {

@@ -90,20 +90,5 @@
             $this->session->set_flashdata('status', 'success');
             redirect('institute/login');
         }
-
-        public function breadcrumbs(){
-            // load Breadcrumbs
-            $this->load->library('breadcrumbs');
-            echo "HELLO BREADCRUMBS";
-            // add breadcrumbs
-            $this->breadcrumbs->push('Section', '/section');
-            $this->breadcrumbs->push('Page', '/section/page');
-
-            // unshift crumb
-            $this->breadcrumbs->unshift('Home', '/');
-
-            // output
-            $this->breadcrumbs->show();
-        }
     }
 ?>

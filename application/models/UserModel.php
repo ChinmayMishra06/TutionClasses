@@ -59,7 +59,7 @@ class UserModel extends CI_Model
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
     
-    public function countCourses($user_id=false, $course_id=false, $conditions = false){  
+    public function countCourses($user_id=false, $course_id=false, $status=false, $conditions = false){  
         $this->db->select(TABLE_USER.'.name')
                  ->join(TABLE_USER, TABLE_COURSE.".user_id=" . TABLE_USER. ".user_id")
                  ->join(TABLE_CAT . ' tct', 'tct.category_id ='. TABLE_COURSE . '.category_id')
@@ -67,6 +67,10 @@ class UserModel extends CI_Model
                  ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
                  ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
                  ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit');
+                 
+                 if($status == 1){
+                    $this->db->where(TABLE_COURSE.".status=",1);
+                 }
                  if($user_id > 0)
                      $this->db->where(TABLE_COURSE.".user_id=", $user_id);
                  if($course_id > 0)
@@ -84,7 +88,7 @@ class UserModel extends CI_Model
         return ($result->num_rows() > 0) ? $result->num_rows() : false;
     }
 
-    public function getAllCourses($limit=false, $page=false, $conditions = false, $user_id=false, $course_id=false){
+    public function getAllCourses($limit=false, $page=false, $status=false, $conditions = false, $user_id=false, $course_id=false){
         $this->db->select(
                     TABLE_USER.'.name,'. TABLE_USER.'.image,'.  TABLE_COURSE.'.*,
                     tct.category_name, tcs.category_name as sub_category,
@@ -97,9 +101,11 @@ class UserModel extends CI_Model
                  ->join(TABLE_CAT . ' tcs', 'tcs.category_id ='. TABLE_COURSE . '.sub_category_id')
                  ->join(TABLE_CAT . ' tcm', 'tcm.category_id ='. TABLE_COURSE . '.medium')
                  ->join(TABLE_CAT . ' tcd', 'tcd.category_id ='. TABLE_COURSE . '.duration_unit')
-                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit')
-                 ->where(TABLE_COURSE.".status=",1);
-                 
+                 ->join(TABLE_CAT . ' tcf', 'tcf.category_id ='. TABLE_COURSE . '.fees_unit');
+
+                 if($status == 1){
+                    $this->db->where(TABLE_COURSE.".status=",1);
+                 }
                  if($user_id > 0){
                     $this->db->where(TABLE_COURSE.".user_id=", $user_id);
                  }

@@ -10,9 +10,10 @@
             $this->load->model('UserModel', 'userModel');            
 
             $data['profileData'] = $this->commonModel->getProfileData($this->session->userdata('user_id'));
-            $data['courses'] = $this->userModel->getAllCourses(false, false, false, $this->session->userdata('user_id'));
-            $data['siteTitle'] = "All courses";
-            $data['sectionTitle'] = "All courses";
+            $data['courses'] = $this->userModel->getAllCourses(false, false, false, false, $this->session->userdata('user_id'));
+
+            $data['siteTitle'] = "All Courses";
+            $data['sectionTitle'] = "All Courses";
             $this->load->view('institute/header', $data);            
             $this->load->view('institute/courses');
             $this->load->view('institute/footer');
@@ -89,8 +90,8 @@
             $data['mediums'] = $rspMedium;
             $data['terms'] = $rspTerm;
             
-            $data['siteTitle'] = "Add new course";
-            $data['sectionTitle'] = "Add new course";
+            $data['siteTitle'] = "Add New Course";
+            $data['sectionTitle'] = "Add New Course";
             
             $this->load->view('institute/header', $data);
             $this->load->view('institute/courseAdd');
@@ -163,13 +164,13 @@
             }
 
             $data['profileData'] = $this->commonModel->getProfileData($this->session->userdata('user_id'));            
-            $data['course'] = $this->userModel->getAllCourses(false, false, false, false, $id);
+            $data['course'] = $this->userModel->getAllCourses(false, false, false, false, false, $id);
             $data['categories'] = $this->dataModel->getCategory(0, 0);
             $data['mediums'] = $this->dataModel->getCategory(0, 1);
             $data['terms'] = $this->dataModel->getCategory(0, 2);
 
-            $data['siteTitle'] = "Edit course";
-            $data['sectionTitle'] = "Edit course";            
+            $data['siteTitle'] = "Edit Course";
+            $data['sectionTitle'] = "Edit Course";            
             $this->load->view('institute/header', $data);            
             $this->load->view('institute/courseEdit');
             $this->load->view('institute/footer');
@@ -186,12 +187,31 @@
             $this->load->model('UserModel', 'userModel');
             $courseDetails = $this->userModel->getAllCourses(false, false, false, $this->session->userdata('user_id'), $id);
             $data['course'] = $courseDetails;
-            $data['siteTitle'] = "Course details";
-            $data['sectionTitle'] = "Course details";
+            $data['siteTitle'] = "Course Details";
+            $data['sectionTitle'] = "Course Details";
             
             $this->load->view('institute/header', $data);            
             $this->load->view('institute/courseDetails');
             $this->load->view('institute/footer');
+        }
+        
+        public function courseActiveDeactive(){
+            if(!$this->session->userdata('login'))
+                redirect('institute/login');
+
+            $details = json_decode($this->input->post('data'));
+
+            if($details->status == "0"){ $activeDeactive = array('status'=>1); }
+            else{ $activeDeactive = array('status'=>0); }
+
+            $this->load->model('UserModel', 'userModel');
+            $rspActiveDeactive = $this->userModel->editCourse($details->course_id, $activeDeactive);
+
+            if($rspActiveDeactive){
+                die(json_encode(array('status'=>true, 'course_id'=>$details->course_id)));
+            }else{
+                die(json_encode(array('status'=>false)));
+            }
         }
     }
 ?>

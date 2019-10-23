@@ -43,6 +43,7 @@ $route['institute/category'] = 'institute/category/getAllCategory';             
 $route['institute/enquiry/all'] = 'institute/common/getAllEnquiries';                      //pending
 // $route['institute/notifications'] = 'institute/notification';                   //Pending
 // $route['institute/subscriptions'] = 'institute/subscription';                   //Pending
+$route['institute/active-deactive'] = 'institute/course/courseActiveDeactive';                   //Pending
 
 
 // Site panel

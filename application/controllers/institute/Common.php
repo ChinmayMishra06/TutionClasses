@@ -8,9 +8,9 @@
             
             $this->load->model('CommonModel', 'commonModel');
             $data['profileData'] = $this->commonModel->getProfileData($this->session->userdata('user_id'));            
-            $data['feedbacks']  = $this->commonModel->getAllFeedbacks(false, $this->session->userdata('user_id'));            
-            $data['siteTitle'] = "All feedbacks";
-            $data['sectionTitle'] = "All feedbacks";            
+            $data['feedbacks']  = $this->commonModel->getAllFeedbacks($this->session->userdata('user_id'));            
+            $data['siteTitle'] = "All Feedbacks";
+            $data['sectionTitle'] = "All Feedbacks";            
             $this->load->view('institute/header', $data);
             $this->load->view('institute/feedback');
             $this->load->view('institute/footer');
@@ -21,14 +21,11 @@
                 redirect('institute/login');
             
             $this->load->model('CommonModel', 'commonModel');
-            $rspProfileData = $this->commonModel->getProfileData($this->session->userdata('user_id'));
-            $data['profileData'] = $rspProfileData;
-            
-            $resAllReports = $this->commonModel->getAllReports($this->session->userdata('user_id'));
-            $data['reports'] = $resAllReports;
-            $data['siteTitle'] = "All reports";
-            $data['sectionTitle'] = "All reports";
-            
+            $data['profileData'] = $this->commonModel->getProfileData($this->session->userdata('user_id'));            
+            $data['reports'] = $this->commonModel->getAllReports($this->session->userdata('user_id'));
+
+            $data['siteTitle'] = "All Reports";
+            $data['sectionTitle'] = "All Reports";            
             $this->load->view('institute/header', $data);
             $this->load->view('institute/report');
             $this->load->view('institute/footer');

@@ -11,14 +11,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom: 3%; margin-top:-25px;">
+                <div class="row" style="margin-top:-25px;">
                     <div class="col-sm-12">                    
                         <form action="<?php echo base_url('filter'); ?>" method="GET">
                             <ul class="text-center">
                             <?php if(isset($categories) && is_array($categories)){ ?>
                                 <li class="btn col-md-3 col-lg-2">
                                     <select id="category_list" class="form-control" name="category">
-                                        <option value="">Category</option>
+                                        <option value="">All Categories</option>
                                         <?php foreach($categories as $category){ ?>
                                             <?php if($category['category_id'] != $this->input->get('category')){?>
                                                 <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
@@ -33,7 +33,7 @@
                             <?php if(isset($durations) && is_array($durations)){ ?>
                                 <li class="btn col-md-3 col-lg-2">
                                     <select class="form-control" name="duration">
-                                        <option value="">Duration</option> 
+                                        <option value="">Any Duration</option> 
                                         <?php foreach($durations as $category){ ?>
                                             <?php if($category['category_id'] != $this->input->get('duration')){?>
                                                 <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
@@ -59,7 +59,7 @@
                 </div>                
                 <div class="row">
                     <?php foreach($courses as $course){ ?>
-                        <div class="col-sm-6 col-lg-4 all_course" style="margin-top: 28px;">
+                        <div class="col-sm-6 col-lg-4 all_course" style="margin-top: 40px;">
                             <div class="single_special_cource">
                                 <img src="<?php echo base_url('public/uploads/institute/images/'. $course['banner_image']); ?>" height="100px;" width="400px;" class="special_img" alt="<?php echo $course['banner_image']; ?>">
                                 <img src="<?php echo base_url('public/uploads/institute/images/'. $course['logo_image']); ?>" class="home-circle" alt="<?php echo $course['logo_image']; ?>">
@@ -121,7 +121,7 @@
                             <?php if(isset($categories) && is_array($categories)){ ?>
                                 <li class="btn col-md-3 col-lg-2">
                                     <select id="category_list" class="form-control" name="category">
-                                        <option value="">Category</option>
+                                        <option value="">All Categories</option>
                                         <?php foreach($categories as $category){ ?>
                                             <?php if($category['category_id'] != $this->input->get('category')){?>
                                                 <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
@@ -136,7 +136,7 @@
                             <?php if(isset($durations) && is_array($durations)){ ?>
                                 <li class="btn col-md-3 col-lg-2">
                                     <select class="form-control" name="duration">
-                                        <option value="">Duration</option> 
+                                        <option value="">Any Duration</option> 
                                         <?php foreach($durations as $category){ ?>
                                             <?php if($category['category_id'] != $this->input->get('duration')){?>
                                                 <option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>

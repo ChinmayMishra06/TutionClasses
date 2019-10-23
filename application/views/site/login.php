@@ -15,22 +15,22 @@
                   </div>
               <?php } ?>
               <form action="<?php echo base_url('login'); ?>" method="post">
-                  <div class="form-group">
-                      <label class="col">Username</label>
-                      <div class="col">
-                          <input type="text" name="email" id="email" class="form-control" placeholder="Enter your username...">
-                          <?php if(validation_errors()) echo form_error('email'); ?>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col">Password</label>
-                      <div class="col">
-                          <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password...">
-                          <?php if(validation_errors()) echo form_error('password'); ?>
-                      </div>
-                  </div>
-                  <input type="submit" class="btn_1" value="Login" name="btnLogin">
-                  <a href="<?php echo base_url('signup'); ?>" class="btn_2 float-right" id="btnSingup">Signup</a>
+                <div class="form-group">
+                    <label class="col">Username</label>
+                    <div class="col">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="Enter your username...">
+                        <?php if(validation_errors()) echo form_error('email'); ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col">Password</label>
+                    <div class="col">
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password...">
+                        <?php if(validation_errors()) echo form_error('password'); ?>
+                    </div>
+                </div>
+                <input type="submit" class="btn_1" value="Login" name="btnLogin">
+                <a href="<?php echo base_url('signup'); ?>" class="btn_2 float-right" id="btnSingup">Signup</a>
               </form>
             </div>
           </div>

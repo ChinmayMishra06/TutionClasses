@@ -57,7 +57,7 @@
                             </li>
                         </ul>
                         <form action="<?php echo base_url('enquiry'); ?>" method="post">
-                                <input type="hidden" name="course_id" value="<?php echo $course[0]['course_id']; ?>">
+                            <input type="hidden" name="course_id" value="<?php echo $course[0]['course_id']; ?>">
                             <div class="btn_1 d-block"><input type="submit" class="btn text-white" value="I am interested"></div>
                         </form>
                     </div>

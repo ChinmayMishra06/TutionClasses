@@ -73,7 +73,7 @@
         <script src="<?php echo base_url(); ?>public/site/js/custom.js"></script>
         <script type="text/javascript">
              window.setTimeout(function(){
-                window.location.href = "http://127.0.0.1/tutionclasses/home";
+                window.location.href = "http://127.0.0.1/tutionclasses/courseDetails/<?php echo $course_id; ?>";
             }, 5000);
         </script>
     </body>

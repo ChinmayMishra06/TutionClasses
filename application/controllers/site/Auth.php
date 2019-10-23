@@ -9,22 +9,31 @@
         public function index(){
             if($this->session->userdata('student_login'))
                 redirect('home');
-                
+
+            if(($this->session->userdata('source')) && ($this->session->userdata('course_id'))){
+                $session_source = $this->session->userdata('source');
+                $session_course_id = $this->session->userdata('course_id');
+            }
+
             if(isset($_REQUEST['btnLogin'])){
                 $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
                 $this->form_validation->set_rules('password', 'Password', 'trim|required');
                 $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
-
+                
                 if($this->form_validation->run() === TRUE){
                     $email = $this->input->post('email');
                     $password = $this->input->post('password');
-
                     $this->load->model('AuthModel', 'authModel');
                     $user = $this->authModel->getUser($email, $password, 0);
-                    if($user){
+                    if($user){                        
                         $login = array('student_login'=>$user->name, 'student_id'=>$user->user_id);
                         $this->session->set_userdata($login);
-                        redirect('home');
+                        
+                        if($session_source && $session_course_id){
+                            redirect($session_source);
+                        }else{
+                            redirect('home');
+                        }
                     }else{
                         $this->session->set_flashdata('message', 'Invalid credentials');
                         $this->session->set_flashdata('status', 'danger');

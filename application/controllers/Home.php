@@ -9,10 +9,10 @@
             
             $config['base_url'] = base_url() . "home/index";
             $config['per_page'] = 6;
-            $config['total_rows'] = $this->userModel->countCourses();
+            $config['total_rows'] = $this->userModel->countCourses(false, false, 1);
             $this->pagination->initialize($config);
             
-            $data['courses'] = $this->userModel->getAllCourses(6, $page);
+            $data['courses'] = $this->userModel->getAllCourses(6, $page, 1);
             $data['title'] = "Home";               
             $data['categories'] = $this->dataModel->getCategory(0, 0);            
             $data['durations'] = $this->dataModel->getCategory(0, 2);            
@@ -21,7 +21,7 @@
             $data['allSubscribers'] = $this->userModel->countSubscribers();
             $data['happyFeedbacks'] = $this->commonModel->getHappyFeedbacks(3);
             $data['subscribed'] = $this->commonModel->getSubscriber($this->session->userdata('student_id'), 0);                
-            $data['allCourses'] = $this->userModel->countCourses();
+            $data['allCourses'] = $this->userModel->countCourses(false, false, 1);
 
             $this->load->view('site/header', $data);
             $this->load->view('site/home');
@@ -49,20 +49,24 @@
 
                 if((!empty($_REQUEST['category'])) || (!empty($_REQUEST['duration'])) || (!empty($_REQUEST['price']))){
                     if (count($_GET) > 0) { $config['suffix'] = '?' . http_build_query($_GET, '', "&"); }
-                    $config['total_rows'] = $this->userModel->countCourses(false, false, $data);
+                    $config['total_rows'] = $this->userModel->countCourses(false, false, 1, $data);
                     $this->pagination->initialize($config);
-                    $data['courses'] = $this->userModel->getAllCourses(6, $page, $data);
+                    $data['courses'] = $this->userModel->getAllCourses(6, $page, 1, $data);
+                }else{
+                    $config['total_rows'] = $this->userModel->countCourses(false, false, 1);
+                    $this->pagination->initialize($config);
+                    $data['courses'] = $this->userModel->getAllCourses(6, $page, 1);
                 }
             }elseif(isset($_REQUEST['btnSearch'])){
                 if (count($_GET) > 0) { $config['suffix'] = '?' . http_build_query($_GET, '', "&"); }
                 $data['course_name'] = $this->input->get('searchItem');
-                $config['total_rows'] = $this->userModel->countCourses(false, false, $data);
+                $config['total_rows'] = $this->userModel->countCourses(false, false, 1, $data);
                 $this->pagination->initialize($config);
-                $data['courses'] = $this->userModel->getAllCourses(6, $page, $data);
+                $data['courses'] = $this->userModel->getAllCourses(6, $page, 1, $data);
             }else{
-                $config['total_rows'] = $this->userModel->countCourses();
+                $config['total_rows'] = $this->userModel->countCourses(false, false, 1);
                 $this->pagination->initialize($config);
-                $data['courses'] = $this->userModel->getAllCourses(6, $page);
+                $data['courses'] = $this->userModel->getAllCourses(6, $page, 1);
             }
 
             $data['categories'] = $this->dataModel->getCategory(0, 0);            
@@ -101,34 +105,16 @@
                 $this->form_validation->set_rules('subject', 'Subject', 'trim|required');
                 $this->form_validation->set_rules('message', 'Message', 'trim|required');
                 $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
+
                 if($this->form_validation->run() == true){
-                    // This is email configuration settings.
-                    $config['protocol'] = 'smtp';
-                    $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-                    $config['smtp_port'] = '465';
-                    $config['smtp_user'] = $_SERVER['ENCUSER'];
-                    $config['smtp_pass'] = $_SERVER['ENCPASS'];
-                    $config['mailtype'] = 'html';
-                    // $config['starttls'] = TRUE;
-                    // $config['newline'] = '\r\n';
-                    // $config['validate'] = TRUE;
-                    // $config['mailpath'] = 'sendmail';
-                    $config['charset'] = 'iso-8859-1';
-                    // $config['wordwrap'] = TRUE;
+                    $data['name'] = $name = $this->input->post('name');
+                    $data['email'] = $email = $this->input->post('email');
+                    $data['subject'] = $subject = $this->input->post('subject');
+                    $data['message'] = $message = $this->input->post('message');
+                    $this->load->model('CommonModel', 'commonModel');
+                    $rspAddContact = $this->commonModel->addContact($data);
 
-                    $this->email->initialize($config);
-                    $name = $this->input->post('name');
-                    $email = $this->input->post('email');
-                    $subject = $this->input->post('subject');
-                    $message = $this->input->post('message');
-
-                    $this->email->from($email, $name);
-                    $this->email->to('adoisstudio.com@gmail.com');
-                    $this->email->subject($subject);
-                    $this->email->message($message);
-                    $result = $this->email->send();
-
-                    if($result){
+                    if($rspAddContact){
                         $this->session->set_flashdata('message', "Message send successfully.");
                         $this->session->set_flashdata('status', "success");
                     }else{

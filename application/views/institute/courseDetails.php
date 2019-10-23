@@ -8,7 +8,7 @@
             <!-- <img src="< ?php echo base_url('public/uploads/institute/images/'. $course[0]['logo_image']); ?>" alt="Logo Image" id="logo-image"> -->
             <table class="table borderless">
               <tr><th>Category</th><td><?php echo $course[0]['category_name']; ?></td></tr>
-              <tr><th>Medium</th><td><?php echo $course[0]['medium']; ?></td></tr>
+              <tr><th>Medium</th><td><?php echo $course[0]['medium_name']; ?></td></tr>
               <tr><th>Course Name</th><td><?php echo $course[0]['course_name']; ?></td></tr>
               <tr><th>Description</th><td><?php echo $course[0]['description']; ?></td></tr>
               <tr>

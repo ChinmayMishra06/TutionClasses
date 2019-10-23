@@ -61,21 +61,16 @@ class CommonModel extends CI_Model
             }
         }        
     }
-    
-    public function getAllFeedbacks($course_id=false, $user_id=false, $limit=false){
-        $this->db->select(TABLE_FEED.".*, name, image, email, course_name")
-                 ->join(TABLE_USER, TABLE_USER.".user_id=" . TABLE_FEED.".user_id")
-                 ->join(TABLE_COURSE, TABLE_COURSE.".course_id=" . TABLE_FEED.".course_id")
-                 ->where(TABLE_FEED.'.status', 1)
-                 ->order_by(TABLE_FEED.'.feedback_id', 'desc');
-                    if($user_id > 0)
-                        $this->db->where(TABLE_FEED.'.user_id', $user_id);
-                    if($course_id > 0)
-                        $this->db->where(TABLE_FEED.'.course_id', $course_id); 
-                    if($limit > 0)
-                        $this->db->limit($limit);
-                        
-                $result = $this->db->get(TABLE_FEED);
+
+    public function getAllFeedbacks($user_id){
+        $result = $this->db->select("tf.*, tc.course_name, tu.name, tu.email")
+                        ->join(TABLE_COURSE .' tc', 'tc.course_id=tf.course_id')
+                        ->join(TABLE_USER .' tu', 'tc.user_id=tu.user_id')
+                        ->where('tu.user_id', $user_id)
+                        ->get(TABLE_FEED . ' tf');
+        // echo "<pre>";
+        // print_r($result->result_array());die();
+
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
     
@@ -93,11 +88,12 @@ class CommonModel extends CI_Model
     }
     
     public function getAllReports($user_id){
-        $result = $this->db->select(TABLE_REPORT.".*, victim.name victim_name, victim.email, category_name")
-                           ->join(TABLE_USER . " as victim", "victim.user_id=" . TABLE_REPORT.".victim_id")
-                           ->join(TABLE_CAT, TABLE_CAT.".category_id=" . TABLE_REPORT.".course_id")
-                           ->where(TABLE_REPORT.'.status', 1)
-                           ->get(TABLE_REPORT);
+        $result = $this->db->select("tr.*, tc.course_name, tuc.name as criminal_name, tuc.email as criminal_email, tuv.name as victim_name, tuv.email as victim_email")
+                        ->join(TABLE_COURSE .' tc', 'tc.course_id=tr.course_id')
+                        ->join(TABLE_USER .' tuc', 'tc.user_id=tuc.user_id')
+                        ->join(TABLE_USER .' tuv', 'tr.victim_id=tuv.user_id')
+                        ->where('tuc.user_id', $user_id)
+                        ->get(TABLE_REPORT . ' tr');
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
         
@@ -129,6 +125,11 @@ class CommonModel extends CI_Model
         return $result ? true : false;
     }
 
+    public function addContact($data){
+        $result = $this->db->insert(TABLE_CONTACT, $data);
+        return $result ? true : false;
+    }
+    
     // public function unsubscribe($user_id){
     //     $getSubscriberStatus = $this->getSubscriber($user_id, 0);
     //     if($getSubscriberStatus){
