@@ -62,15 +62,27 @@ class CommonModel extends CI_Model
         }        
     }
 
+    public function addReport($data){
+            $result = $this->db->insert(TABLE_REPORT, $data);
+            return $result ? true : false;
+    }
+
     public function getAllFeedbacks($user_id){
-        $result = $this->db->select("tf.*, tc.course_name, tu.name, tu.email")
+        $result = $this->db->select("tf.*, tc.course_name, tu.user_id, tu.name, tu.email")
                         ->join(TABLE_COURSE .' tc', 'tc.course_id=tf.course_id')
                         ->join(TABLE_USER .' tu', 'tc.user_id=tu.user_id')
                         ->where('tu.user_id', $user_id)
                         ->get(TABLE_FEED . ' tf');
-        // echo "<pre>";
-        // print_r($result->result_array());die();
-
+        return ($result->num_rows() > 0) ? $result->result_array() : false;
+    }
+    
+    public function getCourseFeedbacks($course_id){
+        $result = $this->db->select("tf.*, tc.course_name, tu.user_id, tuf.name, tuf.email")
+                           ->join(TABLE_COURSE .' tc', 'tc.course_id=tf.course_id')
+                           ->join(TABLE_USER .' tu', 'tc.user_id=tu.user_id')
+                           ->join(TABLE_USER .' tuf', 'tf.user_id=tuf.user_id')
+                           ->where('tc.course_id', $course_id)
+                           ->get(TABLE_FEED . ' tf');
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
     
@@ -87,6 +99,14 @@ class CommonModel extends CI_Model
         return ($result->num_rows() > 0) ? $result->result_array() : false;
     }
     
+    public function getUserFeedbacks($user_id, $course_id){
+        $result = $this->db->select(TABLE_FEED.".*")
+                 ->where(TABLE_FEED.'.user_id', $user_id)
+                 ->where(TABLE_FEED.'.course_id', $course_id)
+                ->get(TABLE_FEED);
+        return ($result->num_rows() > 0) ? $result->result_array() : false;
+    }
+
     public function getAllReports($user_id){
         $result = $this->db->select("tr.*, tc.course_name, tuc.name as criminal_name, tuc.email as criminal_email, tuv.name as victim_name, tuv.email as victim_email")
                         ->join(TABLE_COURSE .' tc', 'tc.course_id=tr.course_id')

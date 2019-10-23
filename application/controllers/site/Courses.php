@@ -54,9 +54,33 @@
                 }
             }
             
-            $data['feedbacks'] = $this->commonModel->getAllFeedbacks($id);
-            $data['course'] = $this->userModel->getAllCourses(false, false, array(TABLE_COURSE.'.status'=> 1), false, $id);
-            $data['userFeedbacks'] = $this->commonModel->getAllFeedbacks($id, $this->session->userdata('student_id'));            
+            if(isset($_REQUEST['btnReportAdd'])){
+                if(!$this->session->userdata('student_login'))
+                    redirect('login');
+
+                $this->form_validation->set_rules('report_title', 'title', 'trim|required|regex_match[/^([-a-z ])+$/i]');
+                $this->form_validation->set_rules('description', 'description', 'trim|required|regex_match[/^([-a-z. ])+$/i]|max_length[500]');
+                $this->form_validation->set_error_delimiters('<i class="text-danger">', '</i>');
+                if($this->form_validation->run() == true){
+                    $data['title'] = $this->input->post('report_title');
+                    $data['description'] = $this->input->post('description');
+                    $data['victim_id'] = $this->session->userdata('student_id');
+                    $data['course_id'] = $id;
+                    $rspReportAdd = $this->commonModel->addReport($data);
+                    if($rspReportAdd){
+                        $this->session->set_flashdata('message', "Report send successfully.");
+                        $this->session->set_flashdata('status', "success");
+                        redirect('courseDetails/'. $id);
+                    }else{
+                        $this->session->set_flashdata('message', "Report not send.");
+                        $this->session->set_flashdata('status', "danger");
+                    }
+                }
+            }
+            
+            $data['feedbacks'] = $this->commonModel->getCourseFeedbacks($id);
+            $data['course'] = $this->userModel->getAllCourses(false, false, false, array(TABLE_COURSE.'.status'=> 1), false, $id);
+            $data['userFeedbacks'] = $this->commonModel->getUserFeedbacks($this->session->userdata('student_id'), $id);
             $data['title'] = "Course Details";            
             $this->load->view('site/header', $data);
             $this->load->view('site/course_details');
@@ -84,6 +108,30 @@
             $rspAddEnquiry = $this->commonModel->addEnquiry($data);
             if($rspAddEnquiry){
                 $this->load->view('site/enquiry', $data);
+            }
+        }
+
+        public function report(){
+            if(!$this->session->userdata('student_login')){
+                $source = 'report';
+                $course_id = $this->input->post('course_id');            
+                $this->session->set_userdata(array('report_source'=>$source, 'report_course_id'=>$course_id));
+                redirect('login');
+            }
+
+            if(($this->session->userdata('report_source')) && ($this->session->userdata('report_course_id'))){
+                $data['course_id'] = $this->session->userdata('report_course_id');
+                $this->session->unset_userdata('report_source');
+                $this->session->unset_userdata('report_course_id');
+            }else{
+                $data['course_id'] = $this->input->post('course_id');
+            }
+            
+            $data['user_id'] = $this->session->userdata('student_id');
+            $this->load->model('CommonModel', 'commonModel');
+            $rspAddReport = $this->commonModel->addReport($data);
+            if($rspAddReport){
+                $this->load->view('site/report', $data);
             }
         }
     }

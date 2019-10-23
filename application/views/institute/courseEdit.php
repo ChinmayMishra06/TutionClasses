@@ -64,10 +64,7 @@
                 <label for="inputDescription" class="col-sm-2 control-label">Description</label>
                 <div class="col-sm-10">
                   <textarea class="form-control" name="inputDescription" id="inputDescription"><?php echo $course[0]['description']; ?></textarea>
-                  <?php
-                    if(validation_errors()) echo form_error('inputDescription');
-                    else echo '<i class="text-danger">* Only 500 characters are allowed.</i>';
-                  ?>
+                  <i class="text-green" id="allow_word_message">* Only <span id="word_count">0</span>/ <span id="total_char">500</span> characters are allowed.</i>
                 </div>
               </div>
               <div class="form-group">
@@ -303,5 +300,29 @@
 
           document.getElementById('logo_img').addEventListener('mouseout', function(){
             document.getElementById('view_logo_img').style.display="none";
+          });
+
+          let description = document.getElementById('inputDescription');
+          description.addEventListener('keyup', function(){
+            let word_count = document.getElementById('word_count');
+            let total_char = document.getElementById('total_char').textContent;
+            word_count.textContent = description.value.length;
+
+            if(parseInt(total_char) < description.value.length){
+              document.getElementById('allow_word_message').className = "text-red";
+            }else{
+              document.getElementById('allow_word_message').className = "text-green";
+            }
+          });
+
+          window.addEventListener('load', function(){
+            let word_count = document.getElementById('word_count');
+            word_count.textContent = description.value.length;
+
+            if(parseInt(total_char) < description.value.length){
+              document.getElementById('allow_word_message').className = "text-red";
+            }else{
+              document.getElementById('allow_word_message').className = "text-green";
+            }
           });
         </script>

@@ -63,6 +63,7 @@ $route['subscribe'] = 'home/subscribe';                      //Completed
 // $route['unsubscribe'] = 'home';                      //Completed
 // $route['searchCourse'] = 'home/searchCourse';                      //Completed
 $route['enquiry'] = 'site/courses/enquiry';                      //pending
+// $route['report'] = 'site/courses';                      //pending
 
 //Apis v1
 $route['api/v1/init'] = 'api/v1/BaseApi/apiInit';

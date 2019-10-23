@@ -3,8 +3,8 @@
 
     class Common extends CI_Controller{
         public function feedback(){
-            if(!$this->session->userdata('login'))
-                redirect('institute/login');
+            // if(!$this->session->userdata('login'))
+            //     redirect('site/login');
             
             $this->load->model('CommonModel', 'commonModel');
             $data['profileData'] = $this->commonModel->getProfileData($this->session->userdata('user_id'));            
