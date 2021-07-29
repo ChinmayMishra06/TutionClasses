@@ -5,7 +5,7 @@ include_once 'BaseApi.php';
 
 class AuthApi extends BaseApi
 {
-    //send login response using email and password
+    //Send login response using email and password
     public function apiLogin()
     {
         //validate input values
