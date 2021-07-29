@@ -1,0 +1,47 @@
+
+                    <form action="" method="post">
+                        <ul class="text-center">
+                            <li class="filter btn">
+                                <div class="dropdown">
+                                    <input class="btn dropdown-toggle" type="text" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" list="category_list">
+                                    <datalist id="category_list" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <option class="dropdown-item" value="all" >All</option> <!-- href="" -->
+                                        <option class="dropdown-item" value="java" >Java</option> <!-- href="" -->
+                                        <option class="dropdown-item" value="android" >Android</option> <!-- href="" -->
+                                        <option class="dropdown-item" value="php" >PHP</option> <!-- href="" -->
+                                        <option class="dropdown-item" value="python" >Python</option> <!-- href="" -->
+                                    </datalist>
+                                </div>
+                            </li>
+                            <li class="filter btn">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
+                                        Duration
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" >Day</a> <!-- href=""-->
+                                        <a class="dropdown-item" >Week</a> <!-- href=""-->
+                                        <a class="dropdown-item" >Month</a> <!-- href=""-->
+                                        <a class="dropdown-item" >Year</a> <!-- href=""-->
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="filter btn">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="">
+                                        Price
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" >Less Than</a> <!-- href=""-->
+                                        <a class="dropdown-item" >Equal To</a> <!-- href=""-->
+                                        <a class="dropdown-item" >Less Than or Equal To</a> <!-- href=""-->
+                                        <a class="dropdown-item" >Greater Than</a> <!-- href=""-->
+                                        <a class="dropdown-item" >Greater Than or Equal To</a> <!-- href=""-->
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="filter btn">
+                                <button class="btn_1" type="button">Apply</button>
+                            </li>
+                        </ul>
+                    </form>

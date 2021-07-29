@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "9e75b1f9-991f-444c-83e9-9a3e7aa83aa5",
+		"name": "tuitionclassesapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/plain",
+						"type": "text"
+					},
+					{
+						"key": "x-api-key",
+						"value": "molajdfsklajfjowermolajdfsklajfjower",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"mohitmishra.falna850@gmail.com\",\n\t\"password\" : \"password\",\n\t\"userType\" : 0\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{tutionclasses}}login",
+					"host": [
+						"{{tutionclasses}}login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signUp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"key\" : \"0e51ccabeaa5be89b4f96e58f84a0ae32f0146d8ad549443d0e680b14dc8c3bd4387aa9dc521766c4bf3666a9cef686258ff05c476a9641228f5f750a7be4efdDjYZSlmBWeIUTq\\/fx44aIK+lPjLwkr+G5Bqxv7POkrbOQ7jBmksfJE\\/i0HFbT53arHXO7pV5U3yUggMK+SF0ik9QfisbnVtiki\\/y81m43nBGHUXozm1Kc0KzVJyeeHbC03\\/03wz\\/A5wrTFCVJp4suGJjQdoJYOuUP+oeNIEu+Xc=\"\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}/signUp",
+					"host": [
+						"{{tutionclasses}}"
+					],
+					"path": [
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"authToken\":\"authToken\":\"2761ba6668741a1b85b92a1a625cf16aa76e075154acffde6c592a740bba2e3d26665660ea40907924063375f843b4e3b1eef7634e525f41aaf7fdf864938dfaS4x7PH7mFOmMTP\\/krJl4clA2PHMSAhDFDcrBCr3h4AMytCbltI4FmtdbIscB30mLs6LjLr7b+6WOYCs3n9LEoTGbultG31kvLTPANy9yprpHdSAcMQbuqjRCjkIYSv5W2TQSmCRwSC4Kb2I6ipJN6qH4uL3Vv3i91yT1bgCQtaE=\"\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}getProfile",
+					"host": [
+						"{{tutionclasses}}getProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editProfile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}editProfile",
+					"host": [
+						"{{tutionclasses}}editProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCategory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{tutionclasses}}getCategory",
+					"host": [
+						"{{tutionclasses}}getCategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"authToken\":\"7b625e343e61be78b7bae7ba2501d46f5d9ab99e1630171a6b2b75360c0192d9c77f5becde921a9f347b9490a7d4ecbf1f20d54d24bef0e2e54a52a2eb818f44BEf6YuO1SmcwhFmNV7g108wyXGXTvy/snhqCRwebNVKqk7aaX8S0fDNennCUvEmtDndJVVobu/I9uH59Wb6LNksaeAvy9pHx49tW3CTiQkn7f+DldFp7Sk6RP6EGj5uBnvpl0WrO5bTLIfbGx5vOSbNPvJqKlZlO27UXo45hjQM3+o5K+tfCDswZWnt7rpyj\"\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}logout",
+					"host": [
+						"{{tutionclasses}}logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addFeedback",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}addFeedback",
+					"host": [
+						"{{tutionclasses}}addFeedback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addReport",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"category_id\" : 1,\n\t\"victim_id\" : 1,\n\t\"criminal_id\" : 1,\n\t\"title\" : \"Learning\",\n\t\"description\" : \"Not good learning\"\n}\n"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}addReport",
+					"host": [
+						"{{tutionclasses}}addReport"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addCourse",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"authToken\" : \"e9046e6d9d5ffada46a583a2f1be188668caa4a79b3a9051d23ad42a4eb2a1e00c987deed5fee9b149d2a91c421e1c8e671b70eb2c5f9c2139bc2d9c86f1bd23wXrv7w+kyHRC6QVtZFaTuAEzOwlzh9Ze0JXmCLMAGxSHdelXnym+YKPMqTcEdhtIUPbtPXjqa6Wg7RHacL8yH6r6lrCPvqtaXekQiHX+zx4Gxt6TEGvz3IToJ0dwNA446jFb9mZeKxvhemp+tHELZfOwTGt7P6bcEEV+pTQUDJx9fRlja34+ACuWIBegpyS7\",\n\t\"category_id\": 1\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}addCourse",
+					"host": [
+						"{{tutionclasses}}addCourse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editCourse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n}"
+				},
+				"url": {
+					"raw": "{{tutionclasses}}editCourse",
+					"host": [
+						"{{tutionclasses}}editCourse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCourse",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"authToken\": \"9768540ecf1e9de49c006ae1d25af0b6dcea39b40b9972b419d584b4ad8cb6dfdd036bf3b0379eef9cccfef552c19b90fdbb027093ba17921a19d9d46e09ddeaK+ZQJPVdRZ7WC/86NQtzleokmqb51Di/5o3Z9D6MqLYDL4y8aowNqMIpg83mqy+Pt/TlctfVds/oOanp8gi/dmJEd9CR7FYqG4bTKJgM2IuIINgyjBpUGpxOQ/nL1YPPUgYeuHl4PtfqSJUddgg/xbM8abBk+Nv/aMhtCKJM5Kx2Oy6R2GvOzFzS6uWEoNWu\",\n\t\"latitude\" : 25.23590100,\n\t\"longitude\" : 73.23519900,\n\t\"medium\": 8,\n\t\"category_id\":2\n\t\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{tutionclasses}}getCourse",
+					"host": [
+						"{{tutionclasses}}getCourse"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
