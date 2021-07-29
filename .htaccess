@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+#todo add env variable for production
+SetEnv ENCKEY k4osdifjoasd8f923
+SetEnv ENCUSER USERNAME
+SetEnv ENCPASS PASSWORD
